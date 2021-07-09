@@ -28,7 +28,7 @@ void main() {
     when(() => mockWeatherRepository.getWeatherFromCity(any()))
         .thenAnswer((_) async => const Right(tWeather));
     // act
-    final result = await usecase(cityName: tCityName);
+    final result = await usecase(const Params(cityName: tCityName));
     // assert
     expect(result, const Right(tWeather));
     verify(() => mockWeatherRepository.getWeatherFromCity(tCityName));
