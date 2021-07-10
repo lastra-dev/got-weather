@@ -1,3 +1,4 @@
+import 'package:got_weather/core/error/exception.dart';
 import 'package:got_weather/core/network/network_info.dart';
 import 'package:got_weather/features/weather/data/datasources/weather_local_data_source.dart';
 import 'package:got_weather/features/weather/data/datasources/weather_remote_data_source.dart';
@@ -5,6 +6,8 @@ import 'package:got_weather/features/weather/domain/entities/weather.dart';
 import 'package:got_weather/core/error/failures.dart';
 import 'package:dartz/dartz.dart';
 import 'package:got_weather/features/weather/domain/repositories/weather_repository.dart';
+
+typedef CityOrLocationChooser = Future<Weather> Function();
 
 class WeatherRepositoryImpl implements WeatherRepository {
   final WeatherRemoteDataSource remoteDataSource;
@@ -18,15 +21,29 @@ class WeatherRepositoryImpl implements WeatherRepository {
   });
 
   @override
-  Future<Either<Failure, Weather>> getWeatherFromCity(String cityName) {
-    // TODO: implement getWeatherFromCity
-    throw UnimplementedError();
+  Future<Either<Failure, Weather>> getWeatherFromCity(String cityName) async {
+    return _getWeather(() => remoteDataSource.getWeatherFromCity(cityName));
   }
 
   @override
   Future<Either<Failure, Weather>> getWeatherFromLocation(
-      double latitude, double longitude) {
-    // TODO: implement getWeatherFromLocation
-    throw UnimplementedError();
+      double latitude, double longitude) async {
+    return _getWeather(
+        () => remoteDataSource.getWeatherFromLocation(latitude, longitude));
+  }
+
+  Future<Either<Failure, Weather>> _getWeather(
+      CityOrLocationChooser getWeatherFromCityOrLocation) async {
+    if (await networkInfo.isConnected) {
+      try {
+        final remoteWeather = await getWeatherFromCityOrLocation();
+        localDataSource.cacheCityName(remoteWeather.cityName);
+        return Right(remoteWeather);
+      } on ServerException {
+        return Left(ServerFailure());
+      }
+    } else {
+      return Left(NetworkFailure());
+    }
   }
 }
