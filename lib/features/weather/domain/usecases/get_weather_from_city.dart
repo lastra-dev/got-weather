@@ -5,21 +5,21 @@ import 'package:got_weather/core/usecases/usecase.dart';
 import 'package:got_weather/features/weather/domain/entities/weather.dart';
 import 'package:got_weather/features/weather/domain/repositories/weather_repository.dart';
 
-class GetWeatherFromCity extends UseCase<Weather, Params> {
+class GetWeatherFromCity extends UseCase<Weather, WeatherFromCityParams> {
   final WeatherRepository repository;
 
   GetWeatherFromCity(this.repository);
 
   @override
-  Future<Either<Failure, Weather>> call(Params params) async {
+  Future<Either<Failure, Weather>> call(WeatherFromCityParams params) async {
     return repository.getWeatherFromCity(params.cityName);
   }
 }
 
-class Params extends Equatable {
+class WeatherFromCityParams extends Equatable {
   final String cityName;
 
-  const Params({
+  const WeatherFromCityParams({
     required this.cityName,
   });
 

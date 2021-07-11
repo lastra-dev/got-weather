@@ -30,7 +30,7 @@ void main() {
     when(() => mockWeatherRepository.getWeatherFromLocation(any(), any()))
         .thenAnswer((_) async => const Right(tWeather));
     // act
-    final result = await usecase(const Params(
+    final result = await usecase(const WeatherFromLocationParams(
       latitude: tLatitude,
       longitude: tLongitude,
     ));
