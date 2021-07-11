@@ -53,7 +53,17 @@ class _WeatherControlsState extends State<WeatherControls> {
 
   void dispatchFromCity() {
     controller.clear();
+    if (inputStr == null) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: const Text('Please enter a city name...'),
+          action: SnackBarAction(label: 'Ok', onPressed: () {}),
+        ),
+      );
+      return;
+    }
     BlocProvider.of<WeatherBloc>(context).add(GetWeatherForCity(inputStr!));
+    inputStr = '';
   }
 
   void dispatchFromLocation() {
