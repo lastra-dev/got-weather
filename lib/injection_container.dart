@@ -6,6 +6,7 @@ import 'package:got_weather/features/weather/data/repositories/weather_repositor
 import 'package:got_weather/features/weather/domain/repositories/weather_repository.dart';
 import 'package:got_weather/features/weather/domain/usecases/get_weather_from_city.dart';
 import 'package:got_weather/features/weather/presentation/bloc/weather_bloc.dart';
+import 'package:location/location.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 
@@ -35,7 +36,10 @@ Future<void> init() async {
 
   // Data sources
   sl.registerLazySingleton<WeatherRemoteDataSource>(
-      () => WeatherRemoteDataSourceImpl(client: sl()));
+      () => WeatherRemoteDataSourceImpl(
+            client: sl(),
+            location: sl(),
+          ));
   sl.registerLazySingleton<WeatherLocalDataSource>(
       () => WeatherLocalDataSourceImpl(sharedPreferences: sl()));
 
@@ -47,4 +51,5 @@ Future<void> init() async {
   sl.registerLazySingleton(() => sharedPreferences);
   sl.registerLazySingleton(() => http.Client());
   sl.registerLazySingleton(() => DataConnectionChecker());
+  sl.registerLazySingleton(() => Location());
 }

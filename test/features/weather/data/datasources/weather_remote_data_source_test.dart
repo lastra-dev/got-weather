@@ -5,6 +5,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:got_weather/core/error/exception.dart';
 import 'package:got_weather/features/weather/data/datasources/weather_remote_data_source.dart';
 import 'package:got_weather/features/weather/data/models/weather_model.dart';
+import 'package:location/location.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:http/http.dart' as http;
 
@@ -12,12 +13,15 @@ import '../../../../fixtures/fixture_reader.dart';
 
 class MockHttpClient extends Mock implements http.Client {}
 
+class MockLocation extends Mock implements Location {}
+
 Future<void> main() async {
   TestWidgetsFlutterBinding.ensureInitialized();
   await dotenv.load();
 
   late WeatherRemoteDataSourceImpl dataSource;
   late MockHttpClient mockHttpClient;
+  late MockLocation mockLocation;
 
   void setUpMockClientSuccess200(Uri url) {
     when(() => mockHttpClient.get(url)).thenAnswer(
@@ -39,8 +43,10 @@ Future<void> main() async {
 
   setUp(() {
     mockHttpClient = MockHttpClient();
+    mockLocation = MockLocation();
     dataSource = WeatherRemoteDataSourceImpl(
       client: mockHttpClient,
+      location: mockLocation,
     );
   });
 
@@ -92,7 +98,8 @@ Future<void> main() async {
     final url = Uri.parse(
         'https://api.openweathermap.org/data/2.5/weather?lat=$tLatitude&lon=$tLongitude&appid=$appid&units=metric');
 
-    test('should perform a GET request on a URL with the cityName endpoint',
+    test(
+        'should perform a GET request on a URL with latitude and longitude endpoints',
         () async {
       // arrange
       setUpMockClientSuccess200(url);
@@ -100,6 +107,21 @@ Future<void> main() async {
       await dataSource.getWeatherFromLocation(tLatitude, tLongitude);
       // assert
       verify(() => mockHttpClient.get(url));
+    });
+
+    final tLocation = LocationData.fromMap({
+      'latitude': tLatitude,
+      'longitude': tLongitude,
+    });
+
+    test('should get user location', () async {
+      // arrange
+      when(() => mockLocation.getLocation()).thenAnswer((_) async => tLocation);
+      // act
+      final result = await dataSource.getUserLocation();
+      // assert
+      verify(() => mockLocation.getLocation());
+      expect(result, equals(tLocation));
     });
 
     final tWeatherModel = WeatherModel.fromJson(

@@ -4,6 +4,7 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:got_weather/core/error/exception.dart';
 import 'package:got_weather/features/weather/data/models/weather_model.dart';
 import 'package:http/http.dart' as http;
+import 'package:location/location.dart';
 
 abstract class WeatherRemoteDataSource {
   /// Calls the api.openweathermap.org/data/2.5/weather?q={city name}&appid={API key}&units=metric endpoint.
@@ -24,8 +25,12 @@ const weatherApi = 'WEATHER_API';
 
 class WeatherRemoteDataSourceImpl implements WeatherRemoteDataSource {
   final http.Client client;
+  final Location location;
 
-  WeatherRemoteDataSourceImpl({required this.client});
+  WeatherRemoteDataSourceImpl({
+    required this.client,
+    required this.location,
+  });
 
   Future<String?> getAppId() async {
     final dotenvSingleton = DotEnv();
@@ -45,9 +50,15 @@ class WeatherRemoteDataSourceImpl implements WeatherRemoteDataSource {
   Future<WeatherModel> getWeatherFromLocation(
       double latitude, double longitude) async {
     final appId = await getAppId();
+    final locData = await getUserLocation();
     final url = Uri.parse(
-        'https://api.openweathermap.org/data/2.5/weather?lat=$latitude&lon=$longitude&appid=$appId&units=metric');
+        'https://api.openweathermap.org/data/2.5/weather?lat=${locData.latitude}&lon=${locData.longitude}&appid=$appId&units=metric');
     return _getWeatherFromUrl(url);
+  }
+
+  Future<LocationData> getUserLocation() async {
+    final location = Location();
+    return location.getLocation();
   }
 
   Future<WeatherModel> _getWeatherFromUrl(Uri url) async {

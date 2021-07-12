@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:got_weather/features/weather/presentation/bloc/weather_bloc.dart';
+import 'package:location/location.dart';
 
 class WeatherControls extends StatefulWidget {
   const WeatherControls({
