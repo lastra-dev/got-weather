@@ -41,6 +41,10 @@ class WeatherRepositoryImpl implements WeatherRepository {
         return Right(remoteWeather);
       } on ServerException {
         return Left(ServerFailure());
+      } on PermissionException {
+        return Left(PermissionFailure());
+      } on ServiceDisabledException {
+        return Left(ServiceDisabledFailure());
       }
     } else {
       return Left(NetworkFailure());

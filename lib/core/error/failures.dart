@@ -16,3 +16,13 @@ class CacheFailure extends Failure {
   @override
   List<Object?> get props => [];
 }
+
+class PermissionFailure extends Failure {
+  @override
+  List<Object?> get props => [];
+}
+
+class ServiceDisabledFailure extends Failure {
+  @override
+  List<Object?> get props => [];
+}

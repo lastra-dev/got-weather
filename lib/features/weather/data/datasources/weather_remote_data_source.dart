@@ -1,10 +1,11 @@
 import 'dart:convert';
 
 import 'package:flutter_dotenv/flutter_dotenv.dart';
-import 'package:got_weather/core/error/exception.dart';
-import 'package:got_weather/features/weather/data/models/weather_model.dart';
 import 'package:http/http.dart' as http;
 import 'package:location/location.dart';
+
+import '../../../../core/error/exception.dart';
+import '../models/weather_model.dart';
 
 abstract class WeatherRemoteDataSource {
   /// Calls the api.openweathermap.org/data/2.5/weather?q={city name}&appid={API key}&units=metric endpoint.
@@ -58,6 +59,26 @@ class WeatherRemoteDataSourceImpl implements WeatherRemoteDataSource {
 
   Future<LocationData> getUserLocation() async {
     final location = Location();
+
+    bool _serviceEnabled;
+    PermissionStatus _permissionGranted;
+
+    _serviceEnabled = await location.serviceEnabled();
+    if (!_serviceEnabled) {
+      _serviceEnabled = await location.requestService();
+      if (!_serviceEnabled) {
+        throw ServiceDisabledException();
+      }
+    }
+
+    _permissionGranted = await location.hasPermission();
+    if (_permissionGranted == PermissionStatus.denied) {
+      _permissionGranted = await location.requestPermission();
+      if (_permissionGranted != PermissionStatus.granted) {
+        throw PermissionException();
+      }
+    }
+
     return location.getLocation();
   }
 

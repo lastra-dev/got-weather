@@ -14,6 +14,7 @@ part 'weather_state.dart';
 const serverFailureMessage = 'Server Failure';
 const cacheFailureMessage = 'Cache Failure';
 const networkFailureMessage = 'Network Failure';
+const permissionFailureMessage = 'Location permission denied';
 
 class WeatherBloc extends Bloc<WeatherEvent, WeatherState> {
   final GetWeatherFromCity getWeatherFromCity;
@@ -64,6 +65,8 @@ class WeatherBloc extends Bloc<WeatherEvent, WeatherState> {
         return cacheFailureMessage;
       case NetworkFailure:
         return networkFailureMessage;
+      case PermissionFailure:
+        return permissionFailureMessage;
       default:
         return 'Unexpected Error';
     }
