@@ -134,8 +134,6 @@ void main() {
 
   group('getWeatherFromLocation', () {
     const tCityName = 'Tampico';
-    const double tLatitude = 22;
-    const double tLongitude = -97;
     const tWeatherModel = WeatherModel(
       cityName: tCityName,
       icon: '01d',
@@ -146,13 +144,13 @@ void main() {
     test('should check if the device is online', () {
       // arrange
       when(() => mockNetworkInfo.isConnected).thenAnswer((_) async => true);
-      when(() => mockRemoteDataSource.getWeatherFromLocation(
-          tLatitude, tLongitude)).thenAnswer((_) async => tWeatherModel);
+      when(() => mockRemoteDataSource.getWeatherFromLocation())
+          .thenAnswer((_) async => tWeatherModel);
       when(() => mockLocalDataSource.cacheCityName(tCityName))
           .thenAnswer((_) async {});
 
       // act
-      repository.getWeatherFromLocation(tLatitude, tLongitude);
+      repository.getWeatherFromLocation();
       // assert
       verify(() => mockNetworkInfo.isConnected);
     });
@@ -162,16 +160,14 @@ void main() {
           'should return remote data when the call to remote data source is successful',
           () async {
         // arrange
-        when(() => mockRemoteDataSource.getWeatherFromLocation(
-            tLatitude, tLongitude)).thenAnswer((_) async => tWeatherModel);
+        when(() => mockRemoteDataSource.getWeatherFromLocation())
+            .thenAnswer((_) async => tWeatherModel);
         when(() => mockLocalDataSource.cacheCityName(tCityName))
             .thenAnswer((_) async {});
         // act
-        final result =
-            await repository.getWeatherFromLocation(tLatitude, tLongitude);
+        final result = await repository.getWeatherFromLocation();
         // assert
-        verify(() =>
-            mockRemoteDataSource.getWeatherFromLocation(tLatitude, tLongitude));
+        verify(() => mockRemoteDataSource.getWeatherFromLocation());
         expect(result, equals(const Right(tWeather)));
       });
 
@@ -179,15 +175,14 @@ void main() {
           'should cache the data locally when the call to remote data source is successful',
           () async {
         // arrange
-        when(() => mockRemoteDataSource.getWeatherFromLocation(
-            tLatitude, tLongitude)).thenAnswer((_) async => tWeatherModel);
+        when(() => mockRemoteDataSource.getWeatherFromLocation())
+            .thenAnswer((_) async => tWeatherModel);
         when(() => mockLocalDataSource.cacheCityName(tCityName))
             .thenAnswer((_) async {});
         // act
-        await repository.getWeatherFromLocation(tLatitude, tLongitude);
+        await repository.getWeatherFromLocation();
         // assert
-        verify(() =>
-            mockRemoteDataSource.getWeatherFromLocation(tLatitude, tLongitude));
+        verify(() => mockRemoteDataSource.getWeatherFromLocation());
         verify(() => mockLocalDataSource.cacheCityName(tCityName));
       });
 
@@ -195,14 +190,12 @@ void main() {
           'should return server failure when the call to remote data source is unsuccessful',
           () async {
         // arrange
-        when(() => mockRemoteDataSource.getWeatherFromLocation(
-            tLatitude, tLongitude)).thenThrow(ServerException());
+        when(() => mockRemoteDataSource.getWeatherFromLocation())
+            .thenThrow(ServerException());
         // act
-        final result =
-            await repository.getWeatherFromLocation(tLatitude, tLongitude);
+        final result = await repository.getWeatherFromLocation();
         // assert
-        verify(() =>
-            mockRemoteDataSource.getWeatherFromLocation(tLatitude, tLongitude));
+        verify(() => mockRemoteDataSource.getWeatherFromLocation());
         verifyZeroInteractions(mockLocalDataSource);
         expect(result, equals(Left(ServerFailure())));
       });
@@ -211,8 +204,7 @@ void main() {
     _runTestsOffline(() {
       test('should return NetworkFailure when device is offline', () async {
         // act
-        final result =
-            await repository.getWeatherFromLocation(tLatitude, tLongitude);
+        final result = await repository.getWeatherFromLocation();
 
         // assert
         verifyZeroInteractions(mockRemoteDataSource);

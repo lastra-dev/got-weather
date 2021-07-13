@@ -1,6 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:got_weather/core/error/failures.dart';
+import 'package:got_weather/core/usecases/usecase.dart';
 import 'package:got_weather/features/weather/domain/entities/weather.dart';
 import 'package:got_weather/features/weather/domain/usecases/get_weather_from_city.dart';
 import 'package:got_weather/features/weather/domain/usecases/get_weather_from_location.dart';
@@ -30,8 +31,7 @@ void main() {
   // Necessary setup to use Params with mocktail null safety
   setUpAll(() {
     registerFallbackValue(const WeatherFromCityParams(cityName: 'Tampico'));
-    registerFallbackValue(
-        const WeatherFromLocationParams(latitude: 22, longitude: -97));
+    registerFallbackValue(NoParams());
   });
 
   test('initialState should be empty', () {
@@ -114,8 +114,7 @@ void main() {
       bloc.add(const GetWeatherForLocation(tLatitude, tLongitude));
       await untilCalled(() => mockGetWeatherFromLocation(any()));
       // assert
-      verify(() => mockGetWeatherFromLocation(const WeatherFromLocationParams(
-          latitude: tLatitude, longitude: tLongitude)));
+      verify(() => mockGetWeatherFromLocation(NoParams()));
     });
 
     test('should emit [Loading, Loaded] when data is gotten successfuly',

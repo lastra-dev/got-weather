@@ -5,8 +5,5 @@ import '../entities/weather.dart';
 
 abstract class WeatherRepository {
   Future<Either<Failure, Weather>> getWeatherFromCity(String cityName);
-  Future<Either<Failure, Weather>> getWeatherFromLocation(
-    double latitude,
-    double longitude,
-  );
+  Future<Either<Failure, Weather>> getWeatherFromLocation();
 }

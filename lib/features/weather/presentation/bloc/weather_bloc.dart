@@ -4,6 +4,7 @@ import 'package:bloc/bloc.dart';
 import 'package:dartz/dartz.dart';
 import 'package:equatable/equatable.dart';
 import 'package:got_weather/core/error/failures.dart';
+import 'package:got_weather/core/usecases/usecase.dart';
 import 'package:got_weather/features/weather/domain/entities/weather.dart';
 import 'package:got_weather/features/weather/domain/usecases/get_weather_from_city.dart';
 import 'package:got_weather/features/weather/domain/usecases/get_weather_from_location.dart';
@@ -40,9 +41,7 @@ class WeatherBloc extends Bloc<WeatherEvent, WeatherState> {
 
     if (event is GetWeatherForLocation) {
       yield Loading();
-      final failureOrWeather = await getWeatherFromLocation(
-          WeatherFromLocationParams(
-              latitude: event.latitude, longitude: event.longitude));
+      final failureOrWeather = await getWeatherFromLocation(NoParams());
       yield* _eitherLoadedOrErrorState(failureOrWeather);
     }
   }

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:got_weather/features/weather/presentation/bloc/weather_bloc.dart';
-import 'package:location/location.dart';
+
+import '../bloc/weather_bloc.dart';
 
 class WeatherControls extends StatefulWidget {
   const WeatherControls({
@@ -69,7 +69,6 @@ class _WeatherControlsState extends State<WeatherControls> {
 
   void dispatchFromLocation() {
     controller.clear();
-    BlocProvider.of<WeatherBloc>(context)
-        .add(const GetWeatherForLocation(22, -97));
+    BlocProvider.of<WeatherBloc>(context).add(GetWeatherForLocation());
   }
 }

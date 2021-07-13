@@ -26,10 +26,8 @@ class WeatherRepositoryImpl implements WeatherRepository {
   }
 
   @override
-  Future<Either<Failure, Weather>> getWeatherFromLocation(
-      double latitude, double longitude) async {
-    return _getWeather(
-        () => remoteDataSource.getWeatherFromLocation(latitude, longitude));
+  Future<Either<Failure, Weather>> getWeatherFromLocation() async {
+    return _getWeather(() => remoteDataSource.getWeatherFromLocation());
   }
 
   Future<Either<Failure, Weather>> _getWeather(

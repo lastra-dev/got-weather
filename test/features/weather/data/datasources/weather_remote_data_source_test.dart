@@ -139,8 +139,7 @@ Future<void> main() async {
       // act
       final call = dataSource.getWeatherFromLocation;
       // assert
-      expect(() => call(tLatitude, tLongitude),
-          throwsA(isInstanceOf<PermissionException>()));
+      expect(() => call(), throwsA(isInstanceOf<PermissionException>()));
     });
 
     test(
@@ -152,8 +151,7 @@ Future<void> main() async {
       // act
       final call = dataSource.getWeatherFromLocation;
       // assert
-      expect(() => call(tLatitude, tLongitude),
-          throwsA(isInstanceOf<ServiceDisabledException>()));
+      expect(() => call(), throwsA(isInstanceOf<ServiceDisabledException>()));
     });
 
     test(
@@ -198,7 +196,7 @@ Future<void> main() async {
       setUpMockGetLocation();
       setUpMockClientSuccess200(url);
       // act
-      await dataSource.getWeatherFromLocation(tLatitude, tLongitude);
+      await dataSource.getWeatherFromLocation();
       // assert
       verify(() => mockHttpClient.get(url));
     });
@@ -213,8 +211,7 @@ Future<void> main() async {
       setUpMockGetLocation();
       setUpMockClientSuccess200(url);
       // act
-      final result =
-          await dataSource.getWeatherFromLocation(tLatitude, tLongitude);
+      final result = await dataSource.getWeatherFromLocation();
       // assert
       expect(result, equals(tWeatherModel));
     });
@@ -229,8 +226,7 @@ Future<void> main() async {
       // act
       final call = dataSource.getWeatherFromLocation;
       // assert
-      expect(() => call(tLatitude, tLongitude),
-          throwsA(isInstanceOf<ServerException>()));
+      expect(() => call(), throwsA(isInstanceOf<ServerException>()));
     });
   });
 }

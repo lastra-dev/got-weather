@@ -1,5 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:got_weather/core/usecases/usecase.dart';
 import 'package:got_weather/features/weather/domain/entities/weather.dart';
 import 'package:got_weather/features/weather/domain/repositories/weather_repository.dart';
 import 'package:got_weather/features/weather/domain/usecases/get_weather_from_location.dart';
@@ -16,9 +17,6 @@ void main() {
     usecase = GetWeatherFromLocation(mockWeatherRepository);
   });
 
-  const tLatitude = 22.230108;
-  const tLongitude = -97.856055;
-
   const tWeather = Weather(
     cityName: 'Tampico',
     temperature: 20,
@@ -27,17 +25,13 @@ void main() {
 
   test('should get weather from the repository', () async {
     // arrange
-    when(() => mockWeatherRepository.getWeatherFromLocation(any(), any()))
+    when(() => mockWeatherRepository.getWeatherFromLocation())
         .thenAnswer((_) async => const Right(tWeather));
     // act
-    final result = await usecase(const WeatherFromLocationParams(
-      latitude: tLatitude,
-      longitude: tLongitude,
-    ));
+    final result = await usecase(NoParams());
     // assert
     expect(result, const Right(tWeather));
-    verify(() =>
-        mockWeatherRepository.getWeatherFromLocation(tLatitude, tLongitude));
+    verify(() => mockWeatherRepository.getWeatherFromLocation());
     verifyNoMoreInteractions(mockWeatherRepository);
   });
 }

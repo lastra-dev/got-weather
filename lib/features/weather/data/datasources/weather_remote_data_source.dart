@@ -16,10 +16,7 @@ abstract class WeatherRemoteDataSource {
   /// Calls the api.openweathermap.org/data/2.5/weather?lat={lat}&lon={lon}&appid={API key}&units=metric endpoint.
   ///
   /// Throws a [ServerException] for all error codes.
-  Future<WeatherModel> getWeatherFromLocation(
-    double latitude,
-    double longitude,
-  );
+  Future<WeatherModel> getWeatherFromLocation();
 }
 
 const weatherApi = 'WEATHER_API';
@@ -48,8 +45,7 @@ class WeatherRemoteDataSourceImpl implements WeatherRemoteDataSource {
   }
 
   @override
-  Future<WeatherModel> getWeatherFromLocation(
-      double latitude, double longitude) async {
+  Future<WeatherModel> getWeatherFromLocation() async {
     final appId = await getAppId();
     final locData = await getUserLocation();
     final url = Uri.parse(

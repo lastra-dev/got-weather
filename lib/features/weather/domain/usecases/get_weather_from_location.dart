@@ -5,18 +5,14 @@ import 'package:got_weather/core/usecases/usecase.dart';
 import 'package:got_weather/features/weather/domain/entities/weather.dart';
 import 'package:got_weather/features/weather/domain/repositories/weather_repository.dart';
 
-class GetWeatherFromLocation
-    extends UseCase<Weather, WeatherFromLocationParams> {
+class GetWeatherFromLocation extends UseCase<Weather, NoParams> {
   final WeatherRepository repository;
 
   GetWeatherFromLocation(this.repository);
 
   @override
-  Future<Either<Failure, Weather>> call(WeatherFromLocationParams params) {
-    return repository.getWeatherFromLocation(
-      params.latitude,
-      params.longitude,
-    );
+  Future<Either<Failure, Weather>> call(NoParams params) async {
+    return repository.getWeatherFromLocation();
   }
 }
 
