@@ -102,8 +102,6 @@ void main() {
   });
 
   group('GetWeatherFromLocation', () {
-    const double tLatitude = 22;
-    const double tLongitude = -97;
     const tWeather = Weather(cityName: 'Tampico', icon: '01d', temperature: 20);
 
     test('should get data from the location use case', () async {
@@ -111,7 +109,7 @@ void main() {
       when(() => mockGetWeatherFromLocation(any()))
           .thenAnswer((_) async => const Right(tWeather));
       // act
-      bloc.add(const GetWeatherForLocation(tLatitude, tLongitude));
+      bloc.add(GetWeatherForLocation());
       await untilCalled(() => mockGetWeatherFromLocation(any()));
       // assert
       verify(() => mockGetWeatherFromLocation(NoParams()));
@@ -129,7 +127,7 @@ void main() {
       ];
       expectLater(bloc.stream, emitsInOrder(expected));
       // act
-      bloc.add(const GetWeatherForLocation(tLatitude, tLongitude));
+      bloc.add(GetWeatherForLocation());
     });
 
     test('should emit [Loading, Error] when getting data fails', () async {
@@ -143,7 +141,7 @@ void main() {
       ];
       expectLater(bloc.stream, emitsInOrder(expected));
       // act
-      bloc.add(const GetWeatherForLocation(tLatitude, tLongitude));
+      bloc.add(GetWeatherForLocation());
     });
 
     test(
@@ -159,7 +157,7 @@ void main() {
       ];
       expectLater(bloc.stream, emitsInOrder(expected));
       // act
-      bloc.add(const GetWeatherForLocation(tLatitude, tLongitude));
+      bloc.add(GetWeatherForLocation());
     });
   });
 }
