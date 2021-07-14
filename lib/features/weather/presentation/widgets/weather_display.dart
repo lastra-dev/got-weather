@@ -18,7 +18,8 @@ class WeatherDisplay extends StatelessWidget {
           SizedBox(
             height: MediaQuery.of(context).size.height / 10,
             width: MediaQuery.of(context).size.width / 4,
-            child: const Placeholder(),
+            child:
+                Image.asset('assets/images/weather_icons/${weather.icon}.png'),
           ),
           const SizedBox(height: 10),
           SizedBox(
