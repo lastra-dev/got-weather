@@ -1,7 +1,8 @@
 import 'package:equatable/equatable.dart';
 
 class GOTWeather extends Equatable {
-  final int avgTemp;
+  final int minTemp;
+  final int maxTemp;
   final String cityName;
   final String background;
   final String description;
@@ -9,15 +10,17 @@ class GOTWeather extends Equatable {
   const GOTWeather({
     required this.description,
     required this.cityName,
-    required this.avgTemp,
     required this.background,
+    required this.minTemp,
+    required this.maxTemp,
   });
 
   @override
   List<Object?> get props => [
         cityName,
-        avgTemp,
         background,
         description,
+        minTemp,
+        maxTemp,
       ];
 }

@@ -3,7 +3,6 @@ import 'package:got_weather/core/error/failures.dart';
 import 'package:dartz/dartz.dart';
 import 'package:got_weather/core/usecases/usecase.dart';
 import 'package:got_weather/features/weather/domain/entities/got_weather.dart';
-import 'package:got_weather/features/weather/domain/entities/weather.dart';
 import 'package:got_weather/features/weather/domain/repositories/got_weather_repository.dart';
 
 class GetGOTWeather extends UseCase<GOTWeather, GOTWeatherParams> {
@@ -13,15 +12,15 @@ class GetGOTWeather extends UseCase<GOTWeather, GOTWeatherParams> {
 
   @override
   Future<Either<Failure, GOTWeather>> call(GOTWeatherParams params) async {
-    return repository.getGOTWeather(params.weather);
+    return repository.getGOTWeather(params.temperature);
   }
 }
 
 class GOTWeatherParams extends Equatable {
-  final Weather weather;
+  final int temperature;
 
-  const GOTWeatherParams({required this.weather});
+  const GOTWeatherParams({required this.temperature});
 
   @override
-  List<Object?> get props => [weather];
+  List<Object?> get props => [temperature];
 }

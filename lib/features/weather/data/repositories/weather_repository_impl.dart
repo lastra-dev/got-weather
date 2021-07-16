@@ -1,11 +1,12 @@
-import 'package:got_weather/core/error/exception.dart';
-import 'package:got_weather/core/network/network_info.dart';
-import 'package:got_weather/features/weather/data/datasources/weather_local_data_source.dart';
-import 'package:got_weather/features/weather/data/datasources/weather_remote_data_source.dart';
-import 'package:got_weather/features/weather/domain/entities/weather.dart';
-import 'package:got_weather/core/error/failures.dart';
 import 'package:dartz/dartz.dart';
-import 'package:got_weather/features/weather/domain/repositories/weather_repository.dart';
+
+import '../../../../core/error/exception.dart';
+import '../../../../core/error/failures.dart';
+import '../../../../core/network/network_info.dart';
+import '../../domain/entities/weather.dart';
+import '../../domain/repositories/weather_repository.dart';
+import '../datasources/weather_local_data_source.dart';
+import '../datasources/weather_remote_data_source.dart';
 
 typedef CityOrLocationChooser = Future<Weather> Function();
 
