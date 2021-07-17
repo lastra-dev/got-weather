@@ -25,4 +25,16 @@ const gotWeatherData = [
     minTemp: -4,
     maxTemp: 5,
   ),
+  GOTWeather(
+    description: 'Fire place',
+    cityName: 'Dorne',
+    background: 'dorne',
+    minTemp: 20,
+    maxTemp: 35,
+  )
 ];
+
+enum GOTCity {
+  winterfell,
+  dorne,
+}

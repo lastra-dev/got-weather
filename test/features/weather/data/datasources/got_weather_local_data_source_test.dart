@@ -17,7 +17,10 @@ void main() {
       // act
       final result = gotWeatherLocalDataSourceImpl.getGOTWeather(tTemperature);
       // assert
-      expect(result, equals(gotWeatherData[0]));
+      expect(
+        result,
+        equals(gotWeatherData[GOTCity.winterfell.index]),
+      );
     },
   );
 

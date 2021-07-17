@@ -57,7 +57,10 @@ class Body extends StatelessWidget {
                     } else if (state is Loading) {
                       return const LoadingWidget();
                     } else if (state is Loaded) {
-                      return WeatherDisplay(weather: state.weather);
+                      return WeatherDisplay(
+                        weather: state.weather,
+                        gotWeather: state.gotWeather,
+                      );
                     } else if (state is Error) {
                       return MessageDisplay(message: state.message);
                     }

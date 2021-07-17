@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:got_weather/features/weather/domain/entities/got_weather.dart';
 import 'package:got_weather/features/weather/domain/entities/weather.dart';
 
 class WeatherDisplay extends StatelessWidget {
   final Weather weather;
+  final GOTWeather gotWeather;
 
   const WeatherDisplay({
     Key? key,
     required this.weather,
+    required this.gotWeather,
   }) : super(key: key);
 
   @override
@@ -27,6 +30,9 @@ class WeatherDisplay extends StatelessWidget {
             width: MediaQuery.of(context).size.width / 4,
             child: Text('${weather.temperature.toString()}ºC',
                 textAlign: TextAlign.center),
+          ),
+          Text(
+            gotWeather.cityName,
           ),
         ],
       ),
