@@ -106,7 +106,7 @@ void main() {
       });
 
       test(
-          'should return server failure when the call to remote data source is unsuccessful',
+          'should return ServerFailure when the call to remote data source is unsuccessful',
           () async {
         // arrange
         when(() => mockRemoteDataSource.getWeatherFromCity(tCityName))
@@ -187,7 +187,7 @@ void main() {
       });
 
       test(
-          'should return server failure when the call to remote data source is unsuccessful',
+          'should return ServerFailure when the call to remote data source is unsuccessful',
           () async {
         // arrange
         when(() => mockRemoteDataSource.getWeatherFromLocation())
@@ -199,6 +199,36 @@ void main() {
         verifyZeroInteractions(mockLocalDataSource);
         expect(result, equals(Left(ServerFailure())));
       });
+
+      test(
+        'should return PermissionFailure when the location is denied and PermissionException is thrown',
+        () async {
+          // arrange
+          when(() => mockRemoteDataSource.getWeatherFromLocation())
+              .thenThrow(PermissionException());
+          // act
+          final result = await repository.getWeatherFromLocation();
+          // assert
+          verify(() => mockRemoteDataSource.getWeatherFromLocation());
+          verifyZeroInteractions(mockLocalDataSource);
+          expect(result, equals(Left(PermissionFailure())));
+        },
+      );
+
+      test(
+        'should return ServiceDisabledFailure when the service is disabled and ServiceDisabledException is thrown',
+        () async {
+          // arrange
+          when(() => mockRemoteDataSource.getWeatherFromLocation())
+              .thenThrow(ServiceDisabledException());
+          // act
+          final result = await repository.getWeatherFromLocation();
+          // assert
+          verify(() => mockRemoteDataSource.getWeatherFromLocation());
+          verifyZeroInteractions(mockLocalDataSource);
+          expect(result, equals(Left(ServiceDisabledFailure())));
+        },
+      );
     });
 
     _runTestsOffline(() {

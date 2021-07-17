@@ -12,7 +12,6 @@ void main() {
   late MockGOTWeatherRepository mockGOTWeatherRepository;
 
   const tTemperature = 3;
-
   const tGOTWeather = GOTWeather(
     description: 'a description',
     cityName: 'Winterfell',
@@ -39,6 +38,24 @@ void main() {
       expect(result, const Right(tGOTWeather));
       verify(() => mockGOTWeatherRepository.getGOTWeather(tTemperature));
       verifyNoMoreInteractions(mockGOTWeatherRepository);
+    },
+  );
+
+  test(
+    'GOTWeatherParams should have repository parameters',
+    () {
+      // act
+      final result = const GOTWeatherParams(temperature: tTemperature).props;
+      // assert
+      expect(result, [tTemperature]);
+    },
+  );
+
+  test(
+    'GOTWeather should have props',
+    () {
+      // assert
+      expect(tGOTWeather.props, tGOTWeather.props);
     },
   );
 }

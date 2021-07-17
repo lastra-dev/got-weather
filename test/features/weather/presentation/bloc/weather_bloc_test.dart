@@ -92,7 +92,9 @@ void main() {
       bloc.add(const GetWeatherForCity(tCityName));
     });
 
-    test('should emit [Loading, Error] when getting data fails', () async {
+    test(
+        'should emit [Loading, Error] with serverFailureMessage when mockGetWeatherFromCity returns ServerFailure',
+        () async {
       // arrange
       when(() => mockGetWeatherFromCity(any()))
           .thenAnswer((_) async => Left(ServerFailure()));
@@ -107,7 +109,7 @@ void main() {
     });
 
     test(
-        'should emit [Loading, Error] with a proper message for the error when getting data fails',
+        'should emit [Loading, Error] with cacheFailureMessage when mockGetWeatherFromCity returns CacheFailure',
         () async {
       // arrange
       when(() => mockGetWeatherFromCity(any()))
@@ -116,6 +118,38 @@ void main() {
       final expected = [
         Loading(),
         const Error(message: cacheFailureMessage),
+      ];
+      expectLater(bloc.stream, emitsInOrder(expected));
+      // act
+      bloc.add(const GetWeatherForCity(tCityName));
+    });
+
+    test(
+        'should emit [Loading, Error] with networkFailureMessage when mockGetWeatherFromCity returns NetworkFailure',
+        () async {
+      // arrange
+      when(() => mockGetWeatherFromCity(any()))
+          .thenAnswer((_) async => Left(NetworkFailure()));
+      // assert later
+      final expected = [
+        Loading(),
+        const Error(message: networkFailureMessage),
+      ];
+      expectLater(bloc.stream, emitsInOrder(expected));
+      // act
+      bloc.add(const GetWeatherForCity(tCityName));
+    });
+
+    test(
+        'should emit [Loading, Error] with permissionFailureMessage when mockGetWeatherFromCity returns PermissionFailure',
+        () async {
+      // arrange
+      when(() => mockGetWeatherFromCity(any()))
+          .thenAnswer((_) async => Left(PermissionFailure()));
+      // assert later
+      final expected = [
+        Loading(),
+        const Error(message: permissionFailureMessage),
       ];
       expectLater(bloc.stream, emitsInOrder(expected));
       // act
@@ -148,36 +182,6 @@ void main() {
       final expected = [
         Loading(),
         const Loaded(weather: tWeather, gotWeather: tGOTWeather),
-      ];
-      expectLater(bloc.stream, emitsInOrder(expected));
-      // act
-      bloc.add(GetWeatherForLocation());
-    });
-
-    test('should emit [Loading, Error] when getting data fails', () async {
-      // arrange
-      when(() => mockGetWeatherFromLocation(any()))
-          .thenAnswer((_) async => Left(ServerFailure()));
-      // assert later
-      final expected = [
-        Loading(),
-        const Error(message: serverFailureMessage),
-      ];
-      expectLater(bloc.stream, emitsInOrder(expected));
-      // act
-      bloc.add(GetWeatherForLocation());
-    });
-
-    test(
-        'should emit [Loading, Error] with a proper message for the error when getting data fails',
-        () async {
-      // arrange
-      when(() => mockGetWeatherFromLocation(any()))
-          .thenAnswer((_) async => Left(CacheFailure()));
-      // assert later
-      final expected = [
-        Loading(),
-        const Error(message: cacheFailureMessage),
       ];
       expectLater(bloc.stream, emitsInOrder(expected));
       // act
@@ -220,6 +224,16 @@ void main() {
         expectLater(bloc.stream, emitsInOrder(expected));
         // act
         bloc.add(const GetWeatherForCity(tCityName));
+      },
+    );
+
+    test(
+      'Events should extend Equatable',
+      () async {
+        // act
+        final result = const GetWeatherForCity(tCityName).props;
+        // assert
+        expect(result, equals([]));
       },
     );
   });

@@ -1,9 +1,10 @@
-import 'package:equatable/equatable.dart';
-import 'package:got_weather/core/error/failures.dart';
 import 'package:dartz/dartz.dart';
-import 'package:got_weather/core/usecases/usecase.dart';
-import 'package:got_weather/features/weather/domain/entities/got_weather.dart';
-import 'package:got_weather/features/weather/domain/repositories/got_weather_repository.dart';
+import 'package:equatable/equatable.dart';
+
+import '../../../../core/error/failures.dart';
+import '../../../../core/usecases/usecase.dart';
+import '../entities/got_weather.dart';
+import '../repositories/got_weather_repository.dart';
 
 class GetGOTWeather extends UseCase<GOTWeather, GOTWeatherParams> {
   final GOTWeatherRepository repository;

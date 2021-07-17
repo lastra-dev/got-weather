@@ -11,17 +11,17 @@ void main() {
   late GetWeatherFromCity usecase;
   late MockWeatherRepository mockWeatherRepository;
 
-  setUp(() {
-    mockWeatherRepository = MockWeatherRepository();
-    usecase = GetWeatherFromCity(mockWeatherRepository);
-  });
-
   const tCityName = 'Tampico';
   const tWeather = Weather(
     temperature: 20,
     cityName: 'Tampico',
     icon: '01d',
   );
+
+  setUp(() {
+    mockWeatherRepository = MockWeatherRepository();
+    usecase = GetWeatherFromCity(mockWeatherRepository);
+  });
 
   test('should get weather for the city from the repository', () async {
     // arrange
