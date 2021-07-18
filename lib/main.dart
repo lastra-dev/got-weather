@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 import 'features/weather/presentation/pages/weather_page.dart';
 import 'injection_container.dart' as di;
@@ -15,15 +14,11 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'GOT Weather',
-      home: const WeatherPage(),
       theme: ThemeData(
-        primarySwatch: Colors.pink,
-        textTheme: TextTheme(
-          bodyText2: GoogleFonts.poppins(),
-          subtitle1: GoogleFonts.poppins(),
-          button: GoogleFonts.poppins(),
-        ),
+        primarySwatch: Colors.deepPurple,
+        fontFamily: 'Poppins',
       ),
+      home: const WeatherPage(),
     );
   }
 }

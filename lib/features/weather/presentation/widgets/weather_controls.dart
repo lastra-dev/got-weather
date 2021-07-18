@@ -22,28 +22,47 @@ class _WeatherControlsState extends State<WeatherControls> {
       children: [
         const SizedBox(height: 10),
         SizedBox(
-          height: MediaQuery.of(context).size.height / 10,
+          height: MediaQuery.of(context).size.height / 12,
           child: TextField(
             controller: controller,
-            decoration: const InputDecoration(
-                border: OutlineInputBorder(), hintText: 'Search a City...'),
+            decoration: InputDecoration(
+              border: OutlineInputBorder(
+                borderSide: BorderSide(
+                  color: Theme.of(context).primaryColor,
+                ),
+              ),
+              enabledBorder: OutlineInputBorder(
+                borderSide: BorderSide(color: Theme.of(context).primaryColor),
+              ),
+              hintText: 'Enter a city...',
+            ),
             onChanged: (value) {
               inputStr = value;
             },
             onSubmitted: (_) => dispatchFromCity,
           ),
         ),
+        const SizedBox(height: 3),
         Row(
           children: [
             Expanded(
-                child: ElevatedButton(
-                    onPressed: dispatchFromCity,
-                    child: const Text('Search City'))),
+              child: ElevatedButton(
+                onPressed: dispatchFromCity,
+                child: const Text('SEARCH'),
+              ),
+            ),
             const SizedBox(width: 10),
             Expanded(
-              child: ElevatedButton(
+              child: OutlinedButton.icon(
+                style: OutlinedButton.styleFrom(
+                  side: BorderSide(color: Theme.of(context).primaryColor),
+                ),
                 onPressed: dispatchFromLocation,
-                child: const Text('Search your Location'),
+                label: const Text(
+                  'SEARCH BY LOCATION',
+                  style: TextStyle(fontSize: 12),
+                ),
+                icon: const Icon(Icons.location_pin, size: 20),
               ),
             ),
           ],
