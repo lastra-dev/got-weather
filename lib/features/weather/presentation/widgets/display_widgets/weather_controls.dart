@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../bloc/weather_bloc.dart';
+import '../../bloc/weather_bloc.dart';
 
 class WeatherControls extends StatefulWidget {
   const WeatherControls({
@@ -24,6 +24,7 @@ class _WeatherControlsState extends State<WeatherControls> {
         SizedBox(
           height: MediaQuery.of(context).size.height / 12,
           child: TextField(
+            cursorColor: Theme.of(context).primaryColor,
             controller: controller,
             decoration: InputDecoration(
               border: OutlineInputBorder(
@@ -34,19 +35,25 @@ class _WeatherControlsState extends State<WeatherControls> {
               enabledBorder: OutlineInputBorder(
                 borderSide: BorderSide(color: Theme.of(context).primaryColor),
               ),
+              focusedBorder: OutlineInputBorder(
+                borderSide: BorderSide(color: Theme.of(context).primaryColor),
+              ),
+              suffixIcon: const Icon(Icons.search),
               hintText: 'Enter a city...',
             ),
             onChanged: (value) {
               inputStr = value;
             },
             onSubmitted: (_) => dispatchFromCity,
+            onEditingComplete: dispatchFromCity,
           ),
         ),
-        const SizedBox(height: 3),
         Row(
           children: [
             Expanded(
               child: ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                    primary: Theme.of(context).primaryColor),
                 onPressed: dispatchFromCity,
                 child: const Text('SEARCH'),
               ),
@@ -58,11 +65,18 @@ class _WeatherControlsState extends State<WeatherControls> {
                   side: BorderSide(color: Theme.of(context).primaryColor),
                 ),
                 onPressed: dispatchFromLocation,
-                label: const Text(
+                label: Text(
                   'SEARCH BY LOCATION',
-                  style: TextStyle(fontSize: 12),
+                  style: TextStyle(
+                    fontSize: 12,
+                    color: Theme.of(context).primaryColor,
+                  ),
                 ),
-                icon: const Icon(Icons.location_pin, size: 20),
+                icon: Icon(
+                  Icons.location_pin,
+                  size: 20,
+                  color: Theme.of(context).primaryColor,
+                ),
               ),
             ),
           ],

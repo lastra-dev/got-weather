@@ -21,14 +21,14 @@ const gotWeatherData = [
   GOTWeather(
     description: 'Ice place',
     cityName: 'Winterfell',
-    background: 'winterfell',
+    background: 'winterfellBg',
     minTemp: -100,
     maxTemp: 10,
   ),
   GOTWeather(
-    description: 'Fire place',
+    description: 'You might catch a snake...',
     cityName: 'Dorne',
-    background: 'dorne',
+    background: 'dorneBg',
     minTemp: 11,
     maxTemp: 100,
   )
