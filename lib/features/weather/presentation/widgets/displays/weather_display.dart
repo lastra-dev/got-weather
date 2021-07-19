@@ -30,7 +30,7 @@ class WeatherDisplay extends StatelessWidget {
           'FEELS\nLIKE\n${gotWeather.cityName.toUpperCase()}',
         ),
         SizedBox(
-          height: MediaQuery.of(context).size.height / 8,
+          height: MediaQuery.of(context).size.height / 7,
         ),
         SubtitleText(
           gotWeather.description,

@@ -6,8 +6,10 @@ class GOTWeather extends Equatable {
   final String cityName;
   final String background;
   final String description;
+  final int primaryColor;
 
   const GOTWeather({
+    required this.primaryColor,
     required this.description,
     required this.cityName,
     required this.background,

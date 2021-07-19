@@ -19,17 +19,19 @@ class GOTWeatherLocalDataSourceImpl implements GOTWeatherLocalDataSource {
 
 const gotWeatherData = [
   GOTWeather(
-    description: 'Ice place',
+    primaryColor: 0xFF111844,
+    description: 'Winter is comming...',
     cityName: 'Winterfell',
     background: 'winterfellBg',
     minTemp: -100,
-    maxTemp: 10,
+    maxTemp: 20,
   ),
   GOTWeather(
+    primaryColor: 0xFF950330,
     description: 'You might catch a snake...',
     cityName: 'Dorne',
     background: 'dorneBg',
-    minTemp: 11,
+    minTemp: 21,
     maxTemp: 100,
   )
 ];

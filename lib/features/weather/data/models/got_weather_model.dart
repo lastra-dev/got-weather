@@ -1,4 +1,4 @@
-import 'package:got_weather/features/weather/domain/entities/got_weather.dart';
+import '../../domain/entities/got_weather.dart';
 
 class GOTWeatherModel extends GOTWeather {
   const GOTWeatherModel({
@@ -7,7 +7,9 @@ class GOTWeatherModel extends GOTWeather {
     required String cityName,
     required String background,
     required String description,
+    required int primaryColor,
   }) : super(
+          primaryColor: primaryColor,
           minTemp: minTemp,
           maxTemp: maxTemp,
           cityName: cityName,

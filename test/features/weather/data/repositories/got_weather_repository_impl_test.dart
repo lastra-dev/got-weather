@@ -17,6 +17,7 @@ void main() {
   const tTemperature = 3;
 
   const tGOTWeather = GOTWeather(
+    primaryColor: 0xFFFFFF,
     description: 'a description',
     cityName: 'Winterfell',
     minTemp: -4,

@@ -20,7 +20,7 @@ class WeatherPageScaffold extends StatelessWidget {
             BlendMode.darken,
           ),
           image: AssetImage('assets/images/$background.jpg'),
-          fit: BoxFit.fill,
+          fit: BoxFit.cover,
           alignment: Alignment.bottomCenter,
         ),
       ),

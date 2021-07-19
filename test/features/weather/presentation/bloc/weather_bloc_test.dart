@@ -24,6 +24,7 @@ void main() {
   late MockGetGOTWeather mockGetGOTWeather;
 
   const tGOTWeather = GOTWeather(
+    primaryColor: 0xFFFFFF,
     description: 'test',
     cityName: 'test',
     background: 'test',

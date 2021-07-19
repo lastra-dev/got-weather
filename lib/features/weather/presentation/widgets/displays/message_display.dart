@@ -1,20 +1,22 @@
 import 'package:flutter/material.dart';
 
+import '../display_widgets/big_text.dart';
+
 class MessageDisplay extends StatelessWidget {
   final String message;
+
   const MessageDisplay({
-    Key? key,
     required this.message,
+    Key? key,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Align(
-      alignment: Alignment.topRight,
-      child: SizedBox(
-        height: MediaQuery.of(context).size.height / 3,
-        child: Text(message),
-      ),
+    return Column(
+      children: [
+        SizedBox(height: MediaQuery.of(context).size.height / 8),
+        BigText(message),
+      ],
     );
   }
 }

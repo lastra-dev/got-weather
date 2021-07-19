@@ -18,43 +18,37 @@ class _WeatherControlsState extends State<WeatherControls> {
 
   @override
   Widget build(BuildContext context) {
+    final primaryColor = Theme.of(context).primaryColor;
     return Column(
       children: [
-        const SizedBox(height: 10),
         SizedBox(
           height: MediaQuery.of(context).size.height / 12,
           child: TextField(
-            cursorColor: Theme.of(context).primaryColor,
+            cursorColor: primaryColor,
             controller: controller,
             decoration: InputDecoration(
-              border: OutlineInputBorder(
-                borderSide: BorderSide(
-                  color: Theme.of(context).primaryColor,
-                ),
+              border: _buildOutlineInputBorder(primaryColor),
+              enabledBorder: _buildOutlineInputBorder(primaryColor),
+              focusedBorder: _buildOutlineInputBorder(primaryColor),
+              suffixIcon: Icon(
+                Icons.search,
+                color: primaryColor,
               ),
-              enabledBorder: OutlineInputBorder(
-                borderSide: BorderSide(color: Theme.of(context).primaryColor),
-              ),
-              focusedBorder: OutlineInputBorder(
-                borderSide: BorderSide(color: Theme.of(context).primaryColor),
-              ),
-              suffixIcon: const Icon(Icons.search),
               hintText: 'Enter a city...',
             ),
             onChanged: (value) {
               inputStr = value;
             },
-            onSubmitted: (_) => dispatchFromCity,
-            onEditingComplete: dispatchFromCity,
+            onEditingComplete: _dispatchFromCity,
+            onSubmitted: (_) => _dispatchFromCity,
           ),
         ),
         Row(
           children: [
             Expanded(
               child: ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                    primary: Theme.of(context).primaryColor),
-                onPressed: dispatchFromCity,
+                style: ElevatedButton.styleFrom(primary: primaryColor),
+                onPressed: _dispatchFromCity,
                 child: const Text('SEARCH'),
               ),
             ),
@@ -62,21 +56,21 @@ class _WeatherControlsState extends State<WeatherControls> {
             Expanded(
               child: OutlinedButton.icon(
                 style: OutlinedButton.styleFrom(
-                  side: BorderSide(color: Theme.of(context).primaryColor),
+                  side: BorderSide(color: primaryColor),
                 ),
-                onPressed: dispatchFromLocation,
                 label: Text(
                   'SEARCH BY LOCATION',
                   style: TextStyle(
                     fontSize: 12,
-                    color: Theme.of(context).primaryColor,
+                    color: primaryColor,
                   ),
                 ),
                 icon: Icon(
                   Icons.location_pin,
                   size: 20,
-                  color: Theme.of(context).primaryColor,
+                  color: primaryColor,
                 ),
+                onPressed: _dispatchFromLocation,
               ),
             ),
           ],
@@ -85,23 +79,42 @@ class _WeatherControlsState extends State<WeatherControls> {
     );
   }
 
-  void dispatchFromCity() {
+  OutlineInputBorder _buildOutlineInputBorder(Color primaryColor) {
+    return OutlineInputBorder(
+      borderSide: BorderSide(
+        color: primaryColor,
+      ),
+    );
+  }
+
+  void _dispatchFromCity() {
     controller.clear();
     if (inputStr == null) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: const Text('Please enter a city name...'),
-          action: SnackBarAction(label: 'Ok', onPressed: () {}),
-        ),
-      );
+      _showErrorSnackBar();
       return;
     }
     BlocProvider.of<WeatherBloc>(context).add(GetWeatherForCity(inputStr!));
     inputStr = '';
   }
 
-  void dispatchFromLocation() {
+  void _dispatchFromLocation() {
     controller.clear();
     BlocProvider.of<WeatherBloc>(context).add(GetWeatherForLocation());
+  }
+
+  void _showErrorSnackBar() {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: const Text(
+          'Please enter a city name...',
+          style: TextStyle(color: Colors.white70),
+        ),
+        action: SnackBarAction(
+          label: 'Ok',
+          onPressed: () {},
+          textColor: Colors.white,
+        ),
+      ),
+    );
   }
 }

@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 
 import '../pages/weather_page.dart';
 
-class InitialMaterialApp extends StatelessWidget {
+class WeatherMaterialApp extends StatelessWidget {
   final Color primaryColor;
-  const InitialMaterialApp({
-    required this.primaryColor,
+  const WeatherMaterialApp({
+    this.primaryColor = const Color(0xFF272935),
     Key? key,
   }) : super(key: key);
 
@@ -15,6 +15,7 @@ class InitialMaterialApp extends StatelessWidget {
       title: 'GOT Weather',
       theme: ThemeData(
         primaryColor: primaryColor,
+        accentColor: primaryColor,
         fontFamily: 'Poppins',
       ),
       home: const WeatherPage(),
