@@ -14,7 +14,6 @@ class WeatherControls extends StatefulWidget {
 
 class _WeatherControlsState extends State<WeatherControls> {
   final controller = TextEditingController();
-  String? inputStr;
 
   @override
   Widget build(BuildContext context) {
@@ -36,9 +35,6 @@ class _WeatherControlsState extends State<WeatherControls> {
               ),
               hintText: 'Enter a city...',
             ),
-            onChanged: (value) {
-              inputStr = value;
-            },
             onEditingComplete: _dispatchFromCity,
             onSubmitted: (_) => _dispatchFromCity,
           ),
@@ -88,13 +84,13 @@ class _WeatherControlsState extends State<WeatherControls> {
   }
 
   void _dispatchFromCity() {
-    controller.clear();
-    if (inputStr == null) {
+    if (controller.text.isEmpty) {
       _showErrorSnackBar();
       return;
     }
-    BlocProvider.of<WeatherBloc>(context).add(GetWeatherForCity(inputStr!));
-    inputStr = '';
+    BlocProvider.of<WeatherBloc>(context)
+        .add(GetWeatherForCity(controller.text));
+    controller.clear();
   }
 
   void _dispatchFromLocation() {
