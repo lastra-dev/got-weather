@@ -1,4 +1,5 @@
 import 'package:equatable/equatable.dart';
+import 'package:got_weather/core/theme/app_themes.dart';
 
 class GOTWeather extends Equatable {
   final int minTemp;
@@ -6,14 +7,14 @@ class GOTWeather extends Equatable {
   final String cityName;
   final String background;
   final String description;
-  final int primaryColor;
+  final AppTheme appTheme;
 
   const GOTWeather({
-    required this.primaryColor,
     required this.description,
     required this.cityName,
     required this.background,
     required this.minTemp,
+    required this.appTheme,
     required this.maxTemp,
   });
 

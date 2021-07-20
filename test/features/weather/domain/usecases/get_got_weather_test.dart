@@ -1,5 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:got_weather/core/theme/app_themes.dart';
 import 'package:got_weather/features/weather/domain/entities/got_weather.dart';
 import 'package:got_weather/features/weather/domain/repositories/got_weather_repository.dart';
 import 'package:got_weather/features/weather/domain/usecases/get_got_weather.dart';
@@ -13,7 +14,7 @@ void main() {
 
   const tTemperature = 3;
   const tGOTWeather = GOTWeather(
-    primaryColor: 0xFFFFFF,
+    appTheme: AppTheme.winterfell,
     description: 'a description',
     cityName: 'Winterfell',
     minTemp: -4,

@@ -91,11 +91,13 @@ class _WeatherControlsState extends State<WeatherControls> {
     BlocProvider.of<WeatherBloc>(context)
         .add(GetWeatherForCity(controller.text));
     controller.clear();
+    FocusScope.of(context).unfocus();
   }
 
   void _dispatchFromLocation() {
     controller.clear();
     BlocProvider.of<WeatherBloc>(context).add(GetWeatherForLocation());
+    FocusScope.of(context).unfocus();
   }
 
   void _showErrorSnackBar() {

@@ -6,7 +6,7 @@ class WeatherPageScaffold extends StatelessWidget {
   final String background;
 
   const WeatherPageScaffold({
-    required this.background,
+    this.background = 'initialBg',
     Key? key,
   }) : super(key: key);
 

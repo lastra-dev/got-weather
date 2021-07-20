@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import 'features/weather/presentation/apps/loading_material_app.dart';
 import 'features/weather/presentation/apps/weather_material_app.dart';
 import 'features/weather/presentation/bloc/weather_bloc.dart';
 import 'injection_container.dart' as di;
@@ -18,15 +17,12 @@ class MyApp extends StatelessWidget {
     return BlocProvider(
       create: (context) => di.sl<WeatherBloc>(),
       child: BlocBuilder<WeatherBloc, WeatherState>(
+        buildWhen: (previousState, state) => state is! Loading,
         builder: (context, state) {
           if (state is WeatherInitial || state is Error) {
             return const WeatherMaterialApp();
-          } else if (state is Loading) {
-            return const LoadingMaterialApp();
           } else if (state is Loaded) {
-            return WeatherMaterialApp(
-              primaryColor: Color(state.gotWeather.primaryColor),
-            );
+            return WeatherMaterialApp(appTheme: state.gotWeather.appTheme);
           }
           return Container();
         },

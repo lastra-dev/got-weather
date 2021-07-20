@@ -1,6 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:got_weather/core/error/failures.dart';
+import 'package:got_weather/core/theme/app_themes.dart';
 import 'package:got_weather/core/usecases/usecase.dart';
 import 'package:got_weather/features/weather/domain/entities/got_weather.dart';
 import 'package:got_weather/features/weather/domain/entities/weather.dart';
@@ -24,7 +25,7 @@ void main() {
   late MockGetGOTWeather mockGetGOTWeather;
 
   const tGOTWeather = GOTWeather(
-    primaryColor: 0xFFFFFF,
+    appTheme: AppTheme.initial,
     description: 'test',
     cityName: 'test',
     background: 'test',

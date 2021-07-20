@@ -1,4 +1,5 @@
 import 'package:got_weather/core/error/exception.dart';
+import 'package:got_weather/core/theme/app_themes.dart';
 import 'package:got_weather/features/weather/domain/entities/got_weather.dart';
 
 abstract class GOTWeatherLocalDataSource {
@@ -19,7 +20,7 @@ class GOTWeatherLocalDataSourceImpl implements GOTWeatherLocalDataSource {
 
 const gotWeatherData = [
   GOTWeather(
-    primaryColor: 0xFF111844,
+    appTheme: AppTheme.winterfell,
     description: 'Winter is comming...',
     cityName: 'Winterfell',
     background: 'winterfellBg',
@@ -27,7 +28,7 @@ const gotWeatherData = [
     maxTemp: 20,
   ),
   GOTWeather(
-    primaryColor: 0xFF950330,
+    appTheme: AppTheme.dorne,
     description: 'You might catch a snake...',
     cityName: 'Dorne',
     background: 'dorneBg',

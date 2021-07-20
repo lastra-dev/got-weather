@@ -1,3 +1,5 @@
+import 'package:got_weather/core/theme/app_themes.dart';
+
 import '../../domain/entities/got_weather.dart';
 
 class GOTWeatherModel extends GOTWeather {
@@ -7,9 +9,9 @@ class GOTWeatherModel extends GOTWeather {
     required String cityName,
     required String background,
     required String description,
-    required int primaryColor,
+    required AppTheme appTheme,
   }) : super(
-          primaryColor: primaryColor,
+          appTheme: appTheme,
           minTemp: minTemp,
           maxTemp: maxTemp,
           cityName: cityName,
