@@ -23,6 +23,7 @@ class WeatherBloc extends Bloc<WeatherEvent, WeatherState> {
   final GetWeatherFromCity getWeatherFromCity;
   final GetWeatherFromLocation getWeatherFromLocation;
   final GetGOTWeather getGOTWeather;
+  WeatherEvent? previousEvent;
 
   WeatherBloc({
     required GetGOTWeather gotWeather,
@@ -45,6 +46,12 @@ class WeatherBloc extends Bloc<WeatherEvent, WeatherState> {
       final failureOrWeather = await getWeatherFromLocation(NoParams());
       yield* _getLoadedOrErrorState(failureOrWeather);
     }
+  }
+
+  @override
+  void onEvent(WeatherEvent event) {
+    previousEvent = event;
+    super.onEvent(event);
   }
 
   Stream<WeatherState> _getLoadedOrErrorState(
@@ -81,6 +88,12 @@ class WeatherBloc extends Bloc<WeatherEvent, WeatherState> {
         return permissionFailureMessage;
       default:
         return 'Unexpected Error';
+    }
+  }
+
+  Future<void> retry() async {
+    if (previousEvent != null) {
+      add(previousEvent!);
     }
   }
 }

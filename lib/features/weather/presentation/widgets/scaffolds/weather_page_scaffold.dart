@@ -16,7 +16,9 @@ class WeatherPageScaffold extends StatelessWidget {
       decoration: BoxDecoration(
         image: DecorationImage(
           colorFilter: ColorFilter.mode(
-            Colors.black.withOpacity(0.3),
+            Colors.black.withOpacity(
+              background == 'initialBg' ? 0 : 0.3,
+            ),
             BlendMode.darken,
           ),
           image: AssetImage('assets/images/$background.jpg'),

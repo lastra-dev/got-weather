@@ -12,10 +12,13 @@ class WeatherPageBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      height: MediaQuery.of(context).size.height,
-      child: SingleChildScrollView(
-        child: Center(
+    return RefreshIndicator(
+      color: Theme.of(context).primaryColor,
+      onRefresh: () => BlocProvider.of<WeatherBloc>(context).retry(),
+      child: SizedBox(
+        height: MediaQuery.of(context).size.height,
+        child: SingleChildScrollView(
+          physics: const AlwaysScrollableScrollPhysics(),
           child: Padding(
             padding: const EdgeInsets.all(10),
             child: Column(

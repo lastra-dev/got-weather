@@ -34,6 +34,8 @@ void main() {
   );
   const tWeather = Weather(cityName: 'Tampico', icon: '01d', temperature: 20);
   const tCityName = 'Tampico';
+  const tEventCity = GetWeatherForCity(tCityName);
+  final tEventLocation = GetWeatherForLocation();
 
   setUp(() {
     mockGetWeatherFromCity = MockGetWeatherFromCity();
@@ -59,6 +61,26 @@ void main() {
     expect(bloc.state, equals(WeatherInitial()));
   });
 
+  test(
+    'retry should add previousEvent to bloc event',
+    () async {
+      // arrange
+      bloc.previousEvent = tEventCity;
+      when(() => mockGetWeatherFromCity(any()))
+          .thenAnswer((_) async => const Right(tWeather));
+      when(() => mockGetGOTWeather(any()))
+          .thenAnswer((_) async => const Right(tGOTWeather));
+      // assert later
+      final expected = [
+        Loading(),
+        const Loaded(weather: tWeather, gotWeather: tGOTWeather),
+      ];
+      expectLater(bloc.stream, emitsInOrder(expected));
+      // act
+      bloc.retry();
+    },
+  );
+
   group('GetWeatherFromCity', () {
     const tWeather = Weather(cityName: 'Tampico', icon: '01d', temperature: 20);
 
@@ -68,9 +90,8 @@ void main() {
           .thenAnswer((_) async => const Right(tWeather));
       when(() => mockGetGOTWeather(any()))
           .thenAnswer((_) async => const Right(tGOTWeather));
-
       // act
-      bloc.add(const GetWeatherForCity(tCityName));
+      bloc.add(tEventCity);
       await untilCalled(() => mockGetWeatherFromCity(any()));
       // assert
       verify(() => mockGetWeatherFromCity(
@@ -91,7 +112,7 @@ void main() {
       ];
       expectLater(bloc.stream, emitsInOrder(expected));
       // act
-      bloc.add(const GetWeatherForCity(tCityName));
+      bloc.add(tEventCity);
     });
 
     test(
@@ -107,7 +128,7 @@ void main() {
       ];
       expectLater(bloc.stream, emitsInOrder(expected));
       // act
-      bloc.add(const GetWeatherForCity(tCityName));
+      bloc.add(tEventCity);
     });
 
     test(
@@ -123,7 +144,7 @@ void main() {
       ];
       expectLater(bloc.stream, emitsInOrder(expected));
       // act
-      bloc.add(const GetWeatherForCity(tCityName));
+      bloc.add(tEventCity);
     });
 
     test(
@@ -139,7 +160,7 @@ void main() {
       ];
       expectLater(bloc.stream, emitsInOrder(expected));
       // act
-      bloc.add(const GetWeatherForCity(tCityName));
+      bloc.add(tEventCity);
     });
 
     test(
@@ -155,7 +176,7 @@ void main() {
       ];
       expectLater(bloc.stream, emitsInOrder(expected));
       // act
-      bloc.add(const GetWeatherForCity(tCityName));
+      bloc.add(tEventCity);
     });
   });
 
@@ -167,7 +188,7 @@ void main() {
       when(() => mockGetGOTWeather(any()))
           .thenAnswer((_) async => const Right(tGOTWeather));
       // act
-      bloc.add(GetWeatherForLocation());
+      bloc.add(tEventLocation);
       await untilCalled(() => mockGetWeatherFromLocation(any()));
       // assert
       verify(() => mockGetWeatherFromLocation(NoParams()));
@@ -187,7 +208,7 @@ void main() {
       ];
       expectLater(bloc.stream, emitsInOrder(expected));
       // act
-      bloc.add(GetWeatherForLocation());
+      bloc.add(tEventLocation);
     });
   });
 
@@ -201,12 +222,10 @@ void main() {
         when(() => mockGetGOTWeather(any()))
             .thenAnswer((_) async => const Right(tGOTWeather));
         // act
-        bloc.add(const GetWeatherForCity(tCityName));
+        bloc.add(tEventCity);
         await untilCalled(() => mockGetGOTWeather(any()));
         // assert
-        verify(
-          () => mockGetGOTWeather(any()),
-        );
+        verify(() => mockGetGOTWeather(any()));
       },
     );
 
@@ -225,7 +244,7 @@ void main() {
         ];
         expectLater(bloc.stream, emitsInOrder(expected));
         // act
-        bloc.add(const GetWeatherForCity(tCityName));
+        bloc.add(tEventCity);
       },
     );
 
@@ -233,7 +252,7 @@ void main() {
       'Events should extend Equatable',
       () async {
         // act
-        final result = const GetWeatherForCity(tCityName).props;
+        final result = tEventCity.props;
         // assert
         expect(result, equals([]));
       },
