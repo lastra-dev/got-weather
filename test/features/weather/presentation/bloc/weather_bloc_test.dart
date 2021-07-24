@@ -178,6 +178,22 @@ void main() {
       // act
       bloc.add(tEventCity);
     });
+
+    test(
+        'should emit [Loading, Error] with serviceDisabledFailureMessage when mockGetWeatherFromCity returns ServiceDisabledFailure',
+        () async {
+      // arrange
+      when(() => mockGetWeatherFromCity(any()))
+          .thenAnswer((_) async => Left(ServiceDisabledFailure()));
+      // assert later
+      final expected = [
+        Loading(),
+        const Error(message: serviceDisabledFailureMessage),
+      ];
+      expectLater(bloc.stream, emitsInOrder(expected));
+      // act
+      bloc.add(tEventCity);
+    });
   });
 
   group('GetWeatherFromLocation', () {

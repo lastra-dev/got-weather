@@ -19,7 +19,7 @@ const cacheFailureMessage = 'Cache Failure';
 const networkFailureMessage = 'Internet connection not found!';
 const permissionFailureMessage =
     'Location permission denied, please change location permissions!';
-const serviceDisabledMessage =
+const serviceDisabledFailureMessage =
     'Location service disabled, please enable location service!';
 
 class WeatherBloc extends Bloc<WeatherEvent, WeatherState> {
@@ -90,7 +90,7 @@ class WeatherBloc extends Bloc<WeatherEvent, WeatherState> {
       case PermissionFailure:
         return permissionFailureMessage;
       case ServiceDisabledFailure:
-        return serviceDisabledMessage;
+        return serviceDisabledFailureMessage;
       default:
         return 'Unexpected Error';
     }
