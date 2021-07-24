@@ -26,7 +26,7 @@ class WeatherPageBody extends StatelessWidget {
                 const WeatherControls(),
                 BlocBuilder<WeatherBloc, WeatherState>(
                   builder: (context, state) {
-                    if (state is WeatherInitial) {
+                    if (state is WeatherInitial || state is Error) {
                       return const MessageDisplay(
                           message: 'HOW\nDOES IT\nFEEL LIKE?');
                     } else if (state is Loading) {
@@ -35,10 +35,6 @@ class WeatherPageBody extends StatelessWidget {
                       return WeatherDisplay(
                         weather: state.weather,
                         gotWeather: state.gotWeather,
-                      );
-                    } else if (state is Error) {
-                      return MessageDisplay(
-                        message: state.message.toUpperCase(),
                       );
                     }
                     return Container();
