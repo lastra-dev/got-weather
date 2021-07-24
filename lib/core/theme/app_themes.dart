@@ -6,17 +6,29 @@ enum AppTheme {
   dorne,
 }
 
+const initialColor = Color(0xFF282a36);
+const winterfellColor = Color(0xFF111844);
+const dorneColor = Color(0xFF950330);
+
 final appThemeData = {
   AppTheme.initial: ThemeData(
-    primaryColor: const Color(0xFF272935),
-    accentColor: const Color(0xFF272935),
+    brightness: Brightness.dark,
+    primaryColor: initialColor,
+    accentColor: initialColor,
+    textButtonTheme: TextButtonThemeData(
+      style: TextButton.styleFrom(
+        primary: initialColor,
+      ),
+    ),
   ),
   AppTheme.winterfell: ThemeData(
-    primaryColor: const Color(0xFF111844),
-    accentColor: const Color(0xFF111844),
+    brightness: Brightness.dark,
+    primaryColor: winterfellColor,
+    accentColor: winterfellColor,
   ),
   AppTheme.dorne: ThemeData(
-    primaryColor: const Color(0xFF950330),
-    accentColor: const Color(0xFF950330),
+    brightness: Brightness.dark,
+    primaryColor: dorneColor,
+    accentColor: dorneColor,
   ),
 };

@@ -3,8 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../bloc/weather_bloc.dart';
 import '../display_widgets/weather_controls.dart';
+import '../displays/initial_display.dart';
 import '../displays/loading_display.dart';
-import '../displays/message_display.dart';
 import '../displays/weather_display.dart';
 
 class WeatherPageBody extends StatelessWidget {
@@ -27,8 +27,7 @@ class WeatherPageBody extends StatelessWidget {
                 BlocBuilder<WeatherBloc, WeatherState>(
                   builder: (context, state) {
                     if (state is WeatherInitial || state is Error) {
-                      return const MessageDisplay(
-                          message: 'HOW\nDOES IT\nFEEL LIKE?');
+                      return const InitialDisplay();
                     } else if (state is Loading) {
                       return const LoadingDisplay();
                     } else if (state is Loaded) {

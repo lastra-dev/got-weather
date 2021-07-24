@@ -2,11 +2,13 @@ import 'package:flutter/material.dart';
 
 import '../bodies/weather_page_body.dart';
 
+const initialBg = 'initialBg';
+
 class WeatherPageScaffold extends StatelessWidget {
   final String background;
 
   const WeatherPageScaffold({
-    this.background = 'initialBg',
+    this.background = initialBg,
     Key? key,
   }) : super(key: key);
 
@@ -17,7 +19,7 @@ class WeatherPageScaffold extends StatelessWidget {
         image: DecorationImage(
           colorFilter: ColorFilter.mode(
             Colors.black.withOpacity(
-              background == 'initialBg' ? 0 : 0.3,
+              background == initialBg ? 0 : 0.3,
             ),
             BlendMode.darken,
           ),

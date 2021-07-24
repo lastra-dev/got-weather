@@ -14,10 +14,13 @@ import 'package:got_weather/features/weather/domain/usecases/get_weather_from_lo
 part 'weather_event.dart';
 part 'weather_state.dart';
 
-const serverFailureMessage = 'Server Failure';
+const serverFailureMessage = 'City not found!';
 const cacheFailureMessage = 'Cache Failure';
-const networkFailureMessage = 'Network Failure';
-const permissionFailureMessage = 'Location permission denied';
+const networkFailureMessage = 'Internet connection not found!';
+const permissionFailureMessage =
+    'Location permission denied, please change location permissions!';
+const serviceDisabledMessage =
+    'Location service disabled, please enable location service!';
 
 class WeatherBloc extends Bloc<WeatherEvent, WeatherState> {
   final GetWeatherFromCity getWeatherFromCity;
@@ -86,6 +89,8 @@ class WeatherBloc extends Bloc<WeatherEvent, WeatherState> {
         return networkFailureMessage;
       case PermissionFailure:
         return permissionFailureMessage;
+      case ServiceDisabledFailure:
+        return serviceDisabledMessage;
       default:
         return 'Unexpected Error';
     }
