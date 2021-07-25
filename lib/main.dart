@@ -21,12 +21,11 @@ class MyApp extends StatelessWidget {
       child: BlocBuilder<WeatherBloc, WeatherState>(
         buildWhen: (previousState, state) => state is! Loading,
         builder: (context, state) {
-          if (state is WeatherInitial || state is Error) {
-            return const WeatherMaterialApp();
-          } else if (state is Loaded) {
+          if (state is Loaded) {
             return WeatherMaterialApp(appTheme: state.gotWeather.appTheme);
+          } else {
+            return const WeatherMaterialApp();
           }
-          return Container();
         },
       ),
     );

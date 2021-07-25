@@ -26,17 +26,16 @@ class WeatherPageBody extends StatelessWidget {
                 const WeatherControls(),
                 BlocBuilder<WeatherBloc, WeatherState>(
                   builder: (context, state) {
-                    if (state is WeatherInitial || state is Error) {
-                      return const InitialDisplay();
-                    } else if (state is Loading) {
+                    if (state is Loading) {
                       return const LoadingDisplay();
                     } else if (state is Loaded) {
                       return WeatherDisplay(
                         weather: state.weather,
                         gotWeather: state.gotWeather,
                       );
+                    } else {
+                      return const InitialDisplay();
                     }
-                    return Container();
                   },
                 ),
               ],

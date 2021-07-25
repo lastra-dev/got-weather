@@ -14,12 +14,11 @@ class WeatherPage extends StatelessWidget {
     return BlocBuilder<WeatherBloc, WeatherState>(
       buildWhen: (previousState, state) => state is! Loading,
       builder: (context, state) {
-        if (state is WeatherInitial || state is Error) {
-          return const WeatherPageScaffold();
-        } else if (state is Loaded) {
+        if (state is Loaded) {
           return WeatherPageScaffold(background: state.gotWeather.background);
+        } else {
+          return const WeatherPageScaffold();
         }
-        return Container();
       },
     );
   }
