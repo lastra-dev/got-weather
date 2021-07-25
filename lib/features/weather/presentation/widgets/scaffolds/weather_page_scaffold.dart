@@ -30,7 +30,15 @@ class WeatherPageScaffold extends StatelessWidget {
       ),
       child: Scaffold(
         backgroundColor: Colors.transparent,
-        appBar: AppBar(title: const Text('GOT Weather')),
+        appBar: AppBar(
+          title: Row(
+            children: const [
+              Text('GOT Weather'),
+              SizedBox(width: 10),
+              Icon(Icons.ac_unit),
+            ],
+          ),
+        ),
         body: const WeatherPageBody(),
       ),
     );

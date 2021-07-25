@@ -28,7 +28,10 @@ class WeatherRepositoryImpl implements WeatherRepository {
 
   @override
   Future<Either<Failure, Weather>> getWeatherFromLocation() async {
-    return _getWeather(() => remoteDataSource.getWeatherFromLocation());
+    return _getWeather(
+      () => remoteDataSource.getWeatherFromLocation(),
+      cacheCityName: true,
+    );
   }
 
   @override
@@ -42,11 +45,15 @@ class WeatherRepositoryImpl implements WeatherRepository {
   }
 
   Future<Either<Failure, Weather>> _getWeather(
-      CityOrLocationChooser getWeatherFromCityOrLocation) async {
+    CityOrLocationChooser getWeatherFromCityOrLocation, {
+    bool cacheCityName = false,
+  }) async {
     if (await networkInfo.isConnected) {
       try {
         final remoteWeather = await getWeatherFromCityOrLocation();
-        localDataSource.cacheCityName(remoteWeather.cityName);
+        if (cacheCityName) {
+          localDataSource.cacheCityName(remoteWeather.cityName);
+        }
         return Right(remoteWeather);
       } on ServerException {
         return Left(ServerFailure());

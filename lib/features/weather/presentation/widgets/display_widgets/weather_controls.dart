@@ -35,6 +35,7 @@ class _WeatherControlsState extends State<WeatherControls> {
                 color: primaryColor,
               ),
               hintText: 'Enter a city...',
+              hintStyle: const TextStyle(fontWeight: FontWeight.bold),
             ),
             onEditingComplete: _dispatchFromCity,
             onSubmitted: (_) => _dispatchFromCity,
@@ -53,11 +54,12 @@ class _WeatherControlsState extends State<WeatherControls> {
             Expanded(
               child: OutlinedButton.icon(
                 style: OutlinedButton.styleFrom(
-                  side: BorderSide(color: primaryColor),
+                  side: BorderSide(color: primaryColor, width: 2),
                 ),
                 label: Text(
                   'SEARCH BY LOCATION',
                   style: TextStyle(
+                    fontWeight: FontWeight.bold,
                     fontSize: 12,
                     color: primaryColor,
                   ),
@@ -79,6 +81,7 @@ class _WeatherControlsState extends State<WeatherControls> {
   OutlineInputBorder _buildOutlineInputBorder(Color primaryColor) {
     return OutlineInputBorder(
       borderSide: BorderSide(
+        width: 2,
         color: primaryColor,
       ),
     );
