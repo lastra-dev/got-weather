@@ -252,6 +252,23 @@ void main() {
         verify(() => mockGetWeatherFromLastCity(any()));
       },
     );
+
+    test(
+      'should emit [Loading, WeatherInitial] if GetWeatherFromLastCity returns a failure',
+      () async {
+        // arrange
+        when(() => mockGetWeatherFromLastCity(any()))
+            .thenAnswer((_) async => Left(CacheFailure()));
+        // assert later
+        final expected = [
+          Loading(),
+          WeatherInitial(),
+        ];
+        expectLater(bloc.stream, emitsInOrder(expected));
+        // act
+        bloc.add(tEventLastCity);
+      },
+    );
   });
 
   group('GetGOTWeather', () {

@@ -55,14 +55,12 @@ class WeatherBloc extends Bloc<WeatherEvent, WeatherState> {
     } else if (event is GetWeatherForLastCity) {
       yield Loading();
       final failureOrWeather = await getWeatherFromLastCity(NoParams());
-      yield* _getLoadedOrErrorState(failureOrWeather);
+      yield* failureOrWeather.fold((failure) async* {
+        yield WeatherInitial();
+      }, (_) async* {
+        yield* _getLoadedOrErrorState(failureOrWeather);
+      });
     }
-  }
-
-  @override
-  void onEvent(WeatherEvent event) {
-    previousEvent = event;
-    super.onEvent(event);
   }
 
   Stream<WeatherState> _getLoadedOrErrorState(
@@ -85,6 +83,12 @@ class WeatherBloc extends Bloc<WeatherEvent, WeatherState> {
         );
       },
     );
+  }
+
+  @override
+  void onEvent(WeatherEvent event) {
+    previousEvent = event;
+    super.onEvent(event);
   }
 
   String _mapFailureToMessage(Failure failure) {

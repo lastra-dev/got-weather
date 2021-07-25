@@ -15,7 +15,9 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => di.sl<WeatherBloc>(),
+      create: (context) {
+        return di.sl<WeatherBloc>()..add(GetWeatherForLastCity());
+      },
       child: BlocBuilder<WeatherBloc, WeatherState>(
         buildWhen: (previousState, state) => state is! Loading,
         builder: (context, state) {
