@@ -7,6 +7,7 @@ import 'package:got_weather/features/weather/domain/entities/got_weather.dart';
 import 'package:got_weather/features/weather/domain/entities/weather.dart';
 import 'package:got_weather/features/weather/domain/usecases/get_got_weather.dart';
 import 'package:got_weather/features/weather/domain/usecases/get_weather_from_city.dart';
+import 'package:got_weather/features/weather/domain/usecases/get_weather_from_last_city.dart';
 import 'package:got_weather/features/weather/domain/usecases/get_weather_from_location.dart';
 import 'package:got_weather/features/weather/presentation/bloc/weather_bloc.dart';
 import 'package:mocktail/mocktail.dart';
@@ -16,12 +17,16 @@ class MockGetWeatherFromCity extends Mock implements GetWeatherFromCity {}
 class MockGetWeatherFromLocation extends Mock
     implements GetWeatherFromLocation {}
 
+class MockGetWeatherFromLastCity extends Mock
+    implements GetWeatherFromLastCity {}
+
 class MockGetGOTWeather extends Mock implements GetGOTWeather {}
 
 void main() {
   late WeatherBloc bloc;
   late MockGetWeatherFromCity mockGetWeatherFromCity;
   late MockGetWeatherFromLocation mockGetWeatherFromLocation;
+  late MockGetWeatherFromLastCity mockGetWeatherFromLastCity;
   late MockGetGOTWeather mockGetGOTWeather;
 
   const tGOTWeather = GOTWeather(
@@ -36,15 +41,18 @@ void main() {
   const tCityName = 'Tampico';
   const tEventCity = GetWeatherForCity(tCityName);
   final tEventLocation = GetWeatherForLocation();
+  final tEventLastCity = GetWeatherForLastCity();
 
   setUp(() {
     mockGetWeatherFromCity = MockGetWeatherFromCity();
     mockGetWeatherFromLocation = MockGetWeatherFromLocation();
+    mockGetWeatherFromLastCity = MockGetWeatherFromLastCity();
     mockGetGOTWeather = MockGetGOTWeather();
 
     bloc = WeatherBloc(
       cityWeather: mockGetWeatherFromCity,
       locationWeather: mockGetWeatherFromLocation,
+      lastCityWeather: mockGetWeatherFromLastCity,
       gotWeather: mockGetGOTWeather,
     );
   });
@@ -226,6 +234,24 @@ void main() {
       // act
       bloc.add(tEventLocation);
     });
+  });
+
+  group('GetWeatherFromLastCity', () {
+    test(
+      'should get data from GetWeatherFromLastCity usecase',
+      () async {
+        // arrange
+        when(() => mockGetWeatherFromLastCity(any()))
+            .thenAnswer((_) async => const Right(tWeather));
+        when(() => mockGetGOTWeather(any()))
+            .thenAnswer((_) async => const Right(tGOTWeather));
+        // act
+        bloc.add(tEventLastCity);
+        await untilCalled(() => mockGetWeatherFromLastCity(any()));
+        // assert
+        verify(() => mockGetWeatherFromLastCity(any()));
+      },
+    );
   });
 
   group('GetGOTWeather', () {

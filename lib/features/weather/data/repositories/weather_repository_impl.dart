@@ -31,6 +31,16 @@ class WeatherRepositoryImpl implements WeatherRepository {
     return _getWeather(() => remoteDataSource.getWeatherFromLocation());
   }
 
+  @override
+  Future<Either<Failure, Weather>> getWeatherFromLastCity() async {
+    try {
+      final lastCityName = await localDataSource.getLastCityName();
+      return getWeatherFromCity(lastCityName);
+    } on CacheException {
+      return Left(CacheFailure());
+    }
+  }
+
   Future<Either<Failure, Weather>> _getWeather(
       CityOrLocationChooser getWeatherFromCityOrLocation) async {
     if (await networkInfo.isConnected) {

@@ -14,3 +14,5 @@ class GetWeatherForCity extends WeatherEvent {
 }
 
 class GetWeatherForLocation extends WeatherEvent {}
+
+class GetWeatherForLastCity extends WeatherEvent {}

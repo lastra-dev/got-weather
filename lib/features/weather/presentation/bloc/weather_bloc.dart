@@ -9,6 +9,7 @@ import 'package:got_weather/features/weather/domain/entities/got_weather.dart';
 import 'package:got_weather/features/weather/domain/entities/weather.dart';
 import 'package:got_weather/features/weather/domain/usecases/get_got_weather.dart';
 import 'package:got_weather/features/weather/domain/usecases/get_weather_from_city.dart';
+import 'package:got_weather/features/weather/domain/usecases/get_weather_from_last_city.dart';
 import 'package:got_weather/features/weather/domain/usecases/get_weather_from_location.dart';
 
 part 'weather_event.dart';
@@ -25,15 +26,18 @@ const serviceDisabledFailureMessage =
 class WeatherBloc extends Bloc<WeatherEvent, WeatherState> {
   final GetWeatherFromCity getWeatherFromCity;
   final GetWeatherFromLocation getWeatherFromLocation;
+  final GetWeatherFromLastCity getWeatherFromLastCity;
   final GetGOTWeather getGOTWeather;
   WeatherEvent? previousEvent;
 
   WeatherBloc({
     required GetGOTWeather gotWeather,
     required GetWeatherFromCity cityWeather,
+    required GetWeatherFromLastCity lastCityWeather,
     required GetWeatherFromLocation locationWeather,
   })  : getWeatherFromCity = cityWeather,
         getWeatherFromLocation = locationWeather,
+        getWeatherFromLastCity = lastCityWeather,
         getGOTWeather = gotWeather,
         super(WeatherInitial());
 
@@ -47,6 +51,10 @@ class WeatherBloc extends Bloc<WeatherEvent, WeatherState> {
     } else if (event is GetWeatherForLocation) {
       yield Loading();
       final failureOrWeather = await getWeatherFromLocation(NoParams());
+      yield* _getLoadedOrErrorState(failureOrWeather);
+    } else if (event is GetWeatherForLastCity) {
+      yield Loading();
+      final failureOrWeather = await getWeatherFromLastCity(NoParams());
       yield* _getLoadedOrErrorState(failureOrWeather);
     }
   }

@@ -14,6 +14,7 @@ import 'features/weather/domain/repositories/got_weather_repository.dart';
 import 'features/weather/domain/repositories/weather_repository.dart';
 import 'features/weather/domain/usecases/get_got_weather.dart';
 import 'features/weather/domain/usecases/get_weather_from_city.dart';
+import 'features/weather/domain/usecases/get_weather_from_last_city.dart';
 import 'features/weather/domain/usecases/get_weather_from_location.dart';
 import 'features/weather/presentation/bloc/weather_bloc.dart';
 
@@ -25,12 +26,14 @@ Future<void> init() async {
   sl.registerFactory(() => WeatherBloc(
         cityWeather: sl(),
         locationWeather: sl(),
+        lastCityWeather: sl(),
         gotWeather: sl(),
       ));
 
   // Use cases
   sl.registerLazySingleton(() => GetWeatherFromCity(sl()));
   sl.registerLazySingleton(() => GetWeatherFromLocation(sl()));
+  sl.registerLazySingleton(() => GetWeatherFromLastCity(sl()));
   sl.registerLazySingleton(() => GetGOTWeather(sl()));
 
   // Repository
