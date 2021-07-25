@@ -23,6 +23,7 @@ class _WeatherControlsState extends State<WeatherControls> {
         SizedBox(
           height: MediaQuery.of(context).size.height / 12,
           child: TextField(
+            style: TextStyle(color: Theme.of(context).primaryColor),
             cursorColor: primaryColor,
             controller: controller,
             decoration: InputDecoration(
@@ -103,14 +104,10 @@ class _WeatherControlsState extends State<WeatherControls> {
   void _showErrorSnackBar() {
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
-        content: const Text(
-          'Please enter a city name...',
-          style: TextStyle(color: Colors.white70),
-        ),
+        content: const Text('Please enter a city name...'),
         action: SnackBarAction(
           label: 'Ok',
           onPressed: () {},
-          textColor: Colors.white,
         ),
       ),
     );

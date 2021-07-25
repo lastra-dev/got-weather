@@ -13,7 +13,7 @@ class WeatherPageBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return RefreshIndicator(
-      color: Theme.of(context).primaryColor,
+      color: Theme.of(context).accentColor,
       onRefresh: () => BlocProvider.of<WeatherBloc>(context).retry(),
       child: SizedBox(
         height: MediaQuery.of(context).size.height,
