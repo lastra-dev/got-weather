@@ -23,7 +23,7 @@ class _WeatherControlsState extends State<WeatherControls> {
         SizedBox(
           height: MediaQuery.of(context).size.height / 12,
           child: TextField(
-            style: TextStyle(color: Theme.of(context).primaryColor),
+            style: const TextStyle(color: Colors.black87),
             cursorColor: primaryColor,
             controller: controller,
             decoration: InputDecoration(

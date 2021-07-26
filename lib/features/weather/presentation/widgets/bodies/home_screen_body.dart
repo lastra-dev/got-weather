@@ -7,8 +7,8 @@ import '../displays/initial_display.dart';
 import '../displays/loading_display.dart';
 import '../displays/weather_display.dart';
 
-class WeatherPageBody extends StatelessWidget {
-  const WeatherPageBody({Key? key}) : super(key: key);
+class HomeScreenBody extends StatelessWidget {
+  const HomeScreenBody({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

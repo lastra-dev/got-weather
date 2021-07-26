@@ -10,8 +10,10 @@ const initialPrimaryColor = Color(0xFF282a36);
 const initialAccentColor = Color(0xFFf8f8f2);
 const winterfellPrimaryColor = Color(0xFF111844);
 const winterfellAccentColor = Color(0xFF455fff);
+const winterfellBigTextColor = Color(0xFFf8f8f2);
 const dornePrimaryColor = Color(0xFF950330);
 const dorneAccentColor = Color(0xFFe0074a);
+const dorneBigTextColor = Color(0xFFf8f8f2);
 
 final appThemeData = {
   AppTheme.initial: ThemeData(
@@ -20,6 +22,10 @@ final appThemeData = {
     accentColor: initialAccentColor,
     hintColor: initialPrimaryColor,
     textTheme: const TextTheme(
+      headline2: TextStyle(
+        color: initialPrimaryColor,
+        fontWeight: FontWeight.bold,
+      ),
       subtitle1: TextStyle(color: initialAccentColor),
     ),
     textButtonTheme: TextButtonThemeData(
@@ -35,10 +41,22 @@ final appThemeData = {
     brightness: Brightness.dark,
     primaryColor: winterfellPrimaryColor,
     accentColor: winterfellAccentColor,
+    textTheme: const TextTheme(
+      headline2: TextStyle(
+        color: winterfellBigTextColor,
+        fontWeight: FontWeight.bold,
+      ),
+    ),
   ),
   AppTheme.dorne: ThemeData(
     brightness: Brightness.dark,
     primaryColor: dornePrimaryColor,
     accentColor: dorneAccentColor,
+    textTheme: const TextTheme(
+      headline2: TextStyle(
+        color: dorneBigTextColor,
+        fontWeight: FontWeight.bold,
+      ),
+    ),
   ),
 };
