@@ -6,57 +6,74 @@ enum AppTheme {
   dorne,
 }
 
-const initialPrimaryColor = Color(0xFF282a36);
-const initialAccentColor = Color(0xFFf8f8f2);
-const winterfellPrimaryColor = Color(0xFF111844);
-const winterfellAccentColor = Color(0xFF455fff);
-const winterfellBigTextColor = Color(0xFFf8f8f2);
-const dornePrimaryColor = Color(0xFF950330);
-const dorneAccentColor = Color(0xFFe0074a);
-const dorneBigTextColor = Color(0xFFf8f8f2);
+const initialColor = Color(0xFF282a36);
+const winterfellColor = Color(0xFF111844);
+const dorneColor = Color(0xFF950330);
 
 final appThemeData = {
-  AppTheme.initial: ThemeData(
-    brightness: Brightness.dark,
-    primaryColor: initialPrimaryColor,
-    accentColor: initialAccentColor,
-    hintColor: initialPrimaryColor,
+  AppTheme.initial: ThemeData.from(
+    colorScheme: const ColorScheme(
+      primary: initialColor,
+      primaryVariant: initialColor,
+      secondary: Colors.white,
+      secondaryVariant: initialColor,
+      surface: initialColor,
+      background: initialColor,
+      error: initialColor,
+      onPrimary: Colors.white,
+      onSecondary: initialColor,
+      onSurface: initialColor,
+      onBackground: initialColor,
+      onError: initialColor,
+      brightness: Brightness.dark,
+    ),
     textTheme: const TextTheme(
-      headline2: TextStyle(
-        color: initialPrimaryColor,
-        fontWeight: FontWeight.bold,
-      ),
-      subtitle1: TextStyle(color: initialAccentColor),
-    ),
-    textButtonTheme: TextButtonThemeData(
-      style: TextButton.styleFrom(primary: initialAccentColor),
-    ),
-    snackBarTheme: const SnackBarThemeData(
-      contentTextStyle: TextStyle(color: initialAccentColor),
-      backgroundColor: initialPrimaryColor,
-      actionTextColor: initialAccentColor,
+      subtitle1: TextStyle(color: initialColor),
+      headline2: TextStyle(color: initialColor),
     ),
   ),
-  AppTheme.winterfell: ThemeData(
-    brightness: Brightness.dark,
-    primaryColor: winterfellPrimaryColor,
-    accentColor: winterfellAccentColor,
+  AppTheme.dorne: ThemeData.from(
+    colorScheme: const ColorScheme(
+      primary: dorneColor,
+      primaryVariant: dorneColor,
+      secondary: Colors.white,
+      secondaryVariant: dorneColor,
+      surface: dorneColor,
+      background: dorneColor,
+      error: dorneColor,
+      onPrimary: Colors.white,
+      onSecondary: dorneColor,
+      onSurface: initialColor,
+      onBackground: dorneColor,
+      onError: dorneColor,
+      brightness: Brightness.dark,
+    ),
     textTheme: const TextTheme(
-      headline2: TextStyle(
-        color: winterfellBigTextColor,
-        fontWeight: FontWeight.bold,
-      ),
+      headline2: TextStyle(color: Colors.white),
+      headline4: TextStyle(color: Colors.white),
+      headline6: TextStyle(color: Colors.white70),
     ),
   ),
-  AppTheme.dorne: ThemeData(
-    brightness: Brightness.dark,
-    primaryColor: dornePrimaryColor,
-    accentColor: dorneAccentColor,
+  AppTheme.winterfell: ThemeData.from(
+    colorScheme: const ColorScheme(
+      primary: winterfellColor,
+      primaryVariant: winterfellColor,
+      secondary: Colors.white,
+      secondaryVariant: winterfellColor,
+      surface: winterfellColor,
+      background: winterfellColor,
+      error: winterfellColor,
+      onPrimary: Colors.white,
+      onSecondary: winterfellColor,
+      onSurface: initialColor,
+      onBackground: winterfellColor,
+      onError: winterfellColor,
+      brightness: Brightness.dark,
+    ),
     textTheme: const TextTheme(
-      headline2: TextStyle(
-        color: dorneBigTextColor,
-        fontWeight: FontWeight.bold,
-      ),
+      headline2: TextStyle(color: Colors.white),
+      headline4: TextStyle(color: Colors.white),
+      headline6: TextStyle(color: Colors.white70),
     ),
   ),
 };

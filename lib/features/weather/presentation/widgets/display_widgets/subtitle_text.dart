@@ -10,12 +10,7 @@ class SubtitleText extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Text(
-      message.toUpperCase(),
-      style: const TextStyle(
-        color: Colors.white70,
-        fontSize: 20,
-      ),
-    );
+    return Text(message.toUpperCase(),
+        style: Theme.of(context).textTheme.headline6);
   }
 }

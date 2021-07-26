@@ -23,7 +23,6 @@ class _WeatherControlsState extends State<WeatherControls> {
         SizedBox(
           height: MediaQuery.of(context).size.height / 12,
           child: TextField(
-            style: const TextStyle(color: Colors.black87),
             cursorColor: primaryColor,
             controller: controller,
             decoration: InputDecoration(
@@ -35,7 +34,9 @@ class _WeatherControlsState extends State<WeatherControls> {
                 color: primaryColor,
               ),
               hintText: 'Enter a city...',
-              hintStyle: const TextStyle(fontWeight: FontWeight.bold),
+              hintStyle: Theme.of(context).textTheme.subtitle1!.copyWith(
+                    fontWeight: FontWeight.bold,
+                  ),
             ),
             onEditingComplete: _dispatchFromCity,
             onSubmitted: (_) => _dispatchFromCity,
@@ -54,20 +55,21 @@ class _WeatherControlsState extends State<WeatherControls> {
             Expanded(
               child: OutlinedButton.icon(
                 style: OutlinedButton.styleFrom(
-                  side: BorderSide(color: primaryColor, width: 2),
+                  side: BorderSide(
+                    color: primaryColor,
+                    width: 2,
+                  ),
                 ),
-                label: Text(
+                label: const Text(
                   'SEARCH BY LOCATION',
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 12,
-                    color: primaryColor,
                   ),
                 ),
-                icon: Icon(
+                icon: const Icon(
                   Icons.location_pin,
                   size: 20,
-                  color: primaryColor,
                 ),
                 onPressed: _dispatchFromLocation,
               ),
@@ -107,8 +109,14 @@ class _WeatherControlsState extends State<WeatherControls> {
   void _showErrorSnackBar() {
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
-        content: const Text('Please enter a city name...'),
+        content: const Text(
+          'Please enter a city name...',
+          style: TextStyle(
+            color: Colors.white,
+          ),
+        ),
         action: SnackBarAction(
+          textColor: Colors.white,
           label: 'Ok',
           onPressed: () {},
         ),

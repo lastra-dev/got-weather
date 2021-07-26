@@ -64,14 +64,23 @@ class _HomeScreenState extends State<HomeScreen> {
     SchedulerBinding.instance!.addPostFrameCallback(
       (_) => showDialog(
         context: context,
-        barrierDismissible: false,
         builder: (ctx) => AlertDialog(
           title: const Text('An Error Occured'),
-          content: Text(message),
+          content: Text(
+            message,
+            style: const TextStyle(
+              color: Colors.white,
+            ),
+          ),
           actions: [
             TextButton(
               onPressed: () => Navigator.of(ctx).pop(),
-              child: const Text('Okay'),
+              child: const Text(
+                'Okay',
+                style: TextStyle(
+                  color: Colors.white,
+                ),
+              ),
             ),
           ],
         ),

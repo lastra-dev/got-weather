@@ -24,18 +24,16 @@ class WeatherInfoWidget extends StatelessWidget {
           ),
           Text(
             '${weather.temperature.toString()}ºC',
-            style: const TextStyle(
-              fontSize: 30,
-              color: Colors.white,
-              fontWeight: FontWeight.bold,
-            ),
+            style: Theme.of(context)
+                .textTheme
+                .headline4!
+                .copyWith(fontWeight: FontWeight.bold),
             textAlign: TextAlign.center,
           ),
           Text(
             weather.cityName,
-            style: const TextStyle(
-              color: Colors.white,
-            ),
+            textAlign: TextAlign.center,
+            style: Theme.of(context).textTheme.subtitle2,
           ),
         ],
       ),

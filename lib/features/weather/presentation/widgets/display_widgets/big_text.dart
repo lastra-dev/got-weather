@@ -14,7 +14,10 @@ class BigText extends StatelessWidget {
       width: MediaQuery.of(context).size.width,
       child: Text(
         message,
-        style: Theme.of(context).textTheme.headline2,
+        style: Theme.of(context)
+            .textTheme
+            .headline2!
+            .copyWith(fontWeight: FontWeight.bold),
         textAlign: TextAlign.start,
       ),
     );
