@@ -10,14 +10,14 @@ class BigText extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 200,
+      height: 190,
       width: MediaQuery.of(context).size.width,
       child: Text(
         message,
-        style: Theme.of(context)
-            .textTheme
-            .headline2!
-            .copyWith(fontWeight: FontWeight.bold),
+        style: Theme.of(context).textTheme.headline2!.copyWith(
+              fontWeight: FontWeight.bold,
+              height: 1.1,
+            ),
         textAlign: TextAlign.start,
       ),
     );

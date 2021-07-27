@@ -11,7 +11,9 @@ const winterfellColor = Color(0xFF111844);
 const dorneColor = Color(0xFF950330);
 
 final appThemeData = {
-  AppTheme.initial: ThemeData.from(
+  AppTheme.initial: ThemeData(
+    primaryColor: initialColor,
+    accentColor: Colors.white,
     colorScheme: const ColorScheme(
       primary: initialColor,
       primaryVariant: initialColor,
@@ -31,8 +33,11 @@ final appThemeData = {
       subtitle1: TextStyle(color: initialColor),
       headline2: TextStyle(color: initialColor),
     ),
+    fontFamily: 'Poppins',
   ),
-  AppTheme.dorne: ThemeData.from(
+  AppTheme.dorne: ThemeData(
+    primaryColor: dorneColor,
+    accentColor: Colors.white,
     colorScheme: const ColorScheme(
       primary: dorneColor,
       primaryVariant: dorneColor,
@@ -53,8 +58,11 @@ final appThemeData = {
       headline4: TextStyle(color: Colors.white),
       headline6: TextStyle(color: Colors.white70),
     ),
+    fontFamily: 'Poppins',
   ),
-  AppTheme.winterfell: ThemeData.from(
+  AppTheme.winterfell: ThemeData(
+    primaryColor: winterfellColor,
+    accentColor: Colors.white,
     colorScheme: const ColorScheme(
       primary: winterfellColor,
       primaryVariant: winterfellColor,
@@ -75,5 +83,6 @@ final appThemeData = {
       headline4: TextStyle(color: Colors.white),
       headline6: TextStyle(color: Colors.white70),
     ),
+    fontFamily: 'Poppins',
   ),
 };

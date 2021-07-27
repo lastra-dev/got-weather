@@ -20,27 +20,24 @@ class _WeatherControlsState extends State<WeatherControls> {
     final primaryColor = Theme.of(context).primaryColor;
     return Column(
       children: [
-        SizedBox(
-          height: MediaQuery.of(context).size.height / 12,
-          child: TextField(
-            cursorColor: primaryColor,
-            controller: controller,
-            decoration: InputDecoration(
-              border: _buildOutlineInputBorder(primaryColor),
-              enabledBorder: _buildOutlineInputBorder(primaryColor),
-              focusedBorder: _buildOutlineInputBorder(primaryColor),
-              suffixIcon: Icon(
-                Icons.search,
-                color: primaryColor,
-              ),
-              hintText: 'Enter a city...',
-              hintStyle: Theme.of(context).textTheme.subtitle1!.copyWith(
-                    fontWeight: FontWeight.bold,
-                  ),
+        TextField(
+          cursorColor: primaryColor,
+          controller: controller,
+          decoration: InputDecoration(
+            fillColor: Theme.of(context).primaryColor.withAlpha(10),
+            filled: true,
+            border: _buildOutlineInputBorder(primaryColor),
+            enabledBorder: _buildOutlineInputBorder(primaryColor),
+            focusedBorder: _buildOutlineInputBorder(primaryColor),
+            suffixIcon: Icon(
+              Icons.search,
+              color: primaryColor,
             ),
-            onEditingComplete: _dispatchFromCity,
-            onSubmitted: (_) => _dispatchFromCity,
+            hintText: 'Enter a City...',
+            hintStyle: Theme.of(context).textTheme.subtitle1,
           ),
+          onEditingComplete: _dispatchFromCity,
+          onSubmitted: (_) => _dispatchFromCity,
         ),
         Row(
           children: [
@@ -48,24 +45,20 @@ class _WeatherControlsState extends State<WeatherControls> {
               child: ElevatedButton(
                 style: ElevatedButton.styleFrom(primary: primaryColor),
                 onPressed: _dispatchFromCity,
-                child: const Text('SEARCH'),
+                child: const Text('Search'),
               ),
             ),
             const SizedBox(width: 10),
             Expanded(
               child: OutlinedButton.icon(
                 style: OutlinedButton.styleFrom(
+                  backgroundColor: Theme.of(context).accentColor.withAlpha(30),
                   side: BorderSide(
                     color: primaryColor,
-                    width: 2,
                   ),
                 ),
                 label: const Text(
-                  'SEARCH BY LOCATION',
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 12,
-                  ),
+                  'Location Search',
                 ),
                 icon: const Icon(
                   Icons.location_pin,
@@ -83,7 +76,6 @@ class _WeatherControlsState extends State<WeatherControls> {
   OutlineInputBorder _buildOutlineInputBorder(Color primaryColor) {
     return OutlineInputBorder(
       borderSide: BorderSide(
-        width: 2,
         color: primaryColor,
       ),
     );
