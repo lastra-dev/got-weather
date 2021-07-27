@@ -25,13 +25,13 @@ void main() {
 
   test('should get weather from the repository', () async {
     // arrange
-    when(() => mockWeatherRepository.getWeatherFromLastCity())
+    when(() => mockWeatherRepository.getWeatherFromLastLocation())
         .thenAnswer((_) async => const Right(tWeather));
     // act
     final result = await usecase(NoParams());
     // assert
     expect(result, const Right(tWeather));
-    verify(() => mockWeatherRepository.getWeatherFromLastCity());
+    verify(() => mockWeatherRepository.getWeatherFromLastLocation());
     verifyNoMoreInteractions(mockWeatherRepository);
   });
 }

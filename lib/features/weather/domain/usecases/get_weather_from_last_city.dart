@@ -12,6 +12,6 @@ class GetWeatherFromLastCity extends UseCase<Weather, NoParams> {
 
   @override
   Future<Either<Failure, Weather>> call(NoParams params) async {
-    return repository.getWeatherFromLastCity();
+    return repository.getWeatherFromLastLocation();
   }
 }

@@ -8,7 +8,7 @@ import '../../domain/repositories/weather_repository.dart';
 import '../datasources/weather_local_data_source.dart';
 import '../datasources/weather_remote_data_source.dart';
 
-typedef CityOrLocationChooser = Future<Weather> Function();
+typedef RemoteWeather = Future<Weather> Function();
 
 class WeatherRepositoryImpl implements WeatherRepository {
   final WeatherRemoteDataSource remoteDataSource;
@@ -23,40 +23,46 @@ class WeatherRepositoryImpl implements WeatherRepository {
 
   @override
   Future<Either<Failure, Weather>> getWeatherFromCity(String cityName) async {
-    return _getWeather(() => remoteDataSource.getWeatherFromCity(cityName));
+    return _getWeather(
+        () async => remoteDataSource.getWeatherFromCity(cityName));
   }
 
   @override
   Future<Either<Failure, Weather>> getWeatherFromLocation() async {
-    return _getWeather(
-      () => remoteDataSource.getWeatherFromLocation(),
-      cacheCityName: true,
-    );
+    return _getWeather(() async {
+      final location = await localDataSource.getUserLocation();
+      await localDataSource.cacheLocation(location);
+      final remoteWeather = await remoteDataSource.getWeatherFromLocation(
+        location.lat.toString(),
+        location.lon.toString(),
+      );
+      return remoteWeather;
+    });
   }
 
   @override
-  Future<Either<Failure, Weather>> getWeatherFromLastCity() async {
-    try {
-      final lastCityName = await localDataSource.getLastCityName();
-      return getWeatherFromCity(lastCityName);
-    } on CacheException {
-      return Left(CacheFailure());
-    }
+  Future<Either<Failure, Weather>> getWeatherFromLastLocation() async {
+    return _getWeather(
+      () async {
+        final location = await localDataSource.getLastLocation();
+        final remoteWeather = await remoteDataSource.getWeatherFromLocation(
+          location.lat.toString(),
+          location.lon.toString(),
+        );
+        return remoteWeather;
+      },
+    );
   }
 
   Future<Either<Failure, Weather>> _getWeather(
-    CityOrLocationChooser getWeatherFromCityOrLocation, {
-    bool cacheCityName = false,
-  }) async {
+      RemoteWeather getRemoteWeather) async {
     if (await networkInfo.isConnected) {
       try {
-        final remoteWeather = await getWeatherFromCityOrLocation();
-        if (cacheCityName) {
-          localDataSource.cacheCityName(remoteWeather.cityName);
-        }
-        return Right(remoteWeather);
+        return Right(await getRemoteWeather());
       } on ServerException {
         return Left(ServerFailure());
+      } on CacheException {
+        return Left(CacheFailure());
       } on PermissionException {
         return Left(PermissionFailure());
       } on ServiceDisabledException {

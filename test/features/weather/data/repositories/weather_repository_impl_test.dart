@@ -5,6 +5,7 @@ import 'package:got_weather/core/error/failures.dart';
 import 'package:got_weather/core/network/network_info.dart';
 import 'package:got_weather/features/weather/data/datasources/weather_local_data_source.dart';
 import 'package:got_weather/features/weather/data/datasources/weather_remote_data_source.dart';
+import 'package:got_weather/features/weather/data/models/location_model.dart';
 import 'package:got_weather/features/weather/data/models/weather_model.dart';
 import 'package:got_weather/features/weather/data/repositories/weather_repository_impl.dart';
 import 'package:got_weather/features/weather/domain/entities/weather.dart';
@@ -22,6 +23,8 @@ void main() {
   late MockLocalDataSource mockLocalDataSource;
   late MockNetworkInfo mockNetworkInfo;
 
+  const tLat = '22.0';
+  const tLon = '-97.0';
   const tCityName = 'Tampico';
   const tWeatherModel = WeatherModel(
     cityName: tCityName,
@@ -29,6 +32,10 @@ void main() {
     temperature: 20,
   );
   const Weather tWeather = tWeatherModel;
+  const tLocationModel = LocationModel(
+    lat: 22,
+    lon: -97,
+  );
 
   void _runTestsOnline(Function body) {
     group('device is online', () {
@@ -57,17 +64,19 @@ void main() {
       localDataSource: mockLocalDataSource,
       networkInfo: mockNetworkInfo,
     );
+
+    when(() => mockLocalDataSource.getUserLocation())
+        .thenAnswer((_) async => tLocationModel);
   });
 
   group('getWeatherFromCity', () {
     test('should check if the device is online', () {
       // arrange
+      when(() => mockLocalDataSource.cacheLocation(tLocationModel))
+          .thenAnswer((_) async {});
       when(() => mockNetworkInfo.isConnected).thenAnswer((_) async => true);
       when(() => mockRemoteDataSource.getWeatherFromCity(tCityName))
           .thenAnswer((_) async => tWeatherModel);
-      when(() => mockLocalDataSource.cacheCityName(tCityName))
-          .thenAnswer((_) async {});
-
       // act
       repository.getWeatherFromCity(tCityName);
       // assert
@@ -81,7 +90,7 @@ void main() {
         // arrange
         when(() => mockRemoteDataSource.getWeatherFromCity(tCityName))
             .thenAnswer((_) async => tWeatherModel);
-        when(() => mockLocalDataSource.cacheCityName(tCityName))
+        when(() => mockLocalDataSource.cacheLocation(tLocationModel))
             .thenAnswer((_) async {});
         // act
         final result = await repository.getWeatherFromCity(tCityName);
@@ -89,21 +98,6 @@ void main() {
         verify(() => mockRemoteDataSource.getWeatherFromCity(tCityName));
         expect(result, equals(const Right(tWeather)));
       });
-
-      // test(
-      // 'should cache the data locally when the call to remote data source is successful',
-      // () async {
-      // // arrange
-      // when(() => mockRemoteDataSource.getWeatherFromCity(tCityName))
-      // .thenAnswer((_) async => tWeatherModel);
-      // // when(() => mockLocalDataSource.cacheCityName(tCityName))
-      // // .thenAnswer((_) async {});
-      // // act
-      // await repository.getWeatherFromCity(tCityName);
-      // // assert
-      // verify(() => mockRemoteDataSource.getWeatherFromCity(tCityName));
-      // // verify(() => mockLocalDataSource.cacheCityName(tCityName));
-      // });
 
       test(
           'should return ServerFailure when the call to remote data source is unsuccessful',
@@ -141,15 +135,17 @@ void main() {
     );
     const Weather tWeather = tWeatherModel;
 
-    test('should check if the device is online', () {
+    test('should check if the device is online', () async {
       // arrange
-      when(() => mockNetworkInfo.isConnected).thenAnswer((_) async => true);
-      when(() => mockRemoteDataSource.getWeatherFromLocation())
-          .thenAnswer((_) async => tWeatherModel);
-      when(() => mockLocalDataSource.cacheCityName(tCityName))
+      when(() => mockLocalDataSource.getUserLocation())
+          .thenAnswer((_) async => tLocationModel);
+      when(() => mockLocalDataSource.cacheLocation(tLocationModel))
           .thenAnswer((_) async {});
+      when(() => mockRemoteDataSource.getWeatherFromLocation(tLat, tLon))
+          .thenAnswer((_) async => tWeatherModel);
+      when(() => mockNetworkInfo.isConnected).thenAnswer((_) async => true);
       // act
-      repository.getWeatherFromLocation();
+      await repository.getWeatherFromLocation();
       // assert
       verify(() => mockNetworkInfo.isConnected);
     });
@@ -159,14 +155,14 @@ void main() {
           'should return remote data when the call to remote data source is successful',
           () async {
         // arrange
-        when(() => mockRemoteDataSource.getWeatherFromLocation())
+        when(() => mockRemoteDataSource.getWeatherFromLocation(tLat, tLon))
             .thenAnswer((_) async => tWeatherModel);
-        when(() => mockLocalDataSource.cacheCityName(tCityName))
+        when(() => mockLocalDataSource.cacheLocation(tLocationModel))
             .thenAnswer((_) async {});
         // act
         final result = await repository.getWeatherFromLocation();
         // assert
-        verify(() => mockRemoteDataSource.getWeatherFromLocation());
+        verify(() => mockRemoteDataSource.getWeatherFromLocation(tLat, tLon));
         expect(result, equals(const Right(tWeather)));
       });
 
@@ -174,28 +170,29 @@ void main() {
           'should cache the data locally when the call to remote data source is successful',
           () async {
         // arrange
-        when(() => mockRemoteDataSource.getWeatherFromLocation())
+        when(() => mockRemoteDataSource.getWeatherFromLocation(tLat, tLon))
             .thenAnswer((_) async => tWeatherModel);
-        when(() => mockLocalDataSource.cacheCityName(tCityName))
+        when(() => mockLocalDataSource.cacheLocation(tLocationModel))
             .thenAnswer((_) async {});
         // act
         await repository.getWeatherFromLocation();
         // assert
-        verify(() => mockRemoteDataSource.getWeatherFromLocation());
-        verify(() => mockLocalDataSource.cacheCityName(tCityName));
+        verify(() => mockRemoteDataSource.getWeatherFromLocation(tLat, tLon));
+        verify(() => mockLocalDataSource.cacheLocation(tLocationModel));
       });
 
       test(
           'should return ServerFailure when the call to remote data source is unsuccessful',
           () async {
         // arrange
-        when(() => mockRemoteDataSource.getWeatherFromLocation())
+        when(() => mockRemoteDataSource.getWeatherFromLocation(tLat, tLon))
             .thenThrow(ServerException());
+        when(() => mockLocalDataSource.cacheLocation(tLocationModel))
+            .thenAnswer((_) async => {});
         // act
         final result = await repository.getWeatherFromLocation();
         // assert
-        verify(() => mockRemoteDataSource.getWeatherFromLocation());
-        verifyZeroInteractions(mockLocalDataSource);
+        verify(() => mockRemoteDataSource.getWeatherFromLocation(tLat, tLon));
         expect(result, equals(Left(ServerFailure())));
       });
 
@@ -203,13 +200,15 @@ void main() {
         'should return PermissionFailure when the location is denied and PermissionException is thrown',
         () async {
           // arrange
-          when(() => mockRemoteDataSource.getWeatherFromLocation())
+          when(() => mockLocalDataSource.getUserLocation())
               .thenThrow(PermissionException());
+          when(() => mockLocalDataSource.cacheLocation(tLocationModel))
+              .thenAnswer((_) async => {});
           // act
           final result = await repository.getWeatherFromLocation();
           // assert
-          verify(() => mockRemoteDataSource.getWeatherFromLocation());
-          verifyZeroInteractions(mockLocalDataSource);
+          verify(() => mockLocalDataSource.getUserLocation());
+          verifyNever(() => mockLocalDataSource.cacheLocation(tLocationModel));
           expect(result, equals(Left(PermissionFailure())));
         },
       );
@@ -218,13 +217,14 @@ void main() {
         'should return ServiceDisabledFailure when the service is disabled and ServiceDisabledException is thrown',
         () async {
           // arrange
-          when(() => mockRemoteDataSource.getWeatherFromLocation())
+          when(() => mockLocalDataSource.getUserLocation())
               .thenThrow(ServiceDisabledException());
+          when(() => mockLocalDataSource.cacheLocation(tLocationModel))
+              .thenAnswer((_) async => {});
           // act
           final result = await repository.getWeatherFromLocation();
           // assert
-          verify(() => mockRemoteDataSource.getWeatherFromLocation());
-          verifyZeroInteractions(mockLocalDataSource);
+          verifyNever(() => mockLocalDataSource.cacheLocation(tLocationModel));
           expect(result, equals(Left(ServiceDisabledFailure())));
         },
       );
@@ -232,9 +232,13 @@ void main() {
 
     _runTestsOffline(() {
       test('should return NetworkFailure when device is offline', () async {
+        // arrange
+        when(() => mockRemoteDataSource.getWeatherFromLocation(tLat, tLon))
+            .thenAnswer((_) async => tWeatherModel);
+        when(() => mockLocalDataSource.cacheLocation(tLocationModel))
+            .thenAnswer((_) async {});
         // act
         final result = await repository.getWeatherFromLocation();
-
         // assert
         verifyZeroInteractions(mockRemoteDataSource);
         expect(result, equals(Left(NetworkFailure())));
@@ -248,16 +252,18 @@ void main() {
         'should get last city from local data source',
         () async {
           // arrange
-          when(() => mockLocalDataSource.getLastCityName())
-              .thenAnswer((_) async => tCityName);
+          when(() => mockRemoteDataSource.getWeatherFromLocation(tLat, tLon))
+              .thenAnswer((_) async => tWeatherModel);
+          when(() => mockLocalDataSource.getLastLocation())
+              .thenAnswer((_) async => tLocationModel);
           when(() => mockRemoteDataSource.getWeatherFromCity(tCityName))
               .thenAnswer((_) async => tWeatherModel);
-          when(() => mockLocalDataSource.cacheCityName(tCityName))
+          when(() => mockLocalDataSource.cacheLocation(tLocationModel))
               .thenAnswer((_) async {});
           // act
-          await repository.getWeatherFromLastCity();
+          await repository.getWeatherFromLastLocation();
           // assert
-          verify(() => mockLocalDataSource.getLastCityName());
+          verify(() => mockLocalDataSource.getLastLocation());
         },
       );
 
@@ -265,14 +271,16 @@ void main() {
         'should return Weather when call is successful',
         () async {
           // arrange
-          when(() => mockLocalDataSource.getLastCityName())
-              .thenAnswer((_) async => tCityName);
+          when(() => mockRemoteDataSource.getWeatherFromLocation(tLat, tLon))
+              .thenAnswer((_) async => tWeatherModel);
+          when(() => mockLocalDataSource.getLastLocation())
+              .thenAnswer((_) async => tLocationModel);
           when(() => mockRemoteDataSource.getWeatherFromCity(tCityName))
               .thenAnswer((_) async => tWeatherModel);
-          when(() => mockLocalDataSource.cacheCityName(tCityName))
+          when(() => mockLocalDataSource.cacheLocation(tLocationModel))
               .thenAnswer((_) async {});
           // act
-          final result = await repository.getWeatherFromLastCity();
+          final result = await repository.getWeatherFromLastLocation();
           // assert
           expect(result, equals(const Right(tWeather)));
         },
@@ -282,10 +290,10 @@ void main() {
         'should return CacheFailure when call to localDataSource is unsuccessful',
         () async {
           // arrange
-          when(() => mockLocalDataSource.getLastCityName())
+          when(() => mockLocalDataSource.getLastLocation())
               .thenThrow(CacheException());
           // act
-          final result = await repository.getWeatherFromLastCity();
+          final result = await repository.getWeatherFromLastLocation();
           // assert
           expect(result, equals(Left(CacheFailure())));
         },

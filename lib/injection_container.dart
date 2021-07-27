@@ -50,12 +50,12 @@ Future<void> init() async {
 
   // Data sources
   sl.registerLazySingleton<WeatherRemoteDataSource>(
-      () => WeatherRemoteDataSourceImpl(
-            client: sl(),
+      () => WeatherRemoteDataSourceImpl(client: sl()));
+  sl.registerLazySingleton<WeatherLocalDataSource>(
+      () => WeatherLocalDataSourceImpl(
+            sharedPreferences: sl(),
             location: sl(),
           ));
-  sl.registerLazySingleton<WeatherLocalDataSource>(
-      () => WeatherLocalDataSourceImpl(sharedPreferences: sl()));
   sl.registerLazySingleton<GOTWeatherLocalDataSource>(
       () => GOTWeatherLocalDataSourceImpl());
 

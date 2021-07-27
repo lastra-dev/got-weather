@@ -5,7 +5,6 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:got_weather/core/error/exception.dart';
 import 'package:got_weather/features/weather/data/datasources/weather_remote_data_source.dart';
 import 'package:got_weather/features/weather/data/models/weather_model.dart';
-import 'package:location/location.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:http/http.dart' as http;
 
@@ -13,15 +12,12 @@ import '../../../../fixtures/fixture_reader.dart';
 
 class MockHttpClient extends Mock implements http.Client {}
 
-class MockLocation extends Mock implements Location {}
-
 Future<void> main() async {
   TestWidgetsFlutterBinding.ensureInitialized();
   await dotenv.load();
 
   late WeatherRemoteDataSourceImpl dataSource;
   late MockHttpClient mockHttpClient;
-  late MockLocation mockLocation;
 
   void setUpMockClientSuccess200(Uri url) {
     when(() => mockHttpClient.get(url)).thenAnswer(
@@ -41,30 +37,10 @@ Future<void> main() async {
     );
   }
 
-  void setUpMockGetLocation() {
-    const double tLatitude = 22;
-    const double tLongitude = -97;
-    final tLocation = LocationData.fromMap({
-      'latitude': tLatitude,
-      'longitude': tLongitude,
-    });
-    when(() => mockLocation.getLocation()).thenAnswer((_) async => tLocation);
-  }
-
-  void setUpMockGrantLocationPermissions() {
-    when(() => mockLocation.serviceEnabled()).thenAnswer((_) async => true);
-    when(() => mockLocation.hasPermission())
-        .thenAnswer((_) async => PermissionStatus.granted);
-  }
-
   setUp(() {
     mockHttpClient = MockHttpClient();
-    mockLocation = MockLocation();
-    Location.instance = mockLocation;
-    final Location mockLocationInstance = Location();
     dataSource = WeatherRemoteDataSourceImpl(
       client: mockHttpClient,
-      location: mockLocationInstance,
     );
   });
 
@@ -117,86 +93,16 @@ Future<void> main() async {
     final url = Uri.parse(
         'https://api.openweathermap.org/data/2.5/weather?lat=$tLatitude&lon=$tLongitude&appid=$appid&units=metric');
 
-    test('should call getLocation when getUserLocation is called', () async {
-      // arrange
-      setUpMockGrantLocationPermissions();
-      setUpMockGetLocation();
-      setUpMockClientSuccess200(url);
-      // act
-      await dataSource.getUserLocation();
-      // assert
-      verify(() => mockLocation.getLocation());
-    });
-
-    test('should throw PermissionException when location permission is denied',
-        () async {
-      // arrange
-      when(() => mockLocation.serviceEnabled()).thenAnswer((_) async => true);
-      when(() => mockLocation.hasPermission())
-          .thenAnswer((_) async => PermissionStatus.denied);
-      when(() => mockLocation.requestPermission())
-          .thenAnswer((_) async => PermissionStatus.denied);
-      // act
-      final call = dataSource.getWeatherFromLocation;
-      // assert
-      expect(() => call(), throwsA(isInstanceOf<PermissionException>()));
-    });
-
-    test(
-        'should throw ServiceDisabledException when location service is disabled',
-        () {
-      // arrange
-      when(() => mockLocation.serviceEnabled()).thenAnswer((_) async => false);
-      when(() => mockLocation.requestService()).thenAnswer((_) async => false);
-      // act
-      final call = dataSource.getWeatherFromLocation;
-      // assert
-      expect(() => call(), throwsA(isInstanceOf<ServiceDisabledException>()));
-    });
-
-    test(
-      'should requestPermission() when hasPermission() returns PermissionStatus.denied',
-      () async {
-        // arrange
-        when(() => mockLocation.serviceEnabled()).thenAnswer((_) async => true);
-        when(() => mockLocation.hasPermission())
-            .thenAnswer((_) async => PermissionStatus.denied);
-        when(() => mockLocation.requestPermission())
-            .thenAnswer((_) async => PermissionStatus.granted);
-        setUpMockGetLocation();
-        // act
-        await dataSource.getUserLocation();
-        // assert
-        verify(() => mockLocation.requestPermission());
-      },
-    );
-
-    test(
-      'should requestService() when serviceEnabled() returns false',
-      () async {
-        // arrange
-        when(() => mockLocation.serviceEnabled())
-            .thenAnswer((_) async => false);
-        when(() => mockLocation.requestService()).thenAnswer((_) async => true);
-        when(() => mockLocation.hasPermission())
-            .thenAnswer((_) async => PermissionStatus.granted);
-        setUpMockGetLocation();
-        // act
-        await dataSource.getUserLocation();
-        // assert
-        verify(() => mockLocation.requestService());
-      },
-    );
-
     test(
         'should perform a GET request on a URL with latitude and longitude endpoints',
         () async {
       // arrange
-      setUpMockGrantLocationPermissions();
-      setUpMockGetLocation();
       setUpMockClientSuccess200(url);
       // act
-      await dataSource.getWeatherFromLocation();
+      await dataSource.getWeatherFromLocation(
+        tLatitude.toString(),
+        tLongitude.toString(),
+      );
       // assert
       verify(() => mockHttpClient.get(url));
     });
@@ -207,11 +113,12 @@ Future<void> main() async {
     test('should return Weather when the response code is 200 (success)',
         () async {
       //arrange
-      setUpMockGrantLocationPermissions();
-      setUpMockGetLocation();
       setUpMockClientSuccess200(url);
       // act
-      final result = await dataSource.getWeatherFromLocation();
+      final result = await dataSource.getWeatherFromLocation(
+        tLatitude.toString(),
+        tLongitude.toString(),
+      );
       // assert
       expect(result, equals(tWeatherModel));
     });
@@ -220,13 +127,16 @@ Future<void> main() async {
         'should throw a ServerException when the response code is 404 or other',
         () async {
       // arrange
-      setUpMockGrantLocationPermissions();
-      setUpMockGetLocation();
       setUpMockClientFailure404(url);
       // act
       final call = dataSource.getWeatherFromLocation;
       // assert
-      expect(() => call(), throwsA(isInstanceOf<ServerException>()));
+      expect(
+          () => call(
+                tLatitude.toString(),
+                tLongitude.toString(),
+              ),
+          throwsA(isInstanceOf<ServerException>()));
     });
   });
 }

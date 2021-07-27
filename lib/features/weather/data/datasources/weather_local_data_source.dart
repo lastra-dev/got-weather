@@ -1,34 +1,73 @@
 import 'dart:convert';
 
-import 'package:got_weather/core/error/exception.dart';
+import 'package:location/location.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../../../../core/error/exception.dart';
+import '../models/location_model.dart';
+
 abstract class WeatherLocalDataSource {
-  Future<String> getLastCityName();
-  Future<void> cacheCityName(String cityName);
+  Future<LocationModel> getLastLocation();
+  Future<void> cacheLocation(LocationModel locData);
+  Future<LocationModel> getUserLocation();
 }
 
-const cachedCityName = 'CACHED_CITY_NAME';
+const cachedLocation = 'CACHED_LOCATION';
 
 class WeatherLocalDataSourceImpl implements WeatherLocalDataSource {
   final SharedPreferences sharedPreferences;
+  final Location location;
 
-  WeatherLocalDataSourceImpl({required this.sharedPreferences});
+  WeatherLocalDataSourceImpl({
+    required this.sharedPreferences,
+    required this.location,
+  });
 
   @override
-  Future<void> cacheCityName(String cityName) {
-    final jsonString = {"cityName": cityName};
-    return sharedPreferences.setString(cachedCityName, json.encode(jsonString));
+  Future<void> cacheLocation(LocationModel locData) {
+    final jsonString = locData.toJson();
+    return sharedPreferences.setString(cachedLocation, json.encode(jsonString));
   }
 
   @override
-  Future<String> getLastCityName() {
-    final jsonString = sharedPreferences.getString(cachedCityName);
+  Future<LocationModel> getLastLocation() {
+    final jsonString = sharedPreferences.getString(cachedLocation);
     if (jsonString != null) {
-      final cityName = json.decode(jsonString)['cityName'].toString();
-      return Future.value(cityName);
+      final location = LocationModel.fromJson(
+          json.decode(jsonString) as Map<String, dynamic>);
+      return Future.value(location);
     } else {
       throw CacheException();
     }
+  }
+
+  @override
+  Future<LocationModel> getUserLocation() async {
+    final location = Location();
+
+    bool _serviceEnabled;
+    PermissionStatus _permissionGranted;
+
+    _serviceEnabled = await location.serviceEnabled();
+    if (!_serviceEnabled) {
+      _serviceEnabled = await location.requestService();
+      if (!_serviceEnabled) {
+        throw ServiceDisabledException();
+      }
+    }
+
+    _permissionGranted = await location.hasPermission();
+    if (_permissionGranted == PermissionStatus.denied) {
+      _permissionGranted = await location.requestPermission();
+      if (_permissionGranted != PermissionStatus.granted) {
+        throw PermissionException();
+      }
+    }
+
+    final locData = await location.getLocation();
+    return LocationModel(
+      lat: locData.latitude!,
+      lon: locData.longitude!,
+    );
   }
 }
