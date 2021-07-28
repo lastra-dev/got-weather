@@ -10,7 +10,7 @@ class BigText extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 190,
+      height: 185,
       width: MediaQuery.of(context).size.width,
       child: Text(
         message,

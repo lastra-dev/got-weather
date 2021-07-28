@@ -30,13 +30,24 @@ class WeatherInfoWidget extends StatelessWidget {
                 .copyWith(fontWeight: FontWeight.bold),
             textAlign: TextAlign.center,
           ),
-          Text(
-            weather.cityName,
-            textAlign: TextAlign.center,
-            style: Theme.of(context).textTheme.subtitle2,
-          ),
+          if (weather.country == null) _LocationText(weather.cityName),
+          if (weather.country != null)
+            _LocationText('${weather.cityName}, ${weather.country}'),
         ],
       ),
     );
   }
+}
+
+class _LocationText extends StatelessWidget {
+  const _LocationText(this.text, {Key? key}) : super(key: key);
+
+  final String text;
+
+  @override
+  Widget build(BuildContext context) => Text(
+        text,
+        textAlign: TextAlign.center,
+        style: Theme.of(context).textTheme.subtitle2,
+      );
 }

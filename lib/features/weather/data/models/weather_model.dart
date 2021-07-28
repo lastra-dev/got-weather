@@ -4,10 +4,12 @@ class WeatherModel extends Weather {
   const WeatherModel({
     required int temperature,
     required String cityName,
+    String? country,
     required String icon,
   }) : super(
           temperature: temperature,
           cityName: cityName,
+          country: country,
           icon: icon,
         );
 
@@ -15,6 +17,7 @@ class WeatherModel extends Weather {
     return WeatherModel(
       temperature: (json['main']['temp'] as num).toInt(),
       cityName: json['name'].toString(),
+      country: json['sys']['country'] as String?,
       icon: json['weather'][0]['icon'].toString(),
     );
   }
@@ -23,6 +26,7 @@ class WeatherModel extends Weather {
     return {
       'temperature': temperature,
       'cityName': cityName,
+      'country': country,
       'icon': icon,
     };
   }
