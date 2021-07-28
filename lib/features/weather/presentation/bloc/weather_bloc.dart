@@ -39,7 +39,7 @@ class WeatherBloc extends Bloc<WeatherEvent, WeatherState> {
         getWeatherFromLocation = locationWeather,
         getWeatherFromLastCity = lastCityWeather,
         getGOTWeather = gotWeather,
-        super(WeatherInitial());
+        super(Empty());
 
   @override
   Stream<WeatherState> mapEventToState(WeatherEvent event) async* {
@@ -56,7 +56,7 @@ class WeatherBloc extends Bloc<WeatherEvent, WeatherState> {
       yield Loading();
       final failureOrWeather = await getWeatherFromLastCity(NoParams());
       yield* failureOrWeather.fold((failure) async* {
-        yield WeatherInitial();
+        yield Empty();
       }, (_) async* {
         yield* _getLoadedOrErrorState(failureOrWeather);
       });

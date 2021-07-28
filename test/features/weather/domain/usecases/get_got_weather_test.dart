@@ -37,9 +37,9 @@ void main() {
       final result =
           await usecase(const GOTWeatherParams(temperature: tTemperature));
       // assert
-      expect(result, const Right(tGOTWeather));
       verify(() => mockGOTWeatherRepository.getGOTWeather(tTemperature));
       verifyNoMoreInteractions(mockGOTWeatherRepository);
+      expect(result, const Right(tGOTWeather));
     },
   );
 
@@ -54,10 +54,10 @@ void main() {
   );
 
   test(
-    'GOTWeather should have props',
+    'GOTWeather should extend Equatable',
     () {
       // assert
-      expect(tGOTWeather.props, tGOTWeather.props);
+      expect(tGOTWeather.props, equals([...tGOTWeather.props]));
     },
   );
 }

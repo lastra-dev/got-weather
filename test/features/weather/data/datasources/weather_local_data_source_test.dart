@@ -19,9 +19,11 @@ void main() {
   late MockSharedPreferences mockSharedPreferences;
   late MockLocation mockLocation;
 
+  const double tLatitude = 22;
+  const double tLongitude = -97;
+  const tLocationModel = LocationModel(lat: tLatitude, lon: tLongitude);
+
   void setUpMockGetLocation() {
-    const double tLatitude = 22;
-    const double tLongitude = -97;
     final tLocation = LocationData.fromMap({
       'latitude': tLatitude,
       'longitude': tLongitude,
@@ -46,8 +48,6 @@ void main() {
     );
   });
 
-  const tLocationModel = LocationModel(lat: 22, lon: -97);
-
   group('getLastLocation', () {
     test(
         'should return location from SharedPreferences when there is one in cache',
@@ -55,7 +55,6 @@ void main() {
       // arrange
       when(() => mockSharedPreferences.getString(any()))
           .thenReturn(fixture('location_cached.json'));
-
       // act
       final result = await dataSource.getLastLocation();
       // assert
@@ -66,10 +65,8 @@ void main() {
     test('should throw a CacheException when there is not a cached value', () {
       // arrange
       when(() => mockSharedPreferences.getString(any())).thenReturn(null);
-
       // act
       final call = dataSource.getLastLocation;
-
       // assert
       expect(() => call(), throwsA(isInstanceOf<CacheException>()));
     });

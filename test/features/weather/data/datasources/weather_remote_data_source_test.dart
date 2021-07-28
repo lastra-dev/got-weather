@@ -19,6 +19,12 @@ Future<void> main() async {
   late WeatherRemoteDataSourceImpl dataSource;
   late MockHttpClient mockHttpClient;
 
+  final appId = dotenv.env[weatherApi];
+  const double tLatitude = 22;
+  const double tLongitude = -97;
+  final tWeatherModel = WeatherModel.fromJson(
+      json.decode(fixture('weather.json')) as Map<String, dynamic>);
+
   void setUpMockClientSuccess200(Uri url) {
     when(() => mockHttpClient.get(url)).thenAnswer(
       (_) async => http.Response(
@@ -44,15 +50,10 @@ Future<void> main() async {
     );
   });
 
-  final appid = dotenv.env[weatherApi];
-
-  const double tLatitude = 22;
-  const double tLongitude = -97;
-
   group('getWeatherFromCity', () {
     const tCityName = 'Tampico';
     final url = Uri.parse(
-        'https://api.openweathermap.org/data/2.5/weather?q=$tCityName&appid=$appid&units=metric');
+        'https://api.openweathermap.org/data/2.5/weather?q=$tCityName&appid=$appId&units=metric');
 
     test('should perform a GET request on a URL with the cityName endpoint',
         () async {
@@ -63,9 +64,6 @@ Future<void> main() async {
       // asset
       verify(() => mockHttpClient.get(url));
     });
-
-    final tWeatherModel = WeatherModel.fromJson(
-        json.decode(fixture('weather.json')) as Map<String, dynamic>);
 
     test('should return Weather when the response code is 200 (success)',
         () async {
@@ -91,7 +89,7 @@ Future<void> main() async {
 
   group('getWeatherFromLocation', () {
     final url = Uri.parse(
-        'https://api.openweathermap.org/data/2.5/weather?lat=$tLatitude&lon=$tLongitude&appid=$appid&units=metric');
+        'https://api.openweathermap.org/data/2.5/weather?lat=$tLatitude&lon=$tLongitude&appid=$appId&units=metric');
 
     test(
         'should perform a GET request on a URL with latitude and longitude endpoints',
@@ -106,9 +104,6 @@ Future<void> main() async {
       // assert
       verify(() => mockHttpClient.get(url));
     });
-
-    final tWeatherModel = WeatherModel.fromJson(
-        json.decode(fixture('weather.json')) as Map<String, dynamic>);
 
     test('should return Weather when the response code is 200 (success)',
         () async {

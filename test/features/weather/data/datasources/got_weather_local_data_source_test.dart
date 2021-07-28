@@ -30,7 +30,11 @@ void main() {
       // act
       final call = gotWeatherLocalDataSourceImpl.getGOTWeather;
       // assert
-      expect(() => call(1000), throwsA(isInstanceOf<CacheException>()));
+      const outOfRangeNumber = 1000;
+      expect(
+        () => call(outOfRangeNumber),
+        throwsA(isInstanceOf<CacheException>()),
+      );
     },
   );
 }

@@ -41,15 +41,6 @@ class WeatherRemoteDataSourceImpl implements WeatherRemoteDataSource {
     return _getWeatherFromUrl(url);
   }
 
-  // @override
-  // Future<WeatherModel> getWeatherFromLocation() async {
-  // final appId = await getAppId();
-  // final locData = await getUserLocation();
-  // final url = Uri.parse(
-  // 'https://api.openweathermap.org/data/2.5/weather?lat=${locData.latitude}&lon=${locData.longitude}&appid=$appId&units=metric');
-  // return _getWeatherFromUrl(url);
-  // }
-
   @override
   Future<WeatherModel> getWeatherFromLocation(String lat, String lon) async {
     final appId = await getAppId();
