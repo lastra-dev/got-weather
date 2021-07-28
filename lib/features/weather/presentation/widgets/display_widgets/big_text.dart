@@ -1,4 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:animated_text_kit/animated_text_kit.dart';
+
+const colorizeColors = [
+  Colors.white,
+  Colors.blue,
+];
 
 class BigText extends StatelessWidget {
   final String message;
@@ -12,13 +18,24 @@ class BigText extends StatelessWidget {
     return SizedBox(
       height: 185,
       width: MediaQuery.of(context).size.width,
-      child: Text(
-        message,
+      child: DefaultTextStyle(
+        textAlign: TextAlign.start,
         style: Theme.of(context).textTheme.headline2!.copyWith(
               fontWeight: FontWeight.bold,
               height: 1.1,
             ),
-        textAlign: TextAlign.start,
+        child: AnimatedTextKit(
+          animatedTexts: [
+            TyperAnimatedText(
+              message,
+              speed: const Duration(
+                milliseconds: 100,
+              ),
+            ),
+          ],
+          repeatForever: true,
+          pause: const Duration(seconds: 5),
+        ),
       ),
     );
   }
