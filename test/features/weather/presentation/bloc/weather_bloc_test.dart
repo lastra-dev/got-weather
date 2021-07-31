@@ -31,8 +31,8 @@ void main() {
 
   const tGOTWeather = GOTWeather(
     appTheme: AppTheme.initial,
-    description: 'test',
-    cityName: 'test',
+    subtitle: 'test',
+    title: 'test',
     background: 'test',
     minTemp: 0,
     maxTemp: 0,

@@ -14,8 +14,8 @@ class GOTWeatherModel extends GOTWeather {
           appTheme: appTheme,
           minTemp: minTemp,
           maxTemp: maxTemp,
-          cityName: cityName,
+          title: cityName,
           background: background,
-          description: description,
+          subtitle: description,
         );
 }

@@ -16,7 +16,7 @@ class BigText extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 160,
+      height: 185,
       width: MediaQuery.of(context).size.width,
       child: DefaultTextStyle(
         textAlign: TextAlign.start,
@@ -35,7 +35,7 @@ class BigText extends StatelessWidget {
             ),
           ],
           repeatForever: true,
-          pause: const Duration(seconds: 8),
+          pause: const Duration(seconds: 15),
         ),
       ),
     );

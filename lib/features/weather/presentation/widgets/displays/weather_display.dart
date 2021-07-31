@@ -29,13 +29,13 @@ class WeatherDisplay extends StatelessWidget {
             weather: weather,
           ),
           BigText(
-            'FEELS\nLIKE\n${gotWeather.cityName.toUpperCase()}',
+            gotWeather.title.toUpperCase(),
           ),
           const SizedBox(
             height: 40,
           ),
           SubtitleText(
-            gotWeather.description.toUpperCase(),
+            gotWeather.subtitle.toUpperCase(),
           ),
         ],
       ),

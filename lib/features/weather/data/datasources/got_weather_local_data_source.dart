@@ -20,32 +20,42 @@ class GOTWeatherLocalDataSourceImpl implements GOTWeatherLocalDataSource {
 
 const gotWeatherData = [
   GOTWeather(
-    appTheme: AppTheme.winterfell,
-    description: 'Winter is comming...',
-    cityName: 'Winterfell',
-    background: 'winterfellBg',
+    appTheme: AppTheme.beyondTheWall,
+    title: "Feels Like\nBeyond\nthe wall",
+    subtitle: 'Looks like an arrowhead...',
+    background: 'beyondTheWallBgResized',
     minTemp: -100,
-    maxTemp: 19,
+    maxTemp: 10,
   ),
   GOTWeather(
-    appTheme: AppTheme.dorne,
-    description: 'You might catch a snake...',
-    cityName: 'Dorne',
-    background: 'dorneBg',
-    minTemp: 30,
-    maxTemp: 100,
+    appTheme: AppTheme.winterfell,
+    title: 'Feels\nLike\nWinterfell',
+    subtitle: 'Winter is comming...',
+    background: 'winterfellBg',
+    minTemp: 11,
+    maxTemp: 20,
   ),
   GOTWeather(
     appTheme: AppTheme.kingsLanding,
-    description: 'Power is power...',
-    cityName: "King's Landing",
-    background: 'kingsLanding',
-    minTemp: 20,
-    maxTemp: 29,
-  )
+    title: "Feels Like\nKing's\nLanding",
+    subtitle: 'Power is power...',
+    background: 'kingsLandingBg',
+    minTemp: 21,
+    maxTemp: 30,
+  ),
+  GOTWeather(
+    appTheme: AppTheme.dorne,
+    title: 'Feels\nLike\nDorne',
+    subtitle: 'You might catch a snake...',
+    background: 'dorneBg',
+    minTemp: 31,
+    maxTemp: 100,
+  ),
 ];
 
 enum GOTCity {
+  beyondTheWall,
   winterfell,
+  kingsLanding,
   dorne,
 }

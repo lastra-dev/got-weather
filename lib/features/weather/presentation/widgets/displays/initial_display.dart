@@ -17,15 +17,15 @@ class InitialDisplay extends StatelessWidget {
           Align(
             alignment: Alignment.topRight,
             child: SizedBox(
-              height: 100,
+              height: MediaQuery.of(context).size.height / 8.0,
               child: Image.asset('assets/images/coloredWeatherIcon.jpg'),
               // child: const Placeholder(),
             ),
           ),
           const BigText('I KNOW\nNOTHING\nBUT WEATHER'),
           SizedBox(
-            height: 180,
-            child: Image.asset('assets/images/jonCatBlue.jpg'),
+            height: MediaQuery.of(context).size.height / 4.0,
+            child: Image.asset('assets/images/jonCat.jpg'),
             // child: Placeholder(),
           ),
         ],

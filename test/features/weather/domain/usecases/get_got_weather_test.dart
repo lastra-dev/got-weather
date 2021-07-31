@@ -15,8 +15,8 @@ void main() {
   const tTemperature = 3;
   const tGOTWeather = GOTWeather(
     appTheme: AppTheme.winterfell,
-    description: 'a description',
-    cityName: 'Winterfell',
+    subtitle: 'a description',
+    title: 'Winterfell',
     minTemp: -4,
     maxTemp: 5,
     background: 'background',

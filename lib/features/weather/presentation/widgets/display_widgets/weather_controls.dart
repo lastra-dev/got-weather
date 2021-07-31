@@ -31,7 +31,7 @@ class _WeatherControlsState extends State<WeatherControls> {
             focusedBorder: _buildOutlineInputBorder(primaryColor),
             suffixIcon: Icon(
               Icons.search,
-              color: Theme.of(context).accentColor,
+              color: Theme.of(context).accentColor.withAlpha(150),
             ),
             hintText: 'Enter a City...',
             hintStyle: Theme.of(context).textTheme.subtitle1,
@@ -44,6 +44,9 @@ class _WeatherControlsState extends State<WeatherControls> {
             Expanded(
               child: ElevatedButton(
                 style: ElevatedButton.styleFrom(
+                  side: const BorderSide(
+                    color: Colors.transparent,
+                  ),
                   primary: primaryColor,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(15),

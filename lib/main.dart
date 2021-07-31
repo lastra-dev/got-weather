@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'core/theme/app_themes.dart';
@@ -8,6 +9,7 @@ import 'injection_container.dart' as di;
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
   await di.init();
   runApp(MyApp());
 }
@@ -46,6 +48,9 @@ class GOTWeatherApp extends StatelessWidget {
   void precacheImages(BuildContext context) {
     precacheImage(const AssetImage("assets/images/winterfellBg.jpg"), context);
     precacheImage(const AssetImage("assets/images/dorneBg.jpg"), context);
-    precacheImage(const AssetImage("assets/images/kingsLanding.jpg"), context);
+    precacheImage(
+        const AssetImage("assets/images/kingsLandingBg.jpg"), context);
+    precacheImage(
+        const AssetImage("assets/images/beyondTheWallBgResized.jpg"), context);
   }
 }
