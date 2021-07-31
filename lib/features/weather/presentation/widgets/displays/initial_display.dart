@@ -7,11 +7,29 @@ class InitialDisplay extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        SizedBox(height: MediaQuery.of(context).size.height / 8),
-        const BigText('HOW\nDOES IT\nFEEL LIKE?'),
-      ],
+    return SizedBox(
+      height: MediaQuery.of(context).size.height -
+          Scaffold.of(context).appBarMaxHeight! -
+          162,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Align(
+            alignment: Alignment.topRight,
+            child: SizedBox(
+              height: 100,
+              child: Image.asset('assets/images/coloredWeatherIcon.jpg'),
+              // child: const Placeholder(),
+            ),
+          ),
+          const BigText('I KNOW\nNOTHING\nBUT WEATHER'),
+          SizedBox(
+            height: 180,
+            child: Image.asset('assets/images/jonCatBlue.jpg'),
+            // child: Placeholder(),
+          ),
+        ],
+      ),
     );
   }
 }

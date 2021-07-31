@@ -25,15 +25,23 @@ const gotWeatherData = [
     cityName: 'Winterfell',
     background: 'winterfellBg',
     minTemp: -100,
-    maxTemp: 20,
+    maxTemp: 19,
   ),
   GOTWeather(
     appTheme: AppTheme.dorne,
     description: 'You might catch a snake...',
     cityName: 'Dorne',
     background: 'dorneBg',
-    minTemp: 21,
+    minTemp: 30,
     maxTemp: 100,
+  ),
+  GOTWeather(
+    appTheme: AppTheme.kingsLanding,
+    description: 'Power is power...',
+    cityName: "King's Landing",
+    background: 'kingsLanding',
+    minTemp: 20,
+    maxTemp: 29,
   )
 ];
 

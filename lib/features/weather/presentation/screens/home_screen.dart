@@ -30,13 +30,15 @@ class _HomeScreenState extends State<HomeScreen> {
                 BlendMode.darken,
               ),
               image: AssetImage(
-                  'assets/images/${state is Loaded ? state.gotWeather.background : initialBg}.jpg'),
+                'assets/images/${state is Loaded ? state.gotWeather.background : initialBg}.jpg',
+              ),
               fit: BoxFit.cover,
               alignment: Alignment.bottomCenter,
             ),
           ),
           child: Scaffold(
-            backgroundColor: Colors.transparent,
+            backgroundColor:
+                state is Loaded ? Colors.transparent : Colors.white,
             appBar: AppBar(
               title: const Text('GOT Weather'),
               actions: [
@@ -69,8 +71,8 @@ class _HomeScreenState extends State<HomeScreen> {
           content: Text(
             message,
             style: const TextStyle(
-              color: Colors.white,
-            ),
+                // color: Colors.white,
+                ),
           ),
           actions: [
             TextButton(
@@ -78,8 +80,8 @@ class _HomeScreenState extends State<HomeScreen> {
               child: const Text(
                 'Okay',
                 style: TextStyle(
-                  color: Colors.white,
-                ),
+                    // color: Colors.white,
+                    ),
               ),
             ),
           ],

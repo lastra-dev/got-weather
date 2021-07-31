@@ -18,24 +18,27 @@ class WeatherDisplay extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        const SizedBox(
-          height: 10,
-        ),
-        WeatherInfoWidget(
-          weather: weather,
-        ),
-        BigText(
-          'FEELS\nLIKE\n${gotWeather.cityName.toUpperCase()}',
-        ),
-        SizedBox(
-          height: MediaQuery.of(context).size.height / 7,
-        ),
-        SubtitleText(
-          gotWeather.description,
-        ),
-      ],
+    return SizedBox(
+      height: MediaQuery.of(context).size.height -
+          Scaffold.of(context).appBarMaxHeight! -
+          142,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          WeatherInfoWidget(
+            weather: weather,
+          ),
+          BigText(
+            'FEELS\nLIKE\n${gotWeather.cityName.toUpperCase()}',
+          ),
+          const SizedBox(
+            height: 40,
+          ),
+          SubtitleText(
+            gotWeather.description.toUpperCase(),
+          ),
+        ],
+      ),
     );
   }
 }

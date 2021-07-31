@@ -24,10 +24,10 @@ class WeatherInfoWidget extends StatelessWidget {
           ),
           Text(
             '${weather.temperature.toString()}ºC',
-            style: Theme.of(context)
-                .textTheme
-                .headline4!
-                .copyWith(fontWeight: FontWeight.bold),
+            style: Theme.of(context).textTheme.headline4!.copyWith(
+                  fontWeight: FontWeight.bold,
+                  height: 1.3,
+                ),
             textAlign: TextAlign.center,
           ),
           if (weather.country == null) _LocationText(weather.cityName),
@@ -48,6 +48,8 @@ class _LocationText extends StatelessWidget {
   Widget build(BuildContext context) => Text(
         text,
         textAlign: TextAlign.center,
-        style: Theme.of(context).textTheme.subtitle2,
+        style: Theme.of(context).textTheme.subtitle2!.copyWith(
+              height: 1,
+            ),
       );
 }

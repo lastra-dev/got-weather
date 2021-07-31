@@ -16,13 +16,15 @@ class HomeScreenBody extends StatelessWidget {
       color: Theme.of(context).accentColor,
       onRefresh: () => BlocProvider.of<WeatherBloc>(context).retry(),
       child: SizedBox(
-        height: MediaQuery.of(context).size.height,
+        height: MediaQuery.of(context).size.height -
+            Scaffold.of(context).appBarMaxHeight!,
         child: SingleChildScrollView(
           physics: const AlwaysScrollableScrollPhysics(),
           child: Padding(
             padding: const EdgeInsets.all(10),
             child: Column(
               children: [
+                const SizedBox(height: 10),
                 const WeatherControls(),
                 BlocBuilder<WeatherBloc, WeatherState>(
                   builder: (context, state) {
@@ -34,7 +36,12 @@ class HomeScreenBody extends StatelessWidget {
                         gotWeather: state.gotWeather,
                       );
                     } else {
-                      return const InitialDisplay();
+                      return Column(
+                        children: const [
+                          SizedBox(height: 20),
+                          InitialDisplay(),
+                        ],
+                      );
                     }
                   },
                 ),

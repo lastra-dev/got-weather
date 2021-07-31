@@ -46,5 +46,6 @@ class GOTWeatherApp extends StatelessWidget {
   void precacheImages(BuildContext context) {
     precacheImage(const AssetImage("assets/images/winterfellBg.jpg"), context);
     precacheImage(const AssetImage("assets/images/dorneBg.jpg"), context);
+    precacheImage(const AssetImage("assets/images/kingsLanding.jpg"), context);
   }
 }

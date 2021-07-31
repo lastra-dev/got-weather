@@ -24,14 +24,14 @@ class _WeatherControlsState extends State<WeatherControls> {
           cursorColor: primaryColor,
           controller: controller,
           decoration: InputDecoration(
-            fillColor: Theme.of(context).primaryColor.withAlpha(10),
+            fillColor: Theme.of(context).primaryColor.withAlpha(90),
             filled: true,
             border: _buildOutlineInputBorder(primaryColor),
             enabledBorder: _buildOutlineInputBorder(primaryColor),
             focusedBorder: _buildOutlineInputBorder(primaryColor),
             suffixIcon: Icon(
               Icons.search,
-              color: primaryColor,
+              color: Theme.of(context).accentColor,
             ),
             hintText: 'Enter a City...',
             hintStyle: Theme.of(context).textTheme.subtitle1,
@@ -43,7 +43,12 @@ class _WeatherControlsState extends State<WeatherControls> {
           children: [
             Expanded(
               child: ElevatedButton(
-                style: ElevatedButton.styleFrom(primary: primaryColor),
+                style: ElevatedButton.styleFrom(
+                  primary: primaryColor,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(15),
+                  ),
+                ),
                 onPressed: _dispatchFromCity,
                 child: const Text('Search'),
               ),
@@ -52,9 +57,12 @@ class _WeatherControlsState extends State<WeatherControls> {
             Expanded(
               child: OutlinedButton.icon(
                 style: OutlinedButton.styleFrom(
-                  backgroundColor: Theme.of(context).accentColor.withAlpha(30),
-                  side: BorderSide(
-                    color: primaryColor,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(15),
+                  ),
+                  backgroundColor: Theme.of(context).accentColor.withAlpha(90),
+                  side: const BorderSide(
+                    color: Colors.transparent,
                   ),
                 ),
                 label: const Text(
@@ -75,8 +83,9 @@ class _WeatherControlsState extends State<WeatherControls> {
 
   OutlineInputBorder _buildOutlineInputBorder(Color primaryColor) {
     return OutlineInputBorder(
-      borderSide: BorderSide(
-        color: primaryColor,
+      borderRadius: BorderRadius.circular(15),
+      borderSide: const BorderSide(
+        color: Colors.transparent,
       ),
     );
   }
