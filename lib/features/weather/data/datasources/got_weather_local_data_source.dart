@@ -23,7 +23,7 @@ const gotWeatherData = [
     appTheme: AppTheme.beyondTheWall,
     title: "Feels Like\nBeyond\nthe wall",
     subtitle: 'Looks like an arrowhead...',
-    background: 'beyondTheWallBgResized',
+    background: 'beyondTheWallBg',
     minTemp: -100,
     maxTemp: 10,
   ),
