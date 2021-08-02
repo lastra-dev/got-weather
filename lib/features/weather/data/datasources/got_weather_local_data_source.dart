@@ -25,14 +25,22 @@ const gotWeatherData = [
     subtitle: 'Looks like an arrowhead...',
     background: 'beyondTheWallBg',
     minTemp: -100,
-    maxTemp: 10,
+    maxTemp: 8,
   ),
   GOTWeather(
     appTheme: AppTheme.winterfell,
     title: 'Feels\nLike\nWinterfell',
     subtitle: 'Winter is comming...',
     background: 'winterfellBg',
-    minTemp: 11,
+    minTemp: 9,
+    maxTemp: 15,
+  ),
+  GOTWeather(
+    appTheme: AppTheme.highgarden,
+    title: 'Feels Like\nHighgarden',
+    subtitle: "I want her to know, it was me...",
+    background: 'highgardenBg',
+    minTemp: 16,
     maxTemp: 20,
   ),
   GOTWeather(
@@ -56,6 +64,7 @@ const gotWeatherData = [
 enum GOTCity {
   beyondTheWall,
   winterfell,
+  highgarden,
   kingsLanding,
   dorne,
 }

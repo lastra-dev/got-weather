@@ -19,7 +19,7 @@ void main() {
       // assert
       expect(
         result,
-        equals(gotWeatherData[GOTCity.winterfell.index]),
+        equals(gotWeatherData[GOTCity.beyondTheWall.index]),
       );
     },
   );

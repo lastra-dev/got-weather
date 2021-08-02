@@ -6,6 +6,7 @@ enum AppTheme {
   dorne,
   kingsLanding,
   beyondTheWall,
+  highgarden,
 }
 
 final appThemeData = {
@@ -14,4 +15,5 @@ final appThemeData = {
   AppTheme.winterfell: winterfellThemeData,
   AppTheme.kingsLanding: kingsLandingThemeData,
   AppTheme.beyondTheWall: beyondTheWallThemeData,
+  AppTheme.highgarden: highgardenThemeData,
 };

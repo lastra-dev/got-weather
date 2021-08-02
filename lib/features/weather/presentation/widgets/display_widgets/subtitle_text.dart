@@ -13,6 +13,7 @@ class SubtitleText extends StatelessWidget {
     return Text(
       message,
       style: Theme.of(context).textTheme.headline6,
+      textAlign: TextAlign.center,
     );
   }
 }

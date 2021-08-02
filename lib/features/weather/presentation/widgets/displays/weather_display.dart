@@ -21,7 +21,7 @@ class WeatherDisplay extends StatelessWidget {
     return SizedBox(
       height: MediaQuery.of(context).size.height -
           Scaffold.of(context).appBarMaxHeight! -
-          142,
+          162,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
@@ -30,9 +30,6 @@ class WeatherDisplay extends StatelessWidget {
           ),
           BigText(
             gotWeather.title.toUpperCase(),
-          ),
-          const SizedBox(
-            height: 40,
           ),
           SubtitleText(
             gotWeather.subtitle.toUpperCase(),
