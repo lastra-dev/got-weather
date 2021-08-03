@@ -1,6 +1,6 @@
 import 'package:got_weather/core/error/exception.dart';
-import 'package:got_weather/core/theme/app_themes.dart';
 import 'package:got_weather/features/weather/domain/entities/got_weather.dart';
+import 'got_weather_data.dart';
 
 abstract class GOTWeatherLocalDataSource {
   /// Matches a temperature with a [GOTWeather] temperature range and returns a GOTWeather
@@ -10,61 +10,17 @@ abstract class GOTWeatherLocalDataSource {
 class GOTWeatherLocalDataSourceImpl implements GOTWeatherLocalDataSource {
   @override
   GOTWeather getGOTWeather(int temperature) {
-    return gotWeatherData.firstWhere(
-      (element) =>
-          temperature >= element.minTemp && temperature <= element.maxTemp,
-      orElse: () => throw CacheException(),
-    );
+    GOTWeather? gotWeather;
+    gotWeatherData.forEach((_, data) {
+      if (temperature >= data.minTemp && temperature <= data.maxTemp) {
+        gotWeather = data;
+      }
+    });
+
+    if (gotWeather != null) {
+      return gotWeather!;
+    } else {
+      throw CacheException();
+    }
   }
-}
-
-const gotWeatherData = [
-  GOTWeather(
-    appTheme: AppTheme.beyondTheWall,
-    title: "Feels Like\nBeyond\nthe wall",
-    subtitle: 'Looks like an arrowhead...',
-    background: 'beyondTheWallBg',
-    minTemp: -100,
-    maxTemp: 8,
-  ),
-  GOTWeather(
-    appTheme: AppTheme.winterfell,
-    title: 'Feels\nLike\nWinterfell',
-    subtitle: 'Winter is comming...',
-    background: 'winterfellBg',
-    minTemp: 9,
-    maxTemp: 15,
-  ),
-  GOTWeather(
-    appTheme: AppTheme.highgarden,
-    title: 'Feels Like\nHighgarden',
-    subtitle: "I want her to know, it was me...",
-    background: 'highgardenBg',
-    minTemp: 16,
-    maxTemp: 20,
-  ),
-  GOTWeather(
-    appTheme: AppTheme.kingsLanding,
-    title: "Feels Like\nKing's\nLanding",
-    subtitle: 'Power is power...',
-    background: 'kingsLandingBg',
-    minTemp: 21,
-    maxTemp: 30,
-  ),
-  GOTWeather(
-    appTheme: AppTheme.dorne,
-    title: 'Feels\nLike\nDorne',
-    subtitle: 'You might catch a snake...',
-    background: 'dorneBg',
-    minTemp: 31,
-    maxTemp: 100,
-  ),
-];
-
-enum GOTCity {
-  beyondTheWall,
-  winterfell,
-  highgarden,
-  kingsLanding,
-  dorne,
 }

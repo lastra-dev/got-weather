@@ -1,5 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:got_weather/core/error/exception.dart';
+import 'package:got_weather/features/weather/data/datasources/got_weather_data.dart';
 import 'package:got_weather/features/weather/data/datasources/got_weather_local_data_source.dart';
 
 void main() {
@@ -19,7 +20,7 @@ void main() {
       // assert
       expect(
         result,
-        equals(gotWeatherData[GOTCity.beyondTheWall.index]),
+        equals(gotWeatherData[GOTCity.beyondTheWall]),
       );
     },
   );

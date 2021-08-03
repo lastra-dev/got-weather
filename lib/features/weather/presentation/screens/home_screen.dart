@@ -37,8 +37,7 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
           ),
           child: Scaffold(
-            backgroundColor:
-                state is Loaded ? Colors.transparent : Colors.white,
+            backgroundColor: Colors.transparent,
             appBar: AppBar(
               title: const Text('GOT Weather'),
               actions: [
@@ -68,21 +67,11 @@ class _HomeScreenState extends State<HomeScreen> {
         context: context,
         builder: (ctx) => AlertDialog(
           title: const Text('An Error Occured'),
-          content: Text(
-            message,
-            style: const TextStyle(
-                // color: Colors.white,
-                ),
-          ),
+          content: Text(message),
           actions: [
             TextButton(
               onPressed: () => Navigator.of(ctx).pop(),
-              child: const Text(
-                'Okay',
-                style: TextStyle(
-                    // color: Colors.white,
-                    ),
-              ),
+              child: const Text('Okay'),
             ),
           ],
         ),
