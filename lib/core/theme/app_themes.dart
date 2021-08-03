@@ -8,6 +8,7 @@ enum AppTheme {
   beyondTheWall,
   highgarden,
   yunkai,
+  dragonstone,
 }
 
 final appThemeData = {
@@ -18,4 +19,5 @@ final appThemeData = {
   AppTheme.beyondTheWall: beyondTheWallThemeData,
   AppTheme.highgarden: highgardenThemeData,
   AppTheme.yunkai: yunkaiThemeData,
+  AppTheme.dragonstone: dragonstoneThemeData,
 };

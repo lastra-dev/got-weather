@@ -9,6 +9,7 @@ enum GOTCity {
   kingsLanding,
   dorne,
   yunkai,
+  dragonstone,
 }
 
 const gotWeatherData = {
@@ -36,12 +37,20 @@ const gotWeatherData = {
     minTemp: 16,
     maxTemp: 20,
   ),
+  GOTCity.dragonstone: GOTWeather(
+    appTheme: AppTheme.dragonstone,
+    title: 'Feels Like\nDragonstone',
+    subtitle: 'Shall we begin?',
+    background: 'dragonstoneBg',
+    minTemp: 21,
+    maxTemp: 25,
+  ),
   GOTCity.kingsLanding: GOTWeather(
     appTheme: AppTheme.kingsLanding,
     title: "Feels Like\nKing's\nLanding",
     subtitle: 'Power is power...',
     background: 'kingsLandingBg',
-    minTemp: 21,
+    minTemp: 26,
     maxTemp: 30,
   ),
   GOTCity.dorne: GOTWeather(
@@ -49,15 +58,15 @@ const gotWeatherData = {
     title: 'Feels\nLike\nDorne',
     subtitle: 'You might catch a snake...',
     background: 'dorneBg',
-    minTemp: 25,
-    maxTemp: 29,
+    minTemp: 30,
+    maxTemp: 34,
   ),
   GOTCity.yunkai: GOTWeather(
     appTheme: AppTheme.yunkai,
     title: 'Feels\nLike\nYunkai',
     subtitle: 'We shall enslave once more...',
     background: 'yunkaiBg',
-    minTemp: 30,
+    minTemp: 35,
     maxTemp: 100,
   ),
 };
