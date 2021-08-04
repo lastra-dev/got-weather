@@ -1,5 +1,6 @@
 export 'beyond_the_wall_theme_data.dart';
 export 'dorne_theme_data.dart';
+export 'dothraki_sea_theme_data.dart';
 export 'dragonstone_theme_data.dart';
 export 'highgarden_theme_data.dart';
 export 'initial_theme_data.dart';
