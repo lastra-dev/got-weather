@@ -30,7 +30,7 @@ final dothrakiSeaThemeData = ThemeData(
       ],
     ),
     headline4: const TextStyle(color: Colors.white),
-    headline6: const TextStyle(color: Colors.white70),
+    headline6: const TextStyle(color: Colors.white),
   ),
   fontFamily: 'Poppins',
 );

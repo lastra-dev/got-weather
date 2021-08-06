@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-const winterfellColor = Color(0xFF1B1617);
+const winterfellColor = Color(0xFF031530);
 
 final winterfellThemeData = ThemeData(
   primaryColor: winterfellColor,

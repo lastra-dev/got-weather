@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-const highgardenColor = Color(0xFF023664);
+const highgardenColor = Color(0xFF0B3041);
 
 final highgardenThemeData = ThemeData(
   primaryColor: highgardenColor,
@@ -30,7 +30,7 @@ final highgardenThemeData = ThemeData(
       ],
     ),
     headline4: const TextStyle(color: Colors.white),
-    headline6: const TextStyle(color: Colors.white70),
+    headline6: const TextStyle(color: Colors.white),
   ),
   fontFamily: 'Poppins',
 );

@@ -17,45 +17,45 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<WeatherBloc, WeatherState>(
-      buildWhen: (previousState, state) => state is! Loading,
+    return BlocConsumer<WeatherBloc, WeatherState>(
+      listener: (context, state) {
+        if (state is Error) {
+          showErrorMessage(state.message);
+        }
+      },
+      buildWhen: (_, state) => state is! Loading,
       builder: (context, state) {
-        return Container(
-          decoration: BoxDecoration(
-            image: DecorationImage(
-              colorFilter: ColorFilter.mode(
-                Colors.black.withOpacity(
-                  state is Loaded ? 0.3 : 0.0,
+        // FutureBuilder needed to change between backgrounds
+        // without loading black screen
+        return FutureBuilder(
+          future: buildBackgroundImage(
+              "assets/images/${state is Loaded ? state.gotWeather.background : initialBg}.jpg"),
+          builder: (_, snapshot) {
+            return Container(
+              decoration: BoxDecoration(
+                image: DecorationImage(
+                  fit: BoxFit.cover,
+                  alignment: Alignment.bottomCenter,
+                  image: (snapshot.data ??
+                          const AssetImage('assets/images/initialBg.jpg'))
+                      as AssetImage,
                 ),
-                BlendMode.darken,
               ),
-              image: AssetImage(
-                'assets/images/${state is Loaded ? state.gotWeather.background : initialBg}.jpg',
+              child: Scaffold(
+                backgroundColor: Colors.transparent,
+                appBar: AppBar(
+                  title: const Text('GOT Weather'),
+                  actions: [
+                    IconButton(
+                      icon: const Icon(Icons.more_vert),
+                      onPressed: () {},
+                    )
+                  ],
+                ),
+                body: const HomeScreenBody(),
               ),
-              fit: BoxFit.cover,
-              alignment: Alignment.bottomCenter,
-            ),
-          ),
-          child: Scaffold(
-            backgroundColor: Colors.transparent,
-            appBar: AppBar(
-              title: const Text('GOT Weather'),
-              actions: [
-                IconButton(
-                  icon: const Icon(Icons.more_vert),
-                  onPressed: () {},
-                )
-              ],
-            ),
-            body: BlocListener<WeatherBloc, WeatherState>(
-              listener: (context, state) {
-                if (state is Error) {
-                  showErrorMessage(state.message);
-                }
-              },
-              child: const HomeScreenBody(),
-            ),
-          ),
+            );
+          },
         );
       },
     );
@@ -77,5 +77,10 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
       ),
     );
+  }
+
+  Future<AssetImage> buildBackgroundImage(String imageToPrecache) async {
+    await precacheImage(AssetImage(imageToPrecache), context);
+    return AssetImage(imageToPrecache);
   }
 }

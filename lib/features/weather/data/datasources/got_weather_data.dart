@@ -34,7 +34,7 @@ const gotWeatherData = {
     appTheme: AppTheme.highgarden,
     title: 'Feels Like\nHighgarden',
     subtitle: "I want her to know, it was me...",
-    background: 'highgardenBg',
+    background: 'highgardenBg2',
     minTemp: 11,
     maxTemp: 15,
   ),

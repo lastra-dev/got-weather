@@ -31,30 +31,17 @@ class GOTWeatherApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    precacheImages(context);
     return BlocBuilder<WeatherBloc, WeatherState>(
-        buildWhen: (_, state) => state is! Loading,
-        builder: (context, state) {
-          return MaterialApp(
-            title: 'GOT Weather',
-            theme: state is Loaded
-                ? appThemeData[state.gotWeather.appTheme]
-                : appThemeData[AppTheme.initial],
-            home: const HomeScreen(),
-          );
-        });
-  }
-
-  void precacheImages(BuildContext context) {
-    precacheImage(const AssetImage("assets/images/winterfellBg.jpg"), context);
-    precacheImage(const AssetImage("assets/images/dorneBg.jpg"), context);
-    precacheImage(
-        const AssetImage("assets/images/kingsLandingBg.jpg"), context);
-    precacheImage(
-        const AssetImage("assets/images/beyondTheWallBg.jpg"), context);
-    precacheImage(const AssetImage("assets/images/highgardenBg.jpg"), context);
-    precacheImage(const AssetImage("assets/images/yunkaiBg.jpg"), context);
-    precacheImage(const AssetImage("assets/images/dragonstoneBg.jpg"), context);
-    precacheImage(const AssetImage("assets/images/dothrakiSeaBg.jpg"), context);
+      buildWhen: (_, state) => state is! Loading,
+      builder: (context, state) {
+        return MaterialApp(
+          title: 'GOT Weather',
+          theme: state is Loaded
+              ? appThemeData[state.gotWeather.appTheme]
+              : appThemeData[AppTheme.initial],
+          home: const HomeScreen(),
+        );
+      },
+    );
   }
 }
