@@ -11,6 +11,7 @@ enum GOTCity {
   yunkai,
   dragonstone,
   dothrakiSea,
+  redMountains,
 }
 
 const gotWeatherData = {
@@ -25,7 +26,7 @@ const gotWeatherData = {
   GOTCity.winterfell: GOTWeather(
     appTheme: AppTheme.winterfell,
     title: 'Feels Like\nWinterfell',
-    subtitle: 'Winter is comming...',
+    subtitle: 'Winter is coming...',
     background: 'winterfellBg',
     minTemp: 6,
     maxTemp: 10,
@@ -56,10 +57,18 @@ const gotWeatherData = {
   ),
   GOTCity.dorne: GOTWeather(
     appTheme: AppTheme.dorne,
-    title: 'Feels\nLike\nDorne',
+    title: 'Feels Like\nSunspear',
     subtitle: 'You might catch a snake...',
     background: 'dorneBg',
     minTemp: 26,
+    maxTemp: 27,
+  ),
+  GOTCity.redMountains: GOTWeather(
+    appTheme: AppTheme.redMountains,
+    title: 'Feels Like\nRed\nMountains',
+    subtitle: 'Promise me, Ned...',
+    background: 'redMountainsBg',
+    minTemp: 28,
     maxTemp: 30,
   ),
   GOTCity.yunkai: GOTWeather(

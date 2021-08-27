@@ -5,5 +5,6 @@ export 'dragonstone_theme_data.dart';
 export 'highgarden_theme_data.dart';
 export 'initial_theme_data.dart';
 export 'kings_landing_theme_data.dart';
+export 'red_mountains_theme.dart';
 export 'winterfell_theme_data.dart';
 export 'yunkai_theme_data.dart';

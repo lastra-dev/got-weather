@@ -10,6 +10,7 @@ enum AppTheme {
   yunkai,
   dragonstone,
   dothrakiSea,
+  redMountains,
 }
 
 final appThemeData = {
@@ -22,4 +23,5 @@ final appThemeData = {
   AppTheme.yunkai: yunkaiThemeData,
   AppTheme.dragonstone: dragonstoneThemeData,
   AppTheme.dothrakiSea: dothrakiSeaThemeData,
+  AppTheme.redMountains: redMountainsThemeData,
 };
