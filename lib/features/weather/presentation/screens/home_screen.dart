@@ -34,6 +34,12 @@ class _HomeScreenState extends State<HomeScreen> {
             return Container(
               decoration: BoxDecoration(
                 image: DecorationImage(
+                  colorFilter: ColorFilter.mode(
+                    Colors.black.withOpacity(
+                      state is Loaded ? 0.3 : 0.0,
+                    ),
+                    BlendMode.darken,
+                  ),
                   fit: BoxFit.cover,
                   alignment: Alignment.bottomCenter,
                   image: (snapshot.data ??

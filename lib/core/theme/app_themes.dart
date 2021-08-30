@@ -11,6 +11,13 @@ enum AppTheme {
   dragonstone,
   dothrakiSea,
   redMountains,
+  volantis,
+  kingsroad,
+  qarth,
+  pyke,
+  meereen,
+  ironIslands,
+  braavos,
 }
 
 final appThemeData = {
@@ -24,4 +31,11 @@ final appThemeData = {
   AppTheme.dragonstone: dragonstoneThemeData,
   AppTheme.dothrakiSea: dothrakiSeaThemeData,
   AppTheme.redMountains: redMountainsThemeData,
+  AppTheme.volantis: volantisThemeData,
+  AppTheme.kingsroad: kingsroadThemeData,
+  AppTheme.qarth: qarthThemeData,
+  AppTheme.pyke: pykeThemeData,
+  AppTheme.meereen: meereenThemeData,
+  AppTheme.ironIslands: ironIslandsThemeData,
+  AppTheme.braavos: braavosThemeData,
 };
