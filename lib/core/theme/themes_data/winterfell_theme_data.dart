@@ -4,7 +4,6 @@ const winterfellColor = Color(0xFF031530);
 
 final winterfellThemeData = ThemeData(
   primaryColor: winterfellColor,
-  accentColor: Colors.white,
   colorScheme: const ColorScheme(
     primary: winterfellColor,
     primaryVariant: winterfellColor,
@@ -15,7 +14,7 @@ final winterfellThemeData = ThemeData(
     error: winterfellColor,
     onPrimary: Colors.white,
     onSecondary: winterfellColor,
-    onSurface: winterfellColor,
+    onSurface: Colors.white,
     onBackground: winterfellColor,
     onError: winterfellColor,
     brightness: Brightness.dark,

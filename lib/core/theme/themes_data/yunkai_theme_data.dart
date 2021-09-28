@@ -4,7 +4,6 @@ const yunkaiColor = Color(0xFF301B16);
 
 final yunkaiThemeData = ThemeData(
   primaryColor: yunkaiColor,
-  accentColor: Colors.white,
   colorScheme: const ColorScheme(
     primary: yunkaiColor,
     primaryVariant: yunkaiColor,
@@ -15,7 +14,7 @@ final yunkaiThemeData = ThemeData(
     error: yunkaiColor,
     onPrimary: Colors.white,
     onSecondary: yunkaiColor,
-    onSurface: yunkaiColor,
+    onSurface: Colors.white,
     onBackground: yunkaiColor,
     onError: yunkaiColor,
     brightness: Brightness.dark,

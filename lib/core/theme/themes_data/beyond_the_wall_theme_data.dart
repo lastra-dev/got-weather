@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 
-const beyondTheWallColor = Color(0xFF063662);
+const beyondTheWallColor = Color(0xFF052a4d);
 
 final beyondTheWallThemeData = ThemeData(
   primaryColor: beyondTheWallColor,
-  accentColor: Colors.white,
   colorScheme: const ColorScheme(
     primary: beyondTheWallColor,
     primaryVariant: beyondTheWallColor,
@@ -15,7 +14,7 @@ final beyondTheWallThemeData = ThemeData(
     error: beyondTheWallColor,
     onPrimary: Colors.white,
     onSecondary: beyondTheWallColor,
-    onSurface: beyondTheWallColor,
+    onSurface: Colors.white,
     onBackground: beyondTheWallColor,
     onError: beyondTheWallColor,
     brightness: Brightness.dark,
@@ -30,7 +29,7 @@ final beyondTheWallThemeData = ThemeData(
       ],
     ),
     headline4: const TextStyle(color: Colors.white),
-    headline6: const TextStyle(color: Colors.white70),
+    headline6: const TextStyle(color: Colors.white),
   ),
   fontFamily: 'Poppins',
 );

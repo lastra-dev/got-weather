@@ -4,7 +4,6 @@ const pykeColor = Color(0xFF1f3f54);
 
 final pykeThemeData = ThemeData(
   primaryColor: pykeColor,
-  accentColor: Colors.white,
   colorScheme: const ColorScheme(
     primary: pykeColor,
     primaryVariant: pykeColor,
@@ -15,7 +14,7 @@ final pykeThemeData = ThemeData(
     error: pykeColor,
     onPrimary: Colors.white,
     onSecondary: pykeColor,
-    onSurface: pykeColor,
+    onSurface: Colors.white,
     onBackground: pykeColor,
     onError: pykeColor,
     brightness: Brightness.dark,

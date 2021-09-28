@@ -35,15 +35,13 @@ class _HomeScreenState extends State<HomeScreen> {
               decoration: BoxDecoration(
                 image: DecorationImage(
                   colorFilter: ColorFilter.mode(
-                    Colors.black.withOpacity(
-                      state is Loaded ? 0.3 : 0.0,
-                    ),
+                    Colors.black.withOpacity(0.3),
                     BlendMode.darken,
                   ),
                   fit: BoxFit.cover,
                   alignment: Alignment.bottomCenter,
                   image: (snapshot.data ??
-                          const AssetImage('assets/images/initialBg.jpg'))
+                          const AssetImage('assets/images/$initialBg.jpg'))
                       as AssetImage,
                 ),
               ),
@@ -72,7 +70,18 @@ class _HomeScreenState extends State<HomeScreen> {
       (_) => showDialog(
         context: context,
         builder: (ctx) => AlertDialog(
-          title: const Text('An Error Occured'),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(15),
+          ),
+          title: Row(
+            children: const [
+              Text('An Error Ocured '),
+              Icon(
+                Icons.error,
+                color: Colors.yellow,
+              ),
+            ],
+          ),
           content: Text(message),
           actions: [
             TextButton(

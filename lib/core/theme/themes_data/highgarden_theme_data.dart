@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 
-const highgardenColor = Color(0xFF0B3041);
+const highgardenColor = Color(0xFF092633);
 
 final highgardenThemeData = ThemeData(
   primaryColor: highgardenColor,
-  accentColor: Colors.white,
   colorScheme: const ColorScheme(
     primary: highgardenColor,
     primaryVariant: highgardenColor,
@@ -15,7 +14,7 @@ final highgardenThemeData = ThemeData(
     error: highgardenColor,
     onPrimary: Colors.white,
     onSecondary: highgardenColor,
-    onSurface: highgardenColor,
+    onSurface: Colors.white,
     onBackground: highgardenColor,
     onError: highgardenColor,
     brightness: Brightness.dark,

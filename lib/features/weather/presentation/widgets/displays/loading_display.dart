@@ -12,7 +12,7 @@ class LoadingDisplay extends StatelessWidget {
         SizedBox(height: 100),
         Center(
           child: CircularProgressIndicator(
-            color: Colors.black,
+            color: Colors.white,
           ),
         ),
       ],

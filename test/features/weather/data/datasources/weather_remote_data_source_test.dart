@@ -5,8 +5,8 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:got_weather/core/error/exception.dart';
 import 'package:got_weather/features/weather/data/datasources/weather_remote_data_source.dart';
 import 'package:got_weather/features/weather/data/models/weather_model.dart';
-import 'package:mocktail/mocktail.dart';
 import 'package:http/http.dart' as http;
+import 'package:mocktail/mocktail.dart';
 
 import '../../../../fixtures/fixture_reader.dart';
 

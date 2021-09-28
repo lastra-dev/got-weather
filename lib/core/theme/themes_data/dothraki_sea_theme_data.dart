@@ -4,7 +4,6 @@ const dothrakiSeaColor = Color(0xFF2F2D25);
 
 final dothrakiSeaThemeData = ThemeData(
   primaryColor: dothrakiSeaColor,
-  accentColor: Colors.white,
   colorScheme: const ColorScheme(
     primary: dothrakiSeaColor,
     primaryVariant: dothrakiSeaColor,
@@ -15,7 +14,7 @@ final dothrakiSeaThemeData = ThemeData(
     error: dothrakiSeaColor,
     onPrimary: Colors.white,
     onSecondary: dothrakiSeaColor,
-    onSurface: dothrakiSeaColor,
+    onSurface: Colors.white,
     onBackground: dothrakiSeaColor,
     onError: dothrakiSeaColor,
     brightness: Brightness.dark,

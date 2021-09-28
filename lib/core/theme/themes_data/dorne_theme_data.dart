@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 
-const dorneColor = Color(0xFF3A2C2E);
+const dorneColor = Color(0xFF2e2425);
 
 final dorneThemeData = ThemeData(
   primaryColor: dorneColor,
-  accentColor: Colors.white,
   colorScheme: const ColorScheme(
     primary: dorneColor,
     primaryVariant: dorneColor,
@@ -15,7 +14,7 @@ final dorneThemeData = ThemeData(
     error: dorneColor,
     onPrimary: Colors.white,
     onSecondary: dorneColor,
-    onSurface: dorneColor,
+    onSurface: Colors.white,
     onBackground: dorneColor,
     onError: dorneColor,
     brightness: Brightness.dark,

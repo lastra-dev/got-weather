@@ -18,6 +18,7 @@ enum AppTheme {
   meereen,
   ironIslands,
   braavos,
+  casterlyRock,
 }
 
 final appThemeData = {

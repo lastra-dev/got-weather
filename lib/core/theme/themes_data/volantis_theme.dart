@@ -4,7 +4,6 @@ const volantisColor = Color(0xFF251B00);
 
 final volantisThemeData = ThemeData(
   primaryColor: volantisColor,
-  accentColor: Colors.white,
   colorScheme: const ColorScheme(
     primary: volantisColor,
     primaryVariant: volantisColor,
@@ -15,7 +14,7 @@ final volantisThemeData = ThemeData(
     error: volantisColor,
     onPrimary: Colors.white,
     onSecondary: volantisColor,
-    onSurface: volantisColor,
+    onSurface: Colors.white,
     onBackground: volantisColor,
     onError: volantisColor,
     brightness: Brightness.dark,

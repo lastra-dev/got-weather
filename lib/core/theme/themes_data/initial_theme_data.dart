@@ -1,14 +1,12 @@
 import 'package:flutter/material.dart';
 
-const initialColor = Color(0xFF0090BF);
-const secondaryColor = Color(0xFFF8931F);
-const subtitle2Color = Color(0xA5001c26);
+const initialColor = Color(0xFF2e2424);
+const otherColor = Color(0xFF58736F);
 
 final initialThemeData = ThemeData(
   primaryColor: initialColor,
-  accentColor: secondaryColor,
   colorScheme: const ColorScheme(
-    primary: initialColor,
+    primary: Colors.white,
     primaryVariant: initialColor,
     secondary: Colors.white,
     secondaryVariant: initialColor,
@@ -17,14 +15,22 @@ final initialThemeData = ThemeData(
     error: initialColor,
     onPrimary: Colors.white,
     onSecondary: initialColor,
-    onSurface: initialColor,
+    onSurface: Colors.white,
     onBackground: initialColor,
     onError: initialColor,
-    brightness: Brightness.light,
+    brightness: Brightness.dark,
   ),
-  textTheme: const TextTheme(
-    subtitle1: TextStyle(color: subtitle2Color),
-    headline2: TextStyle(color: initialColor),
+  textTheme: TextTheme(
+    headline2: TextStyle(
+      color: Colors.white,
+      shadows: [
+        Shadow(
+          offset: Offset.fromDirection(0, 4),
+        ),
+      ],
+    ),
+    headline4: const TextStyle(color: Colors.white),
+    headline6: const TextStyle(color: Colors.white),
   ),
   fontFamily: 'Poppins',
 );

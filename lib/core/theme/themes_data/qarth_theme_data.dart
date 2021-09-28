@@ -4,7 +4,6 @@ const qarthColor = Color(0xFF1D2840);
 
 final qarthThemeData = ThemeData(
   primaryColor: qarthColor,
-  accentColor: Colors.white,
   colorScheme: const ColorScheme(
     primary: qarthColor,
     primaryVariant: qarthColor,
@@ -15,7 +14,7 @@ final qarthThemeData = ThemeData(
     error: qarthColor,
     onPrimary: Colors.white,
     onSecondary: qarthColor,
-    onSurface: qarthColor,
+    onSurface: Colors.white,
     onBackground: qarthColor,
     onError: qarthColor,
     brightness: Brightness.dark,

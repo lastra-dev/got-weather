@@ -4,7 +4,6 @@ const redMountainsColor = Color(0xFF251B00);
 
 final redMountainsThemeData = ThemeData(
   primaryColor: redMountainsColor,
-  accentColor: Colors.white,
   colorScheme: const ColorScheme(
     primary: redMountainsColor,
     primaryVariant: redMountainsColor,
@@ -15,7 +14,7 @@ final redMountainsThemeData = ThemeData(
     error: redMountainsColor,
     onPrimary: Colors.white,
     onSecondary: redMountainsColor,
-    onSurface: redMountainsColor,
+    onSurface: Colors.white,
     onBackground: redMountainsColor,
     onError: redMountainsColor,
     brightness: Brightness.dark,

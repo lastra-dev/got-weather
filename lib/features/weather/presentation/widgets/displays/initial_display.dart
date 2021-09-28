@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../display_widgets/big_text.dart';
+import '../display_widgets/subtitle_text.dart';
 
 class InitialDisplay extends StatelessWidget {
   const InitialDisplay({Key? key}) : super(key: key);
@@ -17,16 +18,16 @@ class InitialDisplay extends StatelessWidget {
           Align(
             alignment: Alignment.topRight,
             child: SizedBox(
-              height: MediaQuery.of(context).size.height / 8.0,
-              child: Image.asset('assets/images/coloredWeatherIcon.jpg'),
-              // child: const Placeholder(),
+              height: MediaQuery.of(context).size.height / 9.0,
+              width: MediaQuery.of(context).size.width / 5.0,
+              child: Image.asset('assets/images/weather_icons/02d.png'),
             ),
           ),
-          const BigText('I KNOW\nNOTHING\nBUT WEATHER'),
-          SizedBox(
-            height: MediaQuery.of(context).size.height / 4.0,
-            child: Image.asset('assets/images/jonCat.jpg'),
-            // child: Placeholder(),
+          const BigText(
+            'THE GOT\nWEATHER\nFORECAST',
+          ),
+          const SubtitleText(
+            'I KNOW NOTHING BUT WEATHER...',
           ),
         ],
       ),

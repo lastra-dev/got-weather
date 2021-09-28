@@ -4,7 +4,6 @@ const kingsLandingColor = Color(0xFF261014);
 
 final kingsLandingThemeData = ThemeData(
   primaryColor: kingsLandingColor,
-  accentColor: Colors.white,
   colorScheme: const ColorScheme(
     primary: kingsLandingColor,
     primaryVariant: kingsLandingColor,
@@ -15,7 +14,7 @@ final kingsLandingThemeData = ThemeData(
     error: kingsLandingColor,
     onPrimary: Colors.white,
     onSecondary: kingsLandingColor,
-    onSurface: kingsLandingColor,
+    onSurface: Colors.white,
     onBackground: kingsLandingColor,
     onError: kingsLandingColor,
     brightness: Brightness.dark,

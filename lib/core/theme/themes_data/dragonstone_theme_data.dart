@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 
-const dragonstoneColor = Color(0xFF3A1613);
+const dragonstoneColor = Color(0xFF1c0603);
 
 final dragonstoneThemeData = ThemeData(
   primaryColor: dragonstoneColor,
-  accentColor: Colors.white,
   colorScheme: const ColorScheme(
     primary: dragonstoneColor,
     primaryVariant: dragonstoneColor,
@@ -15,7 +14,7 @@ final dragonstoneThemeData = ThemeData(
     error: dragonstoneColor,
     onPrimary: Colors.white,
     onSecondary: dragonstoneColor,
-    onSurface: dragonstoneColor,
+    onSurface: Colors.white,
     onBackground: dragonstoneColor,
     onError: dragonstoneColor,
     brightness: Brightness.dark,

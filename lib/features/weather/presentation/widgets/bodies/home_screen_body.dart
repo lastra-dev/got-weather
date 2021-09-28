@@ -13,7 +13,7 @@ class HomeScreenBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return RefreshIndicator(
-      color: Theme.of(context).accentColor,
+      color: Theme.of(context).colorScheme.secondary,
       onRefresh: () => BlocProvider.of<WeatherBloc>(context).retry(),
       child: SizedBox(
         height: MediaQuery.of(context).size.height -
@@ -36,12 +36,7 @@ class HomeScreenBody extends StatelessWidget {
                         gotWeather: state.gotWeather,
                       );
                     } else {
-                      return Column(
-                        children: const [
-                          SizedBox(height: 20),
-                          InitialDisplay(),
-                        ],
-                      );
+                      return const InitialDisplay();
                     }
                   },
                 ),

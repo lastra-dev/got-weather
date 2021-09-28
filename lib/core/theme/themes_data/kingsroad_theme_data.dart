@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 
-const kingsroadColor = Color(0xFF593202);
+const kingsroadColor = Color(0xFF221611);
 
 final kingsroadThemeData = ThemeData(
   primaryColor: kingsroadColor,
-  accentColor: Colors.white,
   colorScheme: const ColorScheme(
     primary: kingsroadColor,
     primaryVariant: kingsroadColor,
@@ -15,7 +14,7 @@ final kingsroadThemeData = ThemeData(
     error: kingsroadColor,
     onPrimary: Colors.white,
     onSecondary: kingsroadColor,
-    onSurface: kingsroadColor,
+    onSurface: Colors.white,
     onBackground: kingsroadColor,
     onError: kingsroadColor,
     brightness: Brightness.dark,

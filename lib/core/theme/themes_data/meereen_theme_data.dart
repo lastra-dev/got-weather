@@ -4,7 +4,6 @@ const meereenColor = Color(0xFF191c01);
 
 final meereenThemeData = ThemeData(
   primaryColor: meereenColor,
-  accentColor: Colors.white,
   colorScheme: const ColorScheme(
     primary: meereenColor,
     primaryVariant: meereenColor,
@@ -15,7 +14,7 @@ final meereenThemeData = ThemeData(
     error: meereenColor,
     onPrimary: Colors.white,
     onSecondary: meereenColor,
-    onSurface: meereenColor,
+    onSurface: Colors.white,
     onBackground: meereenColor,
     onError: meereenColor,
     brightness: Brightness.dark,

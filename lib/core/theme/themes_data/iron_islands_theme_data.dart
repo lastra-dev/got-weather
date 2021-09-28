@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 
-const ironIslandsColor = Color(0xFF34566b);
+const ironIslandsColor = Color(0xFF19252e);
 
 final ironIslandsThemeData = ThemeData(
   primaryColor: ironIslandsColor,
-  accentColor: Colors.white,
   colorScheme: const ColorScheme(
     primary: ironIslandsColor,
     primaryVariant: ironIslandsColor,
@@ -15,7 +14,7 @@ final ironIslandsThemeData = ThemeData(
     error: ironIslandsColor,
     onPrimary: Colors.white,
     onSecondary: ironIslandsColor,
-    onSurface: ironIslandsColor,
+    onSurface: Colors.white,
     onBackground: ironIslandsColor,
     onError: ironIslandsColor,
     brightness: Brightness.dark,

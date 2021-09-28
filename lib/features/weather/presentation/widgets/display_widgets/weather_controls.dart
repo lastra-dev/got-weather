@@ -26,12 +26,12 @@ class _WeatherControlsState extends State<WeatherControls> {
           decoration: InputDecoration(
             fillColor: Theme.of(context).primaryColor.withAlpha(90),
             filled: true,
-            border: _buildOutlineInputBorder(primaryColor),
-            enabledBorder: _buildOutlineInputBorder(primaryColor),
-            focusedBorder: _buildOutlineInputBorder(primaryColor),
+            border: _buildOutlineInputBorder(),
+            enabledBorder: _buildOutlineInputBorder(),
+            focusedBorder: _buildOutlineInputBorder(),
             suffixIcon: Icon(
               Icons.search,
-              color: Theme.of(context).accentColor.withAlpha(150),
+              color: Theme.of(context).colorScheme.secondary.withAlpha(150),
             ),
             hintText: 'Enter a City...',
             hintStyle: Theme.of(context).textTheme.subtitle1,
@@ -63,7 +63,8 @@ class _WeatherControlsState extends State<WeatherControls> {
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(15),
                   ),
-                  backgroundColor: Theme.of(context).accentColor.withAlpha(90),
+                  backgroundColor:
+                      Theme.of(context).colorScheme.secondary.withAlpha(90),
                   side: const BorderSide(
                     color: Colors.transparent,
                   ),
@@ -84,7 +85,7 @@ class _WeatherControlsState extends State<WeatherControls> {
     );
   }
 
-  OutlineInputBorder _buildOutlineInputBorder(Color primaryColor) {
+  OutlineInputBorder _buildOutlineInputBorder() {
     return OutlineInputBorder(
       borderRadius: BorderRadius.circular(15),
       borderSide: const BorderSide(
@@ -113,14 +114,8 @@ class _WeatherControlsState extends State<WeatherControls> {
   void _showErrorSnackBar() {
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
-        content: const Text(
-          'Please enter a city name...',
-          style: TextStyle(
-            color: Colors.white,
-          ),
-        ),
+        content: const Text('Please enter a city name...'),
         action: SnackBarAction(
-          textColor: Colors.white,
           label: 'Ok',
           onPressed: () {},
         ),

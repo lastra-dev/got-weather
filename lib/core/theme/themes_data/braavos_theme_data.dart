@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 
-const braavosColor = Color(0xFF262523);
+const braavosColor = Color(0xFF242a2e);
 
 final braavosThemeData = ThemeData(
   primaryColor: braavosColor,
-  accentColor: Colors.white,
   colorScheme: const ColorScheme(
     primary: braavosColor,
     primaryVariant: braavosColor,
@@ -15,7 +14,7 @@ final braavosThemeData = ThemeData(
     error: braavosColor,
     onPrimary: Colors.white,
     onSecondary: braavosColor,
-    onSurface: braavosColor,
+    onSurface: Colors.white,
     onBackground: braavosColor,
     onError: braavosColor,
     brightness: Brightness.dark,
