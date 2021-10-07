@@ -50,9 +50,15 @@ class _HomeScreenState extends State<HomeScreen> {
                 appBar: AppBar(
                   title: const Text('GOT Weather'),
                   actions: [
-                    IconButton(
-                      icon: const Icon(Icons.more_vert),
-                      onPressed: () {},
+                    PopupMenuButton(
+                      itemBuilder: (context) => [
+                        const PopupMenuItem(
+                          child: Text('Settings'),
+                        ),
+                        const PopupMenuItem(
+                          child: Text('About'),
+                        ),
+                      ],
                     )
                   ],
                 ),
