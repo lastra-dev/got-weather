@@ -24,7 +24,7 @@ class _WeatherControlsState extends State<WeatherControls> {
           cursorColor: primaryColor,
           controller: controller,
           decoration: InputDecoration(
-            fillColor: Theme.of(context).primaryColor.withAlpha(90),
+            fillColor: Theme.of(context).colorScheme.primary.withOpacity(0.30),
             filled: true,
             border: _buildOutlineInputBorder(),
             enabledBorder: _buildOutlineInputBorder(),

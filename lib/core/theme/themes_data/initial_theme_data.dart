@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-const initialColor = Color(0xFF2e2424);
+const initialColor = Color(0xFF3d3030);
 const otherColor = Color(0xFF58736F);
 
 final initialThemeData = ThemeData(
