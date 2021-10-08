@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:got_weather/features/weather/presentation/screens/about_screen.dart';
+import 'package:got_weather/features/weather/presentation/screens/settings_screen.dart';
 
 import '../bloc/weather_bloc.dart';
 import '../widgets/bodies/home_screen_body.dart';
@@ -51,11 +53,15 @@ class _HomeScreenState extends State<HomeScreen> {
                   title: const Text('GOT Weather'),
                   actions: [
                     PopupMenuButton(
-                      itemBuilder: (context) => [
+                      onSelected: (choice) =>
+                          Navigator.of(context).pushNamed(choice.toString()),
+                      itemBuilder: (_) => [
                         const PopupMenuItem(
+                          value: SettingsScreen.routeName,
                           child: Text('Settings'),
                         ),
                         const PopupMenuItem(
+                          value: AboutScreen.routeName,
                           child: Text('About'),
                         ),
                       ],

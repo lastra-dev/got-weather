@@ -4,7 +4,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'core/theme/app_themes.dart';
 import 'features/weather/presentation/bloc/weather_bloc.dart';
+import 'features/weather/presentation/screens/about_screen.dart';
 import 'features/weather/presentation/screens/home_screen.dart';
+import 'features/weather/presentation/screens/settings_screen.dart';
 import 'injection_container.dart' as di;
 
 Future<void> main() async {
@@ -17,18 +19,6 @@ Future<void> main() async {
   );
   await di.init();
   runApp(MyApp());
-}
-
-class MyApp extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) {
-        return di.sl<WeatherBloc>()..add(GetWeatherForLastCity());
-      },
-      child: const GOTWeatherApp(),
-    );
-  }
 }
 
 class GOTWeatherApp extends StatelessWidget {
@@ -45,8 +35,24 @@ class GOTWeatherApp extends StatelessWidget {
               ? appThemeData[state.gotWeather.appTheme]
               : appThemeData[AppTheme.initial],
           home: const HomeScreen(),
+          routes: {
+            SettingsScreen.routeName: (ctx) => SettingsScreen(),
+            AboutScreen.routeName: (ctx) => AboutScreen(),
+          },
         );
       },
+    );
+  }
+}
+
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return BlocProvider(
+      create: (context) {
+        return di.sl<WeatherBloc>()..add(GetWeatherForLastCity());
+      },
+      child: const GOTWeatherApp(),
     );
   }
 }
