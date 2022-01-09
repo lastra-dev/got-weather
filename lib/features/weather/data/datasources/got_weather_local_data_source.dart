@@ -1,5 +1,5 @@
-import 'package:got_weather/core/error/exception.dart';
-import 'package:got_weather/features/weather/domain/entities/got_weather.dart';
+import '../../../../core/error/exception.dart';
+import '../../domain/entities/got_weather.dart';
 import 'got_weather_data.dart';
 
 abstract class GOTWeatherLocalDataSource {

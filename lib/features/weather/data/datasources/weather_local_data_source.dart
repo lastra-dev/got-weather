@@ -34,7 +34,8 @@ class WeatherLocalDataSourceImpl implements WeatherLocalDataSource {
     final jsonString = sharedPreferences.getString(cachedLocation);
     if (jsonString != null) {
       final location = LocationModel.fromJson(
-          json.decode(jsonString) as Map<String, dynamic>);
+        json.decode(jsonString) as Map<String, dynamic>,
+      );
       return Future.value(location);
     } else {
       throw CacheException();

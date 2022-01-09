@@ -4,8 +4,8 @@ import '../../../domain/entities/weather.dart';
 
 class WeatherInfoWidget extends StatelessWidget {
   const WeatherInfoWidget({
-    Key? key,
     required this.weather,
+    Key? key,
   }) : super(key: key);
 
   final Weather weather;

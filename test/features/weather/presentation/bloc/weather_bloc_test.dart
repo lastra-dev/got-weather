@@ -102,8 +102,11 @@ void main() {
       bloc.add(tEventCity);
       await untilCalled(() => mockGetWeatherFromCity(any()));
       // assert
-      verify(() => mockGetWeatherFromCity(
-          const WeatherFromCityParams(cityName: tCityName)));
+      verify(
+        () => mockGetWeatherFromCity(
+          const WeatherFromCityParams(cityName: tCityName),
+        ),
+      );
     });
 
     test('should emit [Loading, Loaded] when data is gotten successfuly',

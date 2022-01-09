@@ -23,7 +23,8 @@ Future<void> main() async {
   const double tLatitude = 22;
   const double tLongitude = -97;
   final tWeatherModel = WeatherModel.fromJson(
-      json.decode(fixture('weather.json')) as Map<String, dynamic>);
+    json.decode(fixture('weather.json')) as Map<String, dynamic>,
+  );
 
   void setUpMockClientSuccess200(Uri url) {
     when(() => mockHttpClient.get(url)).thenAnswer(
@@ -53,7 +54,8 @@ Future<void> main() async {
   group('getWeatherFromCity', () {
     const tCityName = 'Tampico';
     final url = Uri.parse(
-        'https://api.openweathermap.org/data/2.5/weather?q=$tCityName&appid=$appId&units=metric');
+      'https://api.openweathermap.org/data/2.5/weather?q=$tCityName&appid=$appId&units=metric',
+    );
 
     test('should perform a GET request on a URL with the cityName endpoint',
         () async {
@@ -89,7 +91,8 @@ Future<void> main() async {
 
   group('getWeatherFromLocation', () {
     final url = Uri.parse(
-        'https://api.openweathermap.org/data/2.5/weather?lat=$tLatitude&lon=$tLongitude&appid=$appId&units=metric');
+      'https://api.openweathermap.org/data/2.5/weather?lat=$tLatitude&lon=$tLongitude&appid=$appId&units=metric',
+    );
 
     test(
         'should perform a GET request on a URL with latitude and longitude endpoints',
@@ -127,11 +130,12 @@ Future<void> main() async {
       final call = dataSource.getWeatherFromLocation;
       // assert
       expect(
-          () => call(
-                tLatitude.toString(),
-                tLongitude.toString(),
-              ),
-          throwsA(isInstanceOf<ServerException>()));
+        () => call(
+          tLatitude.toString(),
+          tLongitude.toString(),
+        ),
+        throwsA(isInstanceOf<ServerException>()),
+      );
     });
   });
 }

@@ -18,7 +18,7 @@ Future<void> main() async {
     ),
   );
   await di.init();
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class GOTWeatherApp extends StatelessWidget {
@@ -36,8 +36,8 @@ class GOTWeatherApp extends StatelessWidget {
               : appThemeData[AppTheme.initial],
           home: const HomeScreen(),
           routes: {
-            SettingsScreen.routeName: (ctx) => SettingsScreen(),
-            AboutScreen.routeName: (ctx) => AboutScreen(),
+            SettingsScreen.routeName: (ctx) => const SettingsScreen(),
+            AboutScreen.routeName: (ctx) => const AboutScreen(),
           },
         );
       },
@@ -46,6 +46,8 @@ class GOTWeatherApp extends StatelessWidget {
 }
 
 class MyApp extends StatelessWidget {
+  const MyApp({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return BlocProvider(

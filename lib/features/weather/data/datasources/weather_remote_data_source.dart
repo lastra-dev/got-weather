@@ -37,7 +37,8 @@ class WeatherRemoteDataSourceImpl implements WeatherRemoteDataSource {
   Future<WeatherModel> getWeatherFromCity(String cityName) async {
     final appId = await getAppId();
     final url = Uri.parse(
-        'https://api.openweathermap.org/data/2.5/weather?q=$cityName&appid=$appId&units=metric');
+      'https://api.openweathermap.org/data/2.5/weather?q=$cityName&appid=$appId&units=metric',
+    );
     return _getWeatherFromUrl(url);
   }
 
@@ -45,7 +46,8 @@ class WeatherRemoteDataSourceImpl implements WeatherRemoteDataSource {
   Future<WeatherModel> getWeatherFromLocation(String lat, String lon) async {
     final appId = await getAppId();
     final url = Uri.parse(
-        'https://api.openweathermap.org/data/2.5/weather?lat=$lat&lon=$lon&appid=$appId&units=metric');
+      'https://api.openweathermap.org/data/2.5/weather?lat=$lat&lon=$lon&appid=$appId&units=metric',
+    );
     return _getWeatherFromUrl(url);
   }
 
@@ -54,7 +56,8 @@ class WeatherRemoteDataSourceImpl implements WeatherRemoteDataSource {
 
     if (response.statusCode == 200) {
       return WeatherModel.fromJson(
-          json.decode(response.body) as Map<String, dynamic>);
+        json.decode(response.body) as Map<String, dynamic>,
+      );
     } else {
       throw ServerException();
     }

@@ -4,8 +4,8 @@ class WeatherModel extends Weather {
   const WeatherModel({
     required int temperature,
     required String cityName,
-    String? country,
     required String icon,
+    String? country,
   }) : super(
           temperature: temperature,
           cityName: cityName,

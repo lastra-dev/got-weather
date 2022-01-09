@@ -29,7 +29,8 @@ void main() {
   setUp(() {
     mockGOTWeatherLocalDataSource = MockGOTWeatherLocalDataSource();
     repository = GOTWeatherRepositoryImpl(
-        localDataSource: mockGOTWeatherLocalDataSource);
+      localDataSource: mockGOTWeatherLocalDataSource,
+    );
   });
 
   test(

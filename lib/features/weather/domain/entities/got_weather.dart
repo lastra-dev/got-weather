@@ -1,5 +1,5 @@
 import 'package:equatable/equatable.dart';
-import 'package:got_weather/core/theme/app_themes.dart';
+import '../../../../core/theme/app_themes.dart';
 
 class GOTWeather extends Equatable {
   final int minTemp;

@@ -11,9 +11,9 @@ class WeatherDisplay extends StatelessWidget {
   final GOTWeather gotWeather;
 
   const WeatherDisplay({
-    Key? key,
     required this.weather,
     required this.gotWeather,
+    Key? key,
   }) : super(key: key);
 
   @override

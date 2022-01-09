@@ -29,8 +29,8 @@ void main() {
     final result = tLocationModel.toJson();
     // assert
     final expectedJsonMap = {
-      "lat": 22,
-      "lon": -97,
+      'lat': 22,
+      'lon': -97,
     };
 
     expect(result, expectedJsonMap);

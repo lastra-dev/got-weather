@@ -1,4 +1,4 @@
-import 'package:got_weather/core/theme/app_themes.dart';
+import '../../../../core/theme/app_themes.dart';
 
 import '../../domain/entities/got_weather.dart';
 
@@ -24,7 +24,7 @@ enum GOTCity {
 const gotWeatherData = {
   GOTCity.beyondTheWall: GOTWeather(
     appTheme: AppTheme.beyondTheWall,
-    title: "Feels Like\nBeyond\nthe wall",
+    title: 'Feels Like\nBeyond\nthe wall',
     subtitle: 'Looks like an arrowhead...',
     background: 'beyondTheWallBg',
     minTemp: -100,
@@ -41,7 +41,7 @@ const gotWeatherData = {
   GOTCity.highgarden: GOTWeather(
     appTheme: AppTheme.highgarden,
     title: 'Feels Like\nHighgarden',
-    subtitle: "I want her to know, it was me...",
+    subtitle: 'I want her to know, it was me...',
     background: 'highgardenBg',
     minTemp: 14,
     maxTemp: 15,
@@ -72,7 +72,7 @@ const gotWeatherData = {
   ),
   GOTCity.volantis: GOTWeather(
     appTheme: AppTheme.volantis,
-    title: "Feels Like\nVolantis",
+    title: 'Feels Like\nVolantis',
     subtitle: 'The city thirsts for war...',
     background: 'volantisBg',
     minTemp: 22,
@@ -80,7 +80,7 @@ const gotWeatherData = {
   ),
   GOTCity.meereen: GOTWeather(
     appTheme: AppTheme.meereen,
-    title: "Feels Like\nMeereen",
+    title: 'Feels Like\nMeereen',
     subtitle: 'A free city of free men',
     background: 'meereenBg',
     minTemp: 24,
@@ -96,7 +96,7 @@ const gotWeatherData = {
   ),
   GOTCity.kingsroad: GOTWeather(
     appTheme: AppTheme.kingsroad,
-    title: "Feels Like\nKingsroad",
+    title: 'Feels Like\nKingsroad',
     subtitle: 'The kingsroad can be perilous...',
     background: 'kingsRoadBg',
     minTemp: 28,
@@ -104,7 +104,7 @@ const gotWeatherData = {
   ),
   GOTCity.braavos: GOTWeather(
     appTheme: AppTheme.braavos,
-    title: "Feels Like\nBraavos",
+    title: 'Feels Like\nBraavos',
     subtitle: 'Valar Morghulis',
     background: 'braavosBg',
     minTemp: 30,

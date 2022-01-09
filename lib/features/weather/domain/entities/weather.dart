@@ -9,8 +9,8 @@ class Weather extends Equatable {
   const Weather({
     required this.temperature,
     required this.cityName,
-    this.country,
     required this.icon,
+    this.country,
   });
 
   @override

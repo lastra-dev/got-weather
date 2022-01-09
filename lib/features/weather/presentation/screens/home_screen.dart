@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:got_weather/features/weather/presentation/screens/about_screen.dart';
-import 'package:got_weather/features/weather/presentation/screens/settings_screen.dart';
 
 import '../bloc/weather_bloc.dart';
 import '../widgets/bodies/home_screen_body.dart';
+import 'about_screen.dart';
+import 'settings_screen.dart';
 
 const initialBg = 'initialBg';
 
@@ -31,7 +31,8 @@ class _HomeScreenState extends State<HomeScreen> {
         // without loading black screen
         return FutureBuilder(
           future: buildBackgroundImage(
-              "assets/images/${state is Loaded ? state.gotWeather.background : initialBg}.jpg"),
+            'assets/images/${state is Loaded ? state.gotWeather.background : initialBg}.jpg',
+          ),
           builder: (_, snapshot) {
             return Container(
               decoration: BoxDecoration(

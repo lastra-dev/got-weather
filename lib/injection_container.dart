@@ -23,12 +23,14 @@ final sl = GetIt.instance;
 Future<void> init() async {
   //! Features - Weather
   // Bloc
-  sl.registerFactory(() => WeatherBloc(
-        cityWeather: sl(),
-        locationWeather: sl(),
-        lastCityWeather: sl(),
-        gotWeather: sl(),
-      ));
+  sl.registerFactory(
+    () => WeatherBloc(
+      cityWeather: sl(),
+      locationWeather: sl(),
+      lastCityWeather: sl(),
+      gotWeather: sl(),
+    ),
+  );
 
   // Use cases
   sl.registerLazySingleton(() => GetWeatherFromCity(sl()));
@@ -37,11 +39,13 @@ Future<void> init() async {
   sl.registerLazySingleton(() => GetGOTWeather(sl()));
 
   // Repository
-  sl.registerLazySingleton<WeatherRepository>(() => WeatherRepositoryImpl(
-        remoteDataSource: sl(),
-        localDataSource: sl(),
-        networkInfo: sl(),
-      ));
+  sl.registerLazySingleton<WeatherRepository>(
+    () => WeatherRepositoryImpl(
+      remoteDataSource: sl(),
+      localDataSource: sl(),
+      networkInfo: sl(),
+    ),
+  );
   sl.registerLazySingleton<GOTWeatherRepository>(
     () => GOTWeatherRepositoryImpl(
       localDataSource: sl(),
@@ -50,14 +54,17 @@ Future<void> init() async {
 
   // Data sources
   sl.registerLazySingleton<WeatherRemoteDataSource>(
-      () => WeatherRemoteDataSourceImpl(client: sl()));
+    () => WeatherRemoteDataSourceImpl(client: sl()),
+  );
   sl.registerLazySingleton<WeatherLocalDataSource>(
-      () => WeatherLocalDataSourceImpl(
-            sharedPreferences: sl(),
-            location: sl(),
-          ));
+    () => WeatherLocalDataSourceImpl(
+      sharedPreferences: sl(),
+      location: sl(),
+    ),
+  );
   sl.registerLazySingleton<GOTWeatherLocalDataSource>(
-      () => GOTWeatherLocalDataSourceImpl());
+    () => GOTWeatherLocalDataSourceImpl(),
+  );
 
   //! Core
   sl.registerLazySingleton<NetworkInfo>(() => NetworkInfoImpl(sl()));

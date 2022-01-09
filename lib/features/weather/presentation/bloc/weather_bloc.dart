@@ -3,14 +3,15 @@ import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:dartz/dartz.dart';
 import 'package:equatable/equatable.dart';
-import 'package:got_weather/core/error/failures.dart';
-import 'package:got_weather/core/usecases/usecase.dart';
-import 'package:got_weather/features/weather/domain/entities/got_weather.dart';
-import 'package:got_weather/features/weather/domain/entities/weather.dart';
-import 'package:got_weather/features/weather/domain/usecases/get_got_weather.dart';
-import 'package:got_weather/features/weather/domain/usecases/get_weather_from_city.dart';
-import 'package:got_weather/features/weather/domain/usecases/get_weather_from_last_city.dart';
-import 'package:got_weather/features/weather/domain/usecases/get_weather_from_location.dart';
+
+import '../../../../core/error/failures.dart';
+import '../../../../core/usecases/usecase.dart';
+import '../../domain/entities/got_weather.dart';
+import '../../domain/entities/weather.dart';
+import '../../domain/usecases/get_got_weather.dart';
+import '../../domain/usecases/get_weather_from_city.dart';
+import '../../domain/usecases/get_weather_from_last_city.dart';
+import '../../domain/usecases/get_weather_from_location.dart';
 
 part 'weather_event.dart';
 part 'weather_state.dart';
@@ -46,7 +47,8 @@ class WeatherBloc extends Bloc<WeatherEvent, WeatherState> {
     if (event is GetWeatherForCity) {
       yield Loading();
       final failureOrWeather = await getWeatherFromCity(
-          WeatherFromCityParams(cityName: event.cityName));
+        WeatherFromCityParams(cityName: event.cityName),
+      );
       yield* _getLoadedOrErrorState(failureOrWeather);
     } else if (event is GetWeatherForLocation) {
       yield Loading();
@@ -64,7 +66,8 @@ class WeatherBloc extends Bloc<WeatherEvent, WeatherState> {
   }
 
   Stream<WeatherState> _getLoadedOrErrorState(
-      Either<Failure, Weather> failureOrWeather) async* {
+    Either<Failure, Weather> failureOrWeather,
+  ) async* {
     yield* failureOrWeather.fold(
       (failure) async* {
         yield Error(
@@ -73,7 +76,8 @@ class WeatherBloc extends Bloc<WeatherEvent, WeatherState> {
       },
       (weather) async* {
         final failureOrGOTWeather = await getGOTWeather(
-            GOTWeatherParams(temperature: weather.temperature));
+          GOTWeatherParams(temperature: weather.temperature),
+        );
         yield failureOrGOTWeather.fold(
           (failure) => Error(message: _mapFailureToMessage(failure)),
           (gotWeather) => Loaded(

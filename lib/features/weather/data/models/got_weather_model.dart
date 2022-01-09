@@ -1,4 +1,4 @@
-import 'package:got_weather/core/theme/app_themes.dart';
+import '../../../../core/theme/app_themes.dart';
 
 import '../../domain/entities/got_weather.dart';
 
