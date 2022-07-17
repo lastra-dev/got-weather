@@ -42,22 +42,6 @@ class _WeatherControlsState extends State<WeatherControls> {
         Row(
           children: [
             Expanded(
-              child: ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  side: const BorderSide(
-                    color: Colors.transparent,
-                  ),
-                  primary: primaryColor,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(15),
-                  ),
-                ),
-                onPressed: _dispatchFromCity,
-                child: const Text('Search'),
-              ),
-            ),
-            const SizedBox(width: 10),
-            Expanded(
               child: OutlinedButton.icon(
                 style: OutlinedButton.styleFrom(
                   shape: RoundedRectangleBorder(
@@ -77,6 +61,22 @@ class _WeatherControlsState extends State<WeatherControls> {
                   size: 20,
                 ),
                 onPressed: _dispatchFromLocation,
+              ),
+            ),
+            const SizedBox(width: 10),
+            Expanded(
+              child: ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  side: const BorderSide(
+                    color: Colors.transparent,
+                  ),
+                  primary: primaryColor,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(15),
+                  ),
+                ),
+                onPressed: _dispatchFromCity,
+                child: const Text('Search'),
               ),
             ),
           ],

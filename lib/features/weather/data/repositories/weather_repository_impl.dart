@@ -24,8 +24,7 @@ class WeatherRepositoryImpl implements WeatherRepository {
   @override
   Future<Either<Failure, Weather>> getWeatherFromCity(String cityName) async {
     return _getWeather(
-      () async => remoteDataSource.getWeatherFromCity(cityName),
-    );
+        () async => remoteDataSource.getWeatherFromCity(cityName));
   }
 
   @override
@@ -56,8 +55,7 @@ class WeatherRepositoryImpl implements WeatherRepository {
   }
 
   Future<Either<Failure, Weather>> _getWeather(
-    RemoteWeather getRemoteWeather,
-  ) async {
+      RemoteWeather getRemoteWeather) async {
     if (await networkInfo.isConnected) {
       try {
         return Right(await getRemoteWeather());

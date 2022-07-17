@@ -30,6 +30,7 @@ class GOTWeatherApp extends StatelessWidget {
       buildWhen: (_, state) => state is! Loading,
       builder: (context, state) {
         return MaterialApp(
+          debugShowCheckedModeBanner: false,
           title: 'GOT Weather',
           theme: state is Loaded
               ? appThemeData[state.gotWeather.appTheme]

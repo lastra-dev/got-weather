@@ -4,8 +4,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../bloc/weather_bloc.dart';
 import '../widgets/bodies/home_screen_body.dart';
-import 'about_screen.dart';
-import 'settings_screen.dart';
+// import 'about_screen.dart';
+// import 'settings_screen.dart';
 
 const initialBg = 'initialBg';
 
@@ -52,22 +52,22 @@ class _HomeScreenState extends State<HomeScreen> {
                 backgroundColor: Colors.transparent,
                 appBar: AppBar(
                   title: const Text('GOT Weather'),
-                  actions: [
-                    PopupMenuButton(
-                      onSelected: (choice) =>
-                          Navigator.of(context).pushNamed(choice.toString()),
-                      itemBuilder: (_) => [
-                        const PopupMenuItem(
-                          value: SettingsScreen.routeName,
-                          child: Text('Settings'),
-                        ),
-                        const PopupMenuItem(
-                          value: AboutScreen.routeName,
-                          child: Text('About'),
-                        ),
-                      ],
-                    )
-                  ],
+                  // actions: [
+                  //   PopupMenuButton(
+                  //     onSelected: (choice) =>
+                  //         Navigator.of(context).pushNamed(choice.toString()),
+                  //     itemBuilder: (_) => [
+                  //       const PopupMenuItem(
+                  //         value: SettingsScreen.routeName,
+                  //         child: Text('Settings'),
+                  //       ),
+                  //       const PopupMenuItem(
+                  //         value: AboutScreen.routeName,
+                  //         child: Text('About'),
+                  //       ),
+                  //     ],
+                  //   )
+                  // ],
                 ),
                 body: const HomeScreenBody(),
               ),
